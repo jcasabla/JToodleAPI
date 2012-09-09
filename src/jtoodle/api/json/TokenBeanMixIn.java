@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.beans;
+package jtoodle.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author justo
  */
-abstract class TokenBeanMixIn extends AbstractJToodlerBeanMixIn {
+public interface TokenBeanMixIn extends AbstractJToodlerBeanMixIn {
 
 	@JsonProperty( "userid" )
 	abstract String getUserId();

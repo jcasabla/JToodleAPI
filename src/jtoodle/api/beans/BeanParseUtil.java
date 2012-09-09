@@ -6,6 +6,8 @@ package jtoodle.api.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import jtoodle.api.json.TokenBeanMixIn;
+import jtoodle.api.json.UserIdBeanMixIn;
 
 /**
  *
