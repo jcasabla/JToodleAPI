@@ -45,4 +45,5 @@ public interface WebRequestConstants {
 	public static final String PARAM_NAME_DEVICE = "device";
 	public static final String PARAM_NAME_OS = "os";
 	public static final String PARAM_NAME_FORMAT = "f";
+	public static final String PARAM_NAME_KEY = "key";
 }

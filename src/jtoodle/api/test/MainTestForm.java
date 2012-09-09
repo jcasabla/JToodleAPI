@@ -4,12 +4,18 @@
  */
 package jtoodle.api.test;
 
-import java.security.NoSuchAlgorithmException;
+import java.beans.IntrospectionException;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jtoodle.api.auth.AccountLookupRequest;
 import jtoodle.api.auth.AuthCache;
+import jtoodle.api.beans.AccountInfoBean;
+import jtoodle.api.beans.BeanParseUtil;
 import jtoodle.api.beans.JToodlerException;
+import jtoodle.api.request.GetAccountInfo;
+import org.openide.explorer.propertysheet.PropertySheet;
+import org.openide.nodes.BeanNode;
+import org.openide.nodes.Node;
 
 /**
  *
@@ -34,7 +40,7 @@ public class MainTestForm extends javax.swing.JFrame {
     private void initComponents() {
 
         tabbedPane = new javax.swing.JTabbedPane();
-        accountInfoPanel = new javax.swing.JPanel();
+        authenticationPanel = new javax.swing.JPanel();
         emailLabel = new javax.swing.JLabel();
         emailTextField = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
@@ -49,6 +55,9 @@ public class MainTestForm extends javax.swing.JFrame {
         errorDescLabel = new javax.swing.JLabel();
         errorDescPane = new javax.swing.JScrollPane();
         errorDescTextArea = new javax.swing.JTextArea();
+        accountInfoPanel = new javax.swing.JPanel();
+        accountInfoButton = new javax.swing.JButton();
+        accountInfoPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         exitMenuItem = new javax.swing.JMenuItem();
@@ -94,13 +103,13 @@ public class MainTestForm extends javax.swing.JFrame {
         errorDescTextArea.setRows(5);
         errorDescPane.setViewportView(errorDescTextArea);
 
-        javax.swing.GroupLayout accountInfoPanelLayout = new javax.swing.GroupLayout(accountInfoPanel);
-        accountInfoPanel.setLayout(accountInfoPanelLayout);
-        accountInfoPanelLayout.setHorizontalGroup(
-            accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(accountInfoPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout authenticationPanelLayout = new javax.swing.GroupLayout(authenticationPanel);
+        authenticationPanel.setLayout(authenticationPanelLayout);
+        authenticationPanelLayout.setHorizontalGroup(
+            authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(authenticationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(emailLabel)
                     .addComponent(passwordLabel)
                     .addComponent(userIdLabel)
@@ -108,7 +117,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(errorCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(errorDescLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(errorDescPane)
                     .addComponent(errorCodeTextField)
                     .addComponent(tokenTextField, javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,40 +128,72 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addComponent(authenticateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                 .addContainerGap())
         );
+        authenticationPanelLayout.setVerticalGroup(
+            authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(authenticationPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(authenticateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(authenticationPanelLayout.createSequentialGroup()
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailLabel)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordLabel))))
+                .addGap(39, 39, 39)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userIdLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tokenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tokenLabel))
+                .addGap(39, 39, 39)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorCodeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("Authentication", authenticationPanel);
+
+        accountInfoButton.setText("Account Info");
+        accountInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountInfoButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout accountInfoPanelLayout = new javax.swing.GroupLayout(accountInfoPanel);
+        accountInfoPanel.setLayout(accountInfoPanelLayout);
+        accountInfoPanelLayout.setHorizontalGroup(
+            accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accountInfoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(accountInfoPanelLayout.createSequentialGroup()
+                        .addComponent(accountInfoButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         accountInfoPanelLayout.setVerticalGroup(
             accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(accountInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(authenticateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(accountInfoPanelLayout.createSequentialGroup()
-                        .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailLabel)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLabel))))
-                .addGap(39, 39, 39)
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userIdLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tokenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tokenLabel))
-                .addGap(39, 39, 39)
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(errorCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(errorCodeLabel))
+                .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(accountInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("Authentication", accountInfoPanel);
+        tabbedPane.addTab("Account Info", accountInfoPanel);
 
         fileMenu.setText("File");
 
@@ -208,6 +249,17 @@ public class MainTestForm extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_authenticateButtonActionPerformed
 
+    private void accountInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountInfoButtonActionPerformed
+		String jsonString = new GetAccountInfo().request();
+
+		try {
+			AccountInfoBean bean = BeanParseUtil.toAccountInfoBean( jsonString );
+			accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
+		} catch( IntrospectionException | IOException ex ) {
+			Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, ex );
+		}
+    }//GEN-LAST:event_accountInfoButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,8 +290,11 @@ public class MainTestForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton accountInfoButton;
     private javax.swing.JPanel accountInfoPanel;
+    private org.openide.explorer.propertysheet.PropertySheet accountInfoPropertySheet;
     private javax.swing.JButton authenticateButton;
+    private javax.swing.JPanel authenticationPanel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel errorCodeLabel;

@@ -6,6 +6,7 @@ package jtoodle.api.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import jtoodle.api.json.AccountInfoBeanMixIn;
 import jtoodle.api.json.TokenBeanMixIn;
 import jtoodle.api.json.UserIdBeanMixIn;
 
@@ -22,6 +23,7 @@ public class BeanParseUtil {
 	static {
 		mapper.addMixInAnnotations( UserIdBean.class, UserIdBeanMixIn.class );
 		mapper.addMixInAnnotations( TokenBean.class, TokenBeanMixIn.class );
+		mapper.addMixInAnnotations( AccountInfoBean.class, AccountInfoBeanMixIn.class );
 	}
 
 	public static UserIdBean toUserIdBean( String js ) throws IOException {
@@ -30,5 +32,9 @@ public class BeanParseUtil {
 
 	public static TokenBean toTokenBean( String js ) throws IOException {
 		return( mapper.readValue( js, TokenBean.class ) );
+	}
+
+	public static AccountInfoBean toAccountInfoBean( String js ) throws IOException {
+		return( mapper.readValue( js, AccountInfoBean.class ) );
 	}
 }
