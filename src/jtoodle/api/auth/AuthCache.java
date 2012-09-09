@@ -4,17 +4,13 @@
  */
 package jtoodle.api.auth;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 import jtoodle.api.beans.BeanParseUtil;
 import jtoodle.api.beans.TokenBean;
 import jtoodle.api.beans.UserIdBean;
@@ -28,15 +24,6 @@ public class AuthCache {
 
 	private static final Logger logger = Logger.getLogger( AuthCache.class.getName() );
 
-	private static final File PROPERTIES_FILE = new File( new StringBuilder()
-		.append( System.getProperty( "user.home" ) )
-		.append( System.getProperty( "file.separator" ) )
-		.append( "." )
-		.append( AuthCache.class.getName() )
-		.append( ".properties" )
-		.toString()
-	);
-
 	private static final long MAX_TOKEN_AGE =
 		4 // hours
 		* 60 // minutes/hour
@@ -44,56 +31,36 @@ public class AuthCache {
 		* 1000 // millis/second
 		;
 
-	private static final String KEY_EMAIL = "auth.email";
-	//private static final String KEY_PASSWORD = "auth.password";
-	private static final String KEY_USER_ID = "auth.userId";
-	private static final String KEY_TOKEN = "auth.token";
-	private static final String KEY_TOKEN_TIMESTAMP_MILLIS = "auth.tokenTimestampMillis";
-	private static final String KEY_TOKEN_TIMESTAMP_LONG = "info.tokenTimestampLong";
+	private static final String KEY_EMAIL = "email";
+	private static final String KEY_USER_ID = "userId";
+	private static final String KEY_TOKEN = "token";
+	private static final String KEY_TOKEN_TIMESTAMP_MILLIS = "tokenTimestamp(millis)";
+	private static final String KEY_TOKEN_TIMESTAMP_TEXT = "tokenTimestamp(text)";
 
-	private static final Properties _cache = new Properties();
+	private static final Preferences _prefs = Preferences.userRoot().node( "/jtoodle/api/auth" );
 
 	private static void save() {
 		logger.entering( AuthCache.class.getName(), "save()" );
 
 		try {
-			_cache.store( new BufferedWriter( new FileWriter( PROPERTIES_FILE ) ), null );
-		} catch( IOException ex ) {
+			_prefs.flush();
+		} catch( BackingStoreException ex ) {
 			logger.log( Level.SEVERE, null, ex );
 		}
 
 		logger.exiting( AuthCache.class.getName(), "save()" );
 	}
 
-	private static void load() {
-		logger.entering( AuthCache.class.getName(), "load()" );
-
-		if( _cache.isEmpty() ) {
-			if( !PROPERTIES_FILE.exists() ) {
-				save();
-			}
-
-			try {
-				_cache.load( new BufferedReader( new FileReader( PROPERTIES_FILE ) ) );
-			} catch( IOException ex ) {
-				logger.log( Level.SEVERE, null, ex );
-			}
-		}
-
-		logger.exiting( AuthCache.class.getName(), "load()" );
-	}
-
 	public static void setEmail( String email ) {
-		if( ! NullSafe.equals(  getEmail(), email ) ) {
-			_cache.setProperty( KEY_EMAIL, email );
+		if( !NullSafe.equals( getEmail(), email ) ) {
+			_prefs.put( KEY_EMAIL, email );
 			setUserId( null );
 		}
 	}
-	public static String getEmail() {
-		load();
-		return( _cache.getProperty( KEY_EMAIL ) );
-	}
 
+	public static String getEmail() {
+		return( _prefs.get( KEY_EMAIL, null ) );
+	}
 	private static String _password = null;
 
 	public static void setPassword( String password ) {
@@ -102,15 +69,15 @@ public class AuthCache {
 
 	private static void setUserId( String userId ) {
 		if( NullSafe.isNullOrEmpty( userId ) ) {
-			_cache.remove( KEY_USER_ID );
+			_prefs.remove( KEY_USER_ID );
 		} else {
-			_cache.setProperty( KEY_USER_ID, userId );
+			_prefs.put( KEY_USER_ID, userId );
 		}
 		save();
 	}
+
 	public static String getUserId() {
-		load();
-		String userId = _cache.getProperty( KEY_USER_ID );
+		String userId = _prefs.get( KEY_USER_ID, null );
 
 		if( ( userId == null ) || ( userId.trim().length() == 0 ) ) {
 			try {
@@ -135,17 +102,17 @@ public class AuthCache {
 
 	private static void setToken( String token ) {
 		if( NullSafe.isNullOrEmpty( token ) ) {
-			_cache.remove( KEY_TOKEN );
+			_prefs.remove( KEY_TOKEN );
 		} else {
-			_cache.setProperty( KEY_TOKEN, token );
+			_prefs.put( KEY_TOKEN, token );
 		}
 
 		markTokenTimestampMillis();
 		save();
 	}
+
 	public static String getToken() {
-		load();
-		String token = _cache.getProperty( KEY_TOKEN );
+		String token = _prefs.get( KEY_TOKEN, null );
 
 		if( ( token == null ) || ( token.trim().length() == 0 ) || tokenIsStale() ) {
 			try {
@@ -169,12 +136,12 @@ public class AuthCache {
 
 	private static void markTokenTimestampMillis() {
 		long ts = System.currentTimeMillis();
-		_cache.setProperty( KEY_TOKEN_TIMESTAMP_MILLIS, "" + ts );
-		_cache.setProperty( KEY_TOKEN_TIMESTAMP_LONG, new Date ( ts ).toString() );
+		_prefs.putLong( KEY_TOKEN_TIMESTAMP_MILLIS, ts );
+		_prefs.put( KEY_TOKEN_TIMESTAMP_TEXT, new Date( ts ).toString() );
 	}
+
 	private static long getTokenTimestampMillis() {
-		load();
-		return( Long.parseLong( _cache.getProperty( KEY_TOKEN_TIMESTAMP_MILLIS ) ) );
+		return( _prefs.getLong( KEY_TOKEN_TIMESTAMP_MILLIS, System.currentTimeMillis() ) );
 	}
 
 	private static boolean tokenIsStale() {
