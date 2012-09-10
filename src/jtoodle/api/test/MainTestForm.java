@@ -13,7 +13,6 @@ import jtoodle.api.beans.AccountInfoBean;
 import jtoodle.api.beans.BeanParseUtil;
 import jtoodle.api.beans.JToodlerException;
 import jtoodle.api.request.GetAccountInfo;
-import org.openide.explorer.propertysheet.PropertySheet;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
 
