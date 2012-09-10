@@ -17,7 +17,6 @@ import jtoodle.api.beans.UserIdBean;
 import jtoodle.api.util.NullSafe;
 import jtoodle.api.util.WebRequestConstants;
 import jtoodle.api.util.WebRequestUtils;
-import org.openide.util.Exceptions;
 
 /**
  *
@@ -180,7 +179,7 @@ public class AuthCache {
 					.toString() );
 				setApiKey( apiKey );
 			} catch( NoSuchAlgorithmException ex ) {
-				Exceptions.printStackTrace( ex );
+				logger.log( Level.SEVERE, null, ex );
 			}
 		}
 
