@@ -6,6 +6,7 @@ package jtoodle.api.test;
 
 import java.beans.IntrospectionException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jtoodle.api.auth.AuthCache;
@@ -15,6 +16,7 @@ import jtoodle.api.beans.JToodlerException;
 import jtoodle.api.request.GetAccountInfo;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -279,14 +281,17 @@ public class MainTestForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainTestForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainTestForm().setVisible(true);
-            }
-        });
+		try {
+			/* Create and display the form */
+			java.awt.EventQueue.invokeAndWait( new Runnable() {
+				@Override
+				public void run() {
+					new MainTestForm().setVisible(true);
+				}
+			});
+		} catch( InterruptedException | InvocationTargetException ex ) {
+			Exceptions.printStackTrace( ex );
+		}
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountInfoButton;
