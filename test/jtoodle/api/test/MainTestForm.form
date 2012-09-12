@@ -9,6 +9,24 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="loginMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Login"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="logoutMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Logout"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="exitSeparator">
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="exitMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Exit"/>
@@ -80,26 +98,33 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="emailLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="passwordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="userIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="tokenLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="errorCodeLabel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="errorDescLabel" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="errorCodeLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="errorDescLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="errorDescPane" pref="293" max="32767" attributes="0"/>
+                                  <Component id="errorCodeTextField" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="userIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tokenLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="apiKeyLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tokenTextField" alignment="0" pref="293" max="32767" attributes="0"/>
+                                  <Component id="userIdTextField" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="apiKeyTextField" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="errorDescPane" max="32767" attributes="0"/>
-                          <Component id="errorCodeTextField" max="32767" attributes="0"/>
-                          <Component id="tokenTextField" alignment="0" max="32767" attributes="0"/>
-                          <Component id="userIdTextField" alignment="1" max="32767" attributes="0"/>
-                          <Component id="emailTextField" alignment="0" pref="293" max="32767" attributes="0"/>
-                          <Component id="passwordField" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="authenticateButton" pref="167" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="197" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -107,21 +132,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="authenticateButton" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="emailLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="emailTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="passwordField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="userIdTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="userIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -130,6 +140,11 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tokenTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tokenLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="apiKeyTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="apiKeyLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -141,45 +156,12 @@
                           <Component id="errorDescPane" min="-2" max="-2" attributes="0"/>
                           <Component id="errorDescLabel" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="150" max="32767" attributes="0"/>
+                      <EmptySpace pref="222" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="emailLabel">
-              <Properties>
-                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="emailTextField"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Email:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="emailTextField">
-              <Properties>
-                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="AuthCache.getEmail()" type="code"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="passwordLabel">
-              <Properties>
-                <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="passwordField"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Password:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="passwordField">
-            </Component>
-            <Component class="javax.swing.JButton" name="authenticateButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Authenticate !"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="authenticateButtonActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JLabel" name="userIdLabel">
               <Properties>
                 <Property name="labelFor" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -202,6 +184,16 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tokenTextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="apiKeyLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="API Key:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="apiKeyTextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
@@ -278,7 +270,7 @@
                       <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="accountInfoPropertySheet" min="-2" pref="417" max="-2" attributes="0"/>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

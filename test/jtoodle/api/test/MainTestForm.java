@@ -9,11 +9,14 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfoBean;
 import jtoodle.api.beans.BeanParseUtil;
 import jtoodle.api.beans.JToodlerException;
 import jtoodle.api.request.GetAccountInfo;
+import org.jdesktop.swingx.JXLoginPane;
+import org.jdesktop.swingx.auth.LoginService;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
@@ -42,15 +45,12 @@ public class MainTestForm extends javax.swing.JFrame {
 
         tabbedPane = new javax.swing.JTabbedPane();
         authenticationPanel = new javax.swing.JPanel();
-        emailLabel = new javax.swing.JLabel();
-        emailTextField = new javax.swing.JTextField();
-        passwordLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
-        authenticateButton = new javax.swing.JButton();
         userIdLabel = new javax.swing.JLabel();
         userIdTextField = new javax.swing.JTextField();
         tokenLabel = new javax.swing.JLabel();
         tokenTextField = new javax.swing.JTextField();
+        apiKeyLabel = new javax.swing.JLabel();
+        apiKeyTextField = new javax.swing.JTextField();
         errorCodeLabel = new javax.swing.JLabel();
         errorCodeTextField = new javax.swing.JTextField();
         errorDescLabel = new javax.swing.JLabel();
@@ -61,24 +61,12 @@ public class MainTestForm extends javax.swing.JFrame {
         accountInfoPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        loginMenuItem = new javax.swing.JMenuItem();
+        logoutMenuItem = new javax.swing.JMenuItem();
+        exitSeparator = new javax.swing.JPopupMenu.Separator();
         exitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        emailLabel.setLabelFor(emailTextField);
-        emailLabel.setText("Email:");
-
-        emailTextField.setText(AuthCache.getEmail());
-
-        passwordLabel.setLabelFor(passwordField);
-        passwordLabel.setText("Password:");
-
-        authenticateButton.setText("Authenticate !");
-        authenticateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                authenticateButtonActionPerformed(evt);
-            }
-        });
 
         userIdLabel.setLabelFor(userIdTextField);
         userIdLabel.setText("User Id:");
@@ -89,6 +77,10 @@ public class MainTestForm extends javax.swing.JFrame {
         tokenLabel.setText("Token:");
 
         tokenTextField.setEditable(false);
+
+        apiKeyLabel.setText("API Key:");
+
+        apiKeyTextField.setEditable(false);
 
         errorCodeLabel.setLabelFor(errorCodeTextField);
         errorCodeLabel.setText("Error Code:");
@@ -110,40 +102,31 @@ public class MainTestForm extends javax.swing.JFrame {
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(authenticationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(emailLabel)
-                    .addComponent(passwordLabel)
-                    .addComponent(userIdLabel)
-                    .addComponent(tokenLabel)
-                    .addComponent(errorCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(errorDescLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(errorDescPane)
-                    .addComponent(errorCodeTextField)
-                    .addComponent(tokenTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(userIdTextField)
-                    .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(18, 18, 18)
-                .addComponent(authenticateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(authenticationPanelLayout.createSequentialGroup()
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(errorCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(errorDescPane, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                            .addComponent(errorCodeTextField)))
+                    .addGroup(authenticationPanelLayout.createSequentialGroup()
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(userIdLabel)
+                            .addComponent(tokenLabel)
+                            .addComponent(apiKeyLabel))
+                        .addGap(37, 37, 37)
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tokenTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                            .addComponent(userIdTextField)
+                            .addComponent(apiKeyTextField))))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         authenticationPanelLayout.setVerticalGroup(
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(authenticationPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(authenticateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(authenticationPanelLayout.createSequentialGroup()
-                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailLabel)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(4, 4, 4)
-                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLabel))))
-                .addGap(39, 39, 39)
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(userIdLabel))
@@ -151,6 +134,10 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tokenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tokenLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(apiKeyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apiKeyLabel))
                 .addGap(39, 39, 39)
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(errorCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,7 +146,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -191,12 +178,29 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Account Info", accountInfoPanel);
 
         fileMenu.setText("File");
+
+        loginMenuItem.setText("Login");
+        loginMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(loginMenuItem);
+
+        logoutMenuItem.setText("Logout");
+        logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(logoutMenuItem);
+        fileMenu.add(exitSeparator);
 
         exitMenuItem.setText("Exit");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -234,22 +238,6 @@ public class MainTestForm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authenticateButtonActionPerformed
-		AuthCache.setEmail( emailTextField.getText() );
-		AuthCache.setPassword( new String( passwordField.getPassword() ) );
-
-		try {
-			userIdTextField.setText( AuthCache.getUserId() );
-			tokenTextField.setText( AuthCache.getToken() );
-
-			errorCodeTextField.setText( null );
-			errorDescTextArea.setText( null );
-		} catch( JToodlerException jte ) {
-			errorCodeTextField.setText( ""+jte.getErrorCode() );
-			errorDescTextArea.setText( jte.getMessage() );
-		}
-    }//GEN-LAST:event_authenticateButtonActionPerformed
-
     private void accountInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountInfoButtonActionPerformed
 		String jsonString = new GetAccountInfo().request();
 
@@ -260,6 +248,46 @@ public class MainTestForm extends javax.swing.JFrame {
 			Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, ex );
 		}
     }//GEN-LAST:event_accountInfoButtonActionPerformed
+
+    private void loginMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginMenuItemActionPerformed
+		JXLoginPane.Status status = JXLoginPane.showLoginDialog( this, new LoginService() {
+			@Override
+			public boolean authenticate( String name, char[] password, String server ) {
+				errorCodeTextField.setText( null );
+				errorDescTextArea.setText( null );
+
+				try {
+					AuthCache.login( name, new String( password ) );
+
+					userIdTextField.setText( AuthCache.getUserId() );
+					tokenTextField.setText( AuthCache.getToken() );
+					apiKeyTextField.setText( AuthCache.getApiKey() );
+
+					return( true );
+				} catch( JToodlerException jte ) {
+					errorCodeTextField.setText( "" + jte.getErrorCode() );
+					errorDescTextArea.setText( jte.getMessage() );
+
+					Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, jte );
+					return( false );
+				} catch( Exception ex ) {
+					errorCodeTextField.setText( ex.getClass().getName() );
+					errorDescTextArea.setText( ex.getMessage() );
+
+					Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, ex );
+					return( false );
+				}
+			}
+		} );
+    }//GEN-LAST:event_loginMenuItemActionPerformed
+
+    private void logoutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMenuItemActionPerformed
+        int yn = JOptionPane.showConfirmDialog( this, "Are you sure you want to logout ?" );
+
+		if( yn == JOptionPane.OK_OPTION ) {
+			AuthCache.logout();
+		}
+    }//GEN-LAST:event_logoutMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,20 +325,20 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JButton accountInfoButton;
     private javax.swing.JPanel accountInfoPanel;
     private org.openide.explorer.propertysheet.PropertySheet accountInfoPropertySheet;
-    private javax.swing.JButton authenticateButton;
+    private javax.swing.JLabel apiKeyLabel;
+    private javax.swing.JTextField apiKeyTextField;
     private javax.swing.JPanel authenticationPanel;
-    private javax.swing.JLabel emailLabel;
-    private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel errorCodeLabel;
     private javax.swing.JTextField errorCodeTextField;
     private javax.swing.JLabel errorDescLabel;
     private javax.swing.JScrollPane errorDescPane;
     private javax.swing.JTextArea errorDescTextArea;
     private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JPopupMenu.Separator exitSeparator;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem loginMenuItem;
+    private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JPasswordField passwordField;
-    private javax.swing.JLabel passwordLabel;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JLabel tokenLabel;
     private javax.swing.JTextField tokenTextField;
