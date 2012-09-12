@@ -57,48 +57,124 @@ public class AuthCache {
 		logger.exiting( AuthCache.class.getName(), "save()" );
 	}
 
-	public static void setEmail( String email ) {
+	private static void clear() {
+		logger.entering( AuthCache.class.getName(), "clear()" );
+
+		try {
+			_prefs.clear();
+			save();
+		} catch( BackingStoreException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
+
+		logger.exiting( AuthCache.class.getName(), "clear()" );
+	}
+
+	public static void login( String email, String password ) {
+		logger.entering( AuthCache.class.getName(), "clear()" );
+
+		clear();
+		setEmail( email );
+		setPassword( password );
+
+		getUserId();
+		getToken();
+		getApiKey();
+
+		logger.exiting( AuthCache.class.getName(), "clear()" );
+	}
+
+	public static void logout() {
+		logger.entering( AuthCache.class.getName(), "logout()" );
+		clear();
+		logger.exiting( AuthCache.class.getName(), "logout()" );
+	}
+
+	private static void setEmail( String email ) {
+		logger.entering( AuthCache.class.getName(), "setEmail(String)", email );
+
 		if( !NullSafe.equals( getEmail(), email ) ) {
 			_prefs.put( KEY_EMAIL, email );
 			setUserId( null );
 		}
+
+		logger.exiting( AuthCache.class.getName(), "setEmail(String)" );
 	}
 
 	public static String getEmail() {
-		return( _prefs.get( KEY_EMAIL, null ) );
+		logger.entering( AuthCache.class.getName(), "getEmail()" );
+		String returnValue = _prefs.get( KEY_EMAIL, null );
+		logger.exiting( AuthCache.class.getName(), "getEmail()", returnValue );
+
+		return( returnValue );
 	}
 
-	public static void setPassword( String password ) {
+	private static void setPassword( String password ) {
+		logger.entering( AuthCache.class.getName(), "setPassword(String)", password );
 		_password = password;
+
+		try {
+			String hashedPassword = WebRequestUtils.md5Hash( _password );
+
+			if( !NullSafe.equals( getHashedPassword(), hashedPassword ) ) {
+				storeHashedPassword( null );
+				setUserId( null );
+			}
+		} catch( NoSuchAlgorithmException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
+
+		logger.exiting( AuthCache.class.getName(), "setPassword(String)" );
 	}
 
 	private static String getHashedPassword() {
-		return( _prefs.get( KEY_PASSWORD, null ) );
+		logger.entering( AuthCache.class.getName(), "getHashedPassword()" );
+		String returnValue = _prefs.get( KEY_PASSWORD, null );
+		logger.exiting( AuthCache.class.getName(), "getHashedPassword()", returnValue );
+
+		return( returnValue );
 	}
 
-	private static void storeHashedPassword() {
-		if( NullSafe.isNullOrEmpty( _password ) ) {
+	private static void storeHashedPassword( String clearPassword ) {
+		logger.entering( AuthCache.class.getName(), "storeHashedPassword(String)", clearPassword );
+
+		if( NullSafe.isNullOrEmpty( clearPassword ) ) {
 			_prefs.remove( KEY_PASSWORD );
 		} else {
 			try {
-				_prefs.put( KEY_PASSWORD, WebRequestUtils.md5Hash( _password ) );
+				_prefs.put( KEY_PASSWORD, WebRequestUtils.md5Hash( clearPassword ) );
 			} catch( NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
+
 		save();
+
+		logger.exiting( AuthCache.class.getName(), "storeHashedPassword(String)" );
 	}
 
 	private static void setUserId( String userId ) {
-		if( NullSafe.isNullOrEmpty( userId ) ) {
-			_prefs.remove( KEY_USER_ID );
-		} else {
-			_prefs.put( KEY_USER_ID, userId );
+		logger.entering( AuthCache.class.getName(), "setUserId(String)", userId );
+
+		String storedUserId = _prefs.get( KEY_USER_ID, null );
+
+		if( !NullSafe.equals( userId, storedUserId ) ) {
+			if( NullSafe.isNullOrEmpty( userId ) ) {
+				_prefs.remove( KEY_USER_ID );
+			} else {
+				_prefs.put( KEY_USER_ID, userId );
+			}
+
+			setToken( null );
+			save();
 		}
-		save();
+
+		logger.exiting( AuthCache.class.getName(), "setUserId(String)" );
 	}
 
 	public static String getUserId() {
+		logger.entering( AuthCache.class.getName(), "getUserId()" );
+
 		String userId = _prefs.get( KEY_USER_ID, null );
 
 		if( NullSafe.isNullOrEmpty( userId ) ) {
@@ -112,29 +188,43 @@ public class AuthCache {
 				if( bean.hasError() ) {
 					bean.throwException();
 				} else {
-					setUserId( bean.getUserId() );
-					storeHashedPassword();
+					userId = bean.getUserId();
+					setUserId( userId );
+					storeHashedPassword( _password );
 				}
 			} catch( IOException | NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
 
+		logger.exiting( AuthCache.class.getName(), "getUserId()", userId );
+
 		return( userId );
 	}
 
 	private static void setToken( String token ) {
-		if( NullSafe.isNullOrEmpty( token ) ) {
-			_prefs.remove( KEY_TOKEN );
-		} else {
-			_prefs.put( KEY_TOKEN, token );
+		logger.entering( AuthCache.class.getName(), "setToken(String)", token );
+
+		String storedToken = _prefs.get( KEY_TOKEN, null );
+
+		if( !NullSafe.equals( token, storedToken ) ) {
+			if( NullSafe.isNullOrEmpty( token ) ) {
+				_prefs.remove( KEY_TOKEN );
+			} else {
+				_prefs.put( KEY_TOKEN, token );
+			}
+
+			setApiKey( null );
+			markTokenTimestampMillis();
+			save();
 		}
 
-		markTokenTimestampMillis();
-		save();
+		logger.exiting( AuthCache.class.getName(), "setToken(String)" );
 	}
 
 	public static String getToken() {
+		logger.entering( AuthCache.class.getName(), "getToken()" );
+
 		String token = _prefs.get( KEY_TOKEN, null );
 
 		if( NullSafe.isNullOrEmpty( token ) || tokenIsStale() ) {
@@ -147,27 +237,39 @@ public class AuthCache {
 				if( bean.hasError() ) {
 					bean.throwException();
 				} else {
-					setToken( bean.getToken() );
+					token = bean.getToken();
+					setToken( token );
 				}
 			} catch( IOException | NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
 
+		logger.exiting( AuthCache.class.getName(), "getToken()", token );
+
 		return( token );
 	}
 
-	private static void setApiKey( String key ) {
-		if( NullSafe.isNullOrEmpty( key ) ) {
-			_prefs.remove( KEY_API_KEY );
-		} else {
-			_prefs.put( KEY_API_KEY, key );
+	private static void setApiKey( String apiKey ) {
+		logger.entering( AuthCache.class.getName(), "setApiKey(String)", apiKey );
+
+		String storedApiKey = _prefs.get( KEY_API_KEY, null );
+
+		if( !NullSafe.equals( apiKey, storedApiKey ) ) {
+			if( NullSafe.isNullOrEmpty( apiKey ) ) {
+				_prefs.remove( KEY_API_KEY );
+			} else {
+				_prefs.put( KEY_API_KEY, apiKey );
+			}
+			save();
 		}
-		save();
+
+		logger.exiting( AuthCache.class.getName(), "setApiKey(String)" );
 	}
 
 	public static String getApiKey() {
-		getToken();
+		logger.entering( AuthCache.class.getName(), "getApiKey()" );
+
 		String apiKey = _prefs.get( KEY_API_KEY, null );
 
 		if( NullSafe.isNullOrEmpty( apiKey ) ) {
@@ -182,6 +284,8 @@ public class AuthCache {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
+
+		logger.entering( AuthCache.class.getName(), "getApiKey()", apiKey );
 
 		return( apiKey );
 	}
