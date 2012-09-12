@@ -10,7 +10,7 @@ package jtoodle.api.util;
  */
 public interface WebRequestConstants {
 
-	public static final String BASE_URI = "http://api.toodledo.com/2";
+	public static final String BASE_URI = "https://api.toodledo.com/2";
 
 	public static final String URI_ACCOUNT_LOOKUP = new StringBuilder()
 			.append( BASE_URI )
