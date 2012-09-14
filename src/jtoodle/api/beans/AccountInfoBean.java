@@ -5,6 +5,8 @@
 package jtoodle.api.beans;
 
 import java.util.Date;
+import jtoodle.api.json.enums.DateFormat;
+import jtoodle.api.json.enums.Priority;
 
 /**
  *
@@ -60,10 +62,10 @@ public class AccountInfoBean extends UserIdBean {
 
 	private String alias = null;
 	private Boolean pro = null;
-	private Integer dateFormat = null;
+	private DateFormat dateFormat = null;
 	private Integer timeZone = null;
 	private Integer hideMonths = null;
-	private Integer hotListPriority = null;
+	private Priority hotListPriority = null;
 	private Integer hotListDueDate = null;
 	private Boolean hotListStar = null;
 	private Boolean hotListStatus = null;
@@ -93,11 +95,11 @@ public class AccountInfoBean extends UserIdBean {
 		this.pro = pro;
 	}
 
-	public Integer getDateFormat() {
+	public DateFormat getDateFormat() {
 		return dateFormat;
 	}
 
-	public void setDateFormat( Integer dateFormat ) {
+	public void setDateFormat( DateFormat dateFormat ) {
 		this.dateFormat = dateFormat;
 	}
 
@@ -117,11 +119,11 @@ public class AccountInfoBean extends UserIdBean {
 		this.hideMonths = hideMonths;
 	}
 
-	public Integer getHotListPriority() {
+	public Priority getHotListPriority() {
 		return hotListPriority;
 	}
 
-	public void setHotListPriority( Integer hotListPriority ) {
+	public void setHotListPriority( Priority hotListPriority ) {
 		this.hotListPriority = hotListPriority;
 	}
 

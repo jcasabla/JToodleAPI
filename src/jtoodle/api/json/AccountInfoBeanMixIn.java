@@ -6,6 +6,8 @@ package jtoodle.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
+import jtoodle.api.json.enums.DateFormat;
+import jtoodle.api.json.enums.Priority;
 
 /**
  *
@@ -64,8 +66,8 @@ public interface AccountInfoBeanMixIn extends UserIdBeanMixIn {
 	public void setPro( Boolean pro );
 
 	@JsonProperty( "dateformat" )
-	public Integer getDateFormat();
-	public void setDateFormat( Integer dateFormat );
+	public DateFormat getDateFormat();
+	public void setDateFormat( DateFormat dateFormat );
 
 	@JsonProperty( "timezone" )
 	public Integer getTimeZone();
@@ -76,8 +78,8 @@ public interface AccountInfoBeanMixIn extends UserIdBeanMixIn {
 	public void setHideMonths( Integer hideMonths );
 
 	@JsonProperty( "hotlistpriority" )
-	public Integer getHotListPriority();
-	public void setHotListPriority( Integer hotListPriority );
+	public Priority getHotListPriority();
+	public void setHotListPriority( Priority hotListPriority );
 
 	@JsonProperty( "hotlistduedate" )
 	public Integer getHotListDueDate();

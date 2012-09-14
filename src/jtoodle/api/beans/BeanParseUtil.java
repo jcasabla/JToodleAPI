@@ -14,6 +14,10 @@ import jtoodle.api.json.TokenBeanMixIn;
 import jtoodle.api.json.UserIdBeanMixIn;
 import jtoodle.api.json.deser.TD_BooleanDeserializer;
 import jtoodle.api.json.deser.TD_DateDeserializer;
+import jtoodle.api.json.deser.TD_DateFormatDeserializer;
+import jtoodle.api.json.deser.TD_PriorityDeserializer;
+import jtoodle.api.json.enums.DateFormat;
+import jtoodle.api.json.enums.Priority;
 
 /**
  *
@@ -34,6 +38,8 @@ public class BeanParseUtil {
 			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
 				.addDeserializer( Boolean.class, new TD_BooleanDeserializer() )
 				.addDeserializer( Date.class, new TD_DateDeserializer() )
+				.addDeserializer( DateFormat.class, new TD_DateFormatDeserializer() )
+				.addDeserializer( Priority.class, new TD_PriorityDeserializer() )
 		);
 
 	}
