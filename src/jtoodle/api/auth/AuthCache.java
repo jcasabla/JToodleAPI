@@ -272,7 +272,7 @@ public class AuthCache {
 
 		String apiKey = _prefs.get( KEY_API_KEY, null );
 
-		if( NullSafe.isNullOrEmpty( apiKey ) ) {
+		if( NullSafe.isNullOrEmpty( apiKey ) || tokenIsStale() ) {
 			try {
 				apiKey = WebRequestUtils.md5Hash( new StringBuilder()
 					.append( getHashedPassword() )
