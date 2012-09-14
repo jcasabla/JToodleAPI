@@ -5,8 +5,10 @@
 package jtoodle.api.test;
 
 import java.beans.IntrospectionException;
+import java.beans.PropertyEditorManager;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,7 +34,12 @@ public class MainTestForm extends javax.swing.JFrame {
      */
     public MainTestForm() {
         initComponents();
+		initComponents2();
     }
+
+	private void initComponents2() {
+		PropertyEditorManager.registerEditor(Date.class, DatePropertyEditor.class);
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,7 +153,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -177,8 +184,8 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         tabbedPane.addTab("Account Info", accountInfoPanel);
