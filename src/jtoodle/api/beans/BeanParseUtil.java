@@ -4,11 +4,16 @@
  */
 package jtoodle.api.beans;
 
+import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.IOException;
+import java.util.Date;
 import jtoodle.api.json.AccountInfoBeanMixIn;
 import jtoodle.api.json.TokenBeanMixIn;
 import jtoodle.api.json.UserIdBeanMixIn;
+import jtoodle.api.json.deser.TD_BooleanDeserializer;
+import jtoodle.api.json.deser.TD_DateDeserializer;
 
 /**
  *
@@ -24,6 +29,13 @@ public class BeanParseUtil {
 		mapper.addMixInAnnotations( UserIdBean.class, UserIdBeanMixIn.class );
 		mapper.addMixInAnnotations( TokenBean.class, TokenBeanMixIn.class );
 		mapper.addMixInAnnotations( AccountInfoBean.class, AccountInfoBeanMixIn.class );
+
+		mapper.registerModule(
+			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
+				.addDeserializer( Boolean.class, new TD_BooleanDeserializer() )
+				.addDeserializer( Date.class, new TD_DateDeserializer() )
+		);
+
 	}
 
 	public static UserIdBean toUserIdBean( String js ) throws IOException {

@@ -4,6 +4,8 @@
  */
 package jtoodle.api.beans;
 
+import java.util.Date;
+
 /**
  *
  * @author justo
@@ -57,23 +59,23 @@ public class AccountInfoBean extends UserIdBean {
 	 */
 
 	private String alias = null;
-	private Integer pro = null;
+	private Boolean pro = null;
 	private Integer dateFormat = null;
 	private Integer timeZone = null;
 	private Integer hideMonths = null;
 	private Integer hotListPriority = null;
 	private Integer hotListDueDate = null;
-	private Integer hotListStar = null;
-	private Integer hotListStatus = null;
-	private Integer showTabNums = null;
-	private Long lastEditTaskOn = null;
-	private Long lastDeleteTaskOn = null;
-	private Long lastEditFolderOn = null;
-	private Long lastEditContextOn = null;
-	private Long lastEditGoalOn = null;
-	private Long lastEditLocationOn = null;
-	private Long lastEditNotebookOn = null;
-	private Long lastDeleteNotebookOn = null;
+	private Boolean hotListStar = null;
+	private Boolean hotListStatus = null;
+	private Boolean showTabNums = null;
+	private Date lastEditTaskOn = null;
+	private Date lastDeleteTaskOn = null;
+	private Date lastEditFolderOn = null;
+	private Date lastEditContextOn = null;
+	private Date lastEditGoalOn = null;
+	private Date lastEditLocationOn = null;
+	private Date lastEditNotebookOn = null;
+	private Date lastDeleteNotebookOn = null;
 
 	public String getAlias() {
 		return alias;
@@ -83,11 +85,11 @@ public class AccountInfoBean extends UserIdBean {
 		this.alias = alias;
 	}
 
-	public Integer getPro() {
+	public Boolean getPro() {
 		return pro;
 	}
 
-	public void setPro( Integer pro ) {
+	public void setPro( Boolean pro ) {
 		this.pro = pro;
 	}
 
@@ -131,91 +133,91 @@ public class AccountInfoBean extends UserIdBean {
 		this.hotListDueDate = hotListDueDate;
 	}
 
-	public Integer getHotListStar() {
+	public Boolean getHotListStar() {
 		return hotListStar;
 	}
 
-	public void setHotListStar( Integer hotListStar ) {
+	public void setHotListStar( Boolean hotListStar ) {
 		this.hotListStar = hotListStar;
 	}
 
-	public Integer getHotListStatus() {
+	public Boolean getHotListStatus() {
 		return hotListStatus;
 	}
 
-	public void setHotListStatus( Integer hotListStatus ) {
+	public void setHotListStatus( Boolean hotListStatus ) {
 		this.hotListStatus = hotListStatus;
 	}
 
-	public Integer getShowTabNums() {
+	public Boolean getShowTabNums() {
 		return showTabNums;
 	}
 
-	public void setShowTabNums( Integer showTabNums ) {
+	public void setShowTabNums( Boolean showTabNums ) {
 		this.showTabNums = showTabNums;
 	}
 
-	public Long getLastEditTaskOn() {
+	public Date getLastEditTaskOn() {
 		return lastEditTaskOn;
 	}
 
-	public void setLastEditTaskOn( Long lastEditTaskOn ) {
+	public void setLastEditTaskOn( Date lastEditTaskOn ) {
 		this.lastEditTaskOn = lastEditTaskOn;
 	}
 
-	public Long getLastDeleteTaskOn() {
+	public Date getLastDeleteTaskOn() {
 		return lastDeleteTaskOn;
 	}
 
-	public void setLastDeleteTaskOn( Long lastDeleteTaskOn ) {
+	public void setLastDeleteTaskOn( Date lastDeleteTaskOn ) {
 		this.lastDeleteTaskOn = lastDeleteTaskOn;
 	}
 
-	public Long getLastEditFolderOn() {
+	public Date getLastEditFolderOn() {
 		return lastEditFolderOn;
 	}
 
-	public void setLastEditFolderOn( Long lastEditFolderOn ) {
+	public void setLastEditFolderOn( Date lastEditFolderOn ) {
 		this.lastEditFolderOn = lastEditFolderOn;
 	}
 
-	public Long getLastEditContextOn() {
+	public Date getLastEditContextOn() {
 		return lastEditContextOn;
 	}
 
-	public void setLastEditContextOn( Long lastEditContextOn ) {
+	public void setLastEditContextOn( Date lastEditContextOn ) {
 		this.lastEditContextOn = lastEditContextOn;
 	}
 
-	public Long getLastEditGoalOn() {
+	public Date getLastEditGoalOn() {
 		return lastEditGoalOn;
 	}
 
-	public void setLastEditGoalOn( Long lastEditGoalOn ) {
+	public void setLastEditGoalOn( Date lastEditGoalOn ) {
 		this.lastEditGoalOn = lastEditGoalOn;
 	}
 
-	public Long getLastEditLocationOn() {
+	public Date getLastEditLocationOn() {
 		return lastEditLocationOn;
 	}
 
-	public void setLastEditLocationOn( Long lastEditLocationOn ) {
+	public void setLastEditLocationOn( Date lastEditLocationOn ) {
 		this.lastEditLocationOn = lastEditLocationOn;
 	}
 
-	public Long getLastEditNotebookOn() {
+	public Date getLastEditNotebookOn() {
 		return lastEditNotebookOn;
 	}
 
-	public void setLastEditNotebookOn( Long lastEditNotebookOn ) {
+	public void setLastEditNotebookOn( Date lastEditNotebookOn ) {
 		this.lastEditNotebookOn = lastEditNotebookOn;
 	}
 
-	public Long getLastDeleteNotebookOn() {
+	public Date getLastDeleteNotebookOn() {
 		return lastDeleteNotebookOn;
 	}
 
-	public void setLastDeleteNotebookOn( Long lastDeleteNotebookOn ) {
+	public void setLastDeleteNotebookOn( Date lastDeleteNotebookOn ) {
 		this.lastDeleteNotebookOn = lastDeleteNotebookOn;
 	}
 

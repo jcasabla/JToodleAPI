@@ -5,6 +5,7 @@
 package jtoodle.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Date;
 
 /**
  *
@@ -58,6 +59,10 @@ public interface AccountInfoBeanMixIn extends UserIdBeanMixIn {
 	 * lastdelete_notebook : A timestamp that indicates the last time that any notebook was deleted from this account. You can quickly check this field to determine if you need to identify and remove notebooks from your application.
 	 */
 
+	@JsonProperty( "pro" )
+	public Boolean getPro();
+	public void setPro( Boolean pro );
+
 	@JsonProperty( "dateformat" )
 	public Integer getDateFormat();
 	public void setDateFormat( Integer dateFormat );
@@ -79,46 +84,46 @@ public interface AccountInfoBeanMixIn extends UserIdBeanMixIn {
 	public void setHotListDueDate( Integer hotListDueDate );
 
 	@JsonProperty( "hotliststar" )
-	public Integer getHotListStar();
-	public void setHotListStar( Integer hotListStar );
+	public Boolean getHotListStar();
+	public void setHotListStar( Boolean hotListStar );
 
 	@JsonProperty( "hotliststatus" )
-	public Integer getHotListStatus();
-	public void setHotListStatus( Integer hotListStatus );
+	public Boolean getHotListStatus();
+	public void setHotListStatus( Boolean hotListStatus );
 
 	@JsonProperty( "showtabnums" )
-	public Integer getShowTabNums();
-	public void setShowTabNums( Integer showTabNums );
+	public Boolean getShowTabNums();
+	public void setShowTabNums( Boolean showTabNums );
 
 	@JsonProperty( "lastedit_task" )
-	public Long getLastEditTaskOn();
-	public void setLastEditTaskOn( Long lastEditTaskOn );
+	public Date getLastEditTaskOn();
+	public void setLastEditTaskOn( Date lastEditTaskOn );
 
 	@JsonProperty( "lastdelete_task" )
-	public Long getLastDeleteTaskOn();
-	public void setLastDeleteTaskOn( Long lastDeleteTaskOn );
+	public Date getLastDeleteTaskOn();
+	public void setLastDeleteTaskOn( Date lastDeleteTaskOn );
 
 	@JsonProperty( "lastedit_folder" )
-	public Long getLastEditFolderOn();
-	public void setLastEditFolderOn( Long lastEditFolderOn );
+	public Date getLastEditFolderOn();
+	public void setLastEditFolderOn( Date lastEditFolderOn );
 
 	@JsonProperty( "lastedit_context" )
-	public Long getLastEditContextOn();
-	public void setLastEditContextOn( Long lastEditContextOn );
+	public Date getLastEditContextOn();
+	public void setLastEditContextOn( Date lastEditContextOn );
 
 	@JsonProperty( "lastedit_goal" )
-	public Long getLastEditGoalOn();
-	public void setLastEditGoalOn( Long lastEditGoalOn );
+	public Date getLastEditGoalOn();
+	public void setLastEditGoalOn( Date lastEditGoalOn );
 
 	@JsonProperty( "lastedit_location" )
-	public Long getLastEditLocationOn();
-	public void setLastEditLocationOn( Long lastEditLocationOn );
+	public Date getLastEditLocationOn();
+	public void setLastEditLocationOn( Date lastEditLocationOn );
 
 	@JsonProperty( "lastedit_notebook" )
-	public Long getLastEditNotebookOn();
-	public void setLastEditNotebookOn( Long lastEditNotebookOn );
+	public Date getLastEditNotebookOn();
+	public void setLastEditNotebookOn( Date lastEditNotebookOn );
 
 	@JsonProperty( "lastdelete_notebook" )
-	public Long getLastDeleteNotebookOn();
-	public void setLastDeleteNotebookOn( Long lastDeleteNotebookOn );
+	public Date getLastDeleteNotebookOn();
+	public void setLastDeleteNotebookOn( Date lastDeleteNotebookOn );
 }
