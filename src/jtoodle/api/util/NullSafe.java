@@ -4,6 +4,8 @@
  */
 package jtoodle.api.util;
 
+import java.util.Collection;
+
 /**
  *
  * @author justo
@@ -31,5 +33,9 @@ public final class NullSafe {
 
 	public static boolean isNullOrEmpty( String s ) {
 		return( ( s == null ) || ( s.trim().length() == 0 ) );
+	}
+
+	public static boolean isNullOrEmpty( Collection c ) {
+		return( ( c == null ) || c.isEmpty() );
 	}
 }
