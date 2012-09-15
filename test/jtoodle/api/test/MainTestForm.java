@@ -4,30 +4,38 @@
  */
 package jtoodle.api.test;
 
+import java.awt.Component;
 import java.beans.IntrospectionException;
 import java.beans.PropertyEditorManager;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
 import jtoodle.api.beans.BeanParser;
+import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.request.GetAccountInfo;
+import jtoodle.api.request.GetFolders;
+import jtoodle.api.util.NullSafe;
 import org.jdesktop.swingx.JXLoginPane;
 import org.jdesktop.swingx.auth.LoginService;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
-import org.openide.util.Exceptions;
 
 /**
  *
  * @author Justo_Casablanca
  */
 public class MainTestForm extends javax.swing.JFrame {
+
+	private static final Logger logger = Logger.getLogger( MainTestForm.class.getName() );
 
     /**
      * Creates new form MainTestForm
@@ -39,6 +47,20 @@ public class MainTestForm extends javax.swing.JFrame {
 
 	private void initComponents2() {
 		PropertyEditorManager.registerEditor(Date.class, DatePropertyEditor.class);
+
+		foldersComboBox.setRenderer( new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent( JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus ) {
+				if( value == null ) {
+					setText( "<null value>" );
+				} else if( value instanceof Folder ) {
+					setText( ((Folder)value).getName() );
+				} else {
+					setText( value.toString() );
+				}
+				return this;
+			}
+		});
 	}
 
     /**
@@ -58,6 +80,8 @@ public class MainTestForm extends javax.swing.JFrame {
         tokenTextField = new javax.swing.JTextField();
         apiKeyLabel = new javax.swing.JLabel();
         apiKeyTextField = new javax.swing.JTextField();
+        errorTypeLabel = new javax.swing.JLabel();
+        errorTypeTextField = new javax.swing.JTextField();
         errorCodeLabel = new javax.swing.JLabel();
         errorCodeTextField = new javax.swing.JTextField();
         errorDescLabel = new javax.swing.JLabel();
@@ -66,6 +90,10 @@ public class MainTestForm extends javax.swing.JFrame {
         accountInfoPanel = new javax.swing.JPanel();
         accountInfoButton = new javax.swing.JButton();
         accountInfoPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
+        foldersPanel = new javax.swing.JPanel();
+        getFoldersButton = new javax.swing.JButton();
+        foldersComboBox = new javax.swing.JComboBox();
+        folderPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         loginMenuItem = new javax.swing.JMenuItem();
@@ -89,6 +117,8 @@ public class MainTestForm extends javax.swing.JFrame {
 
         apiKeyTextField.setEditable(false);
 
+        errorTypeLabel.setText("Error Type:");
+
         errorCodeLabel.setLabelFor(errorCodeTextField);
         errorCodeLabel.setText("Error Code:");
 
@@ -111,14 +141,6 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(authenticationPanelLayout.createSequentialGroup()
-                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(errorCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(errorDescPane, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
-                            .addComponent(errorCodeTextField)))
-                    .addGroup(authenticationPanelLayout.createSequentialGroup()
                         .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(userIdLabel)
                             .addComponent(tokenLabel)
@@ -127,8 +149,20 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(tokenTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                             .addComponent(userIdTextField)
-                            .addComponent(apiKeyTextField))))
-                .addContainerGap(197, Short.MAX_VALUE))
+                            .addComponent(apiKeyTextField)))
+                    .addGroup(authenticationPanelLayout.createSequentialGroup()
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(errorCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(errorTypeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(errorTypeTextField)
+                            .addComponent(errorCodeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, authenticationPanelLayout.createSequentialGroup()
+                        .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
         authenticationPanelLayout.setVerticalGroup(
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,13 +181,17 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(apiKeyLabel))
                 .addGap(39, 39, 39)
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(errorTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorTypeLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(errorCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorCodeLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -175,7 +213,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addGroup(accountInfoPanelLayout.createSequentialGroup()
                         .addComponent(accountInfoButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE))
+                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
                 .addContainerGap())
         );
         accountInfoPanelLayout.setVerticalGroup(
@@ -184,11 +222,53 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabbedPane.addTab("Account Info", accountInfoPanel);
+
+        getFoldersButton.setText("Get Folders");
+        getFoldersButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getFoldersButtonActionPerformed(evt);
+            }
+        });
+
+        foldersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        foldersComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foldersComboBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout foldersPanelLayout = new javax.swing.GroupLayout(foldersPanel);
+        foldersPanel.setLayout(foldersPanelLayout);
+        foldersPanelLayout.setHorizontalGroup(
+            foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(foldersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(folderPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                    .addGroup(foldersPanelLayout.createSequentialGroup()
+                        .addComponent(getFoldersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(foldersComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        foldersPanelLayout.setVerticalGroup(
+            foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(foldersPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(getFoldersButton)
+                    .addComponent(foldersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(folderPropertySheet, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        tabbedPane.addTab("Folders", foldersPanel);
 
         fileMenu.setText("File");
 
@@ -234,8 +314,7 @@ public class MainTestForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabbedPane)
-                .addContainerGap())
+                .addComponent(tabbedPane))
         );
 
         pack();
@@ -251,8 +330,13 @@ public class MainTestForm extends javax.swing.JFrame {
 		try {
 			AccountInfo bean = BeanParser.parseAccountInfo( jsonString );
 			accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
-		} catch( IntrospectionException | IOException ex ) {
-			Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, ex );
+		} catch( IntrospectionException | IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+			try {
+				accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
+			} catch( IntrospectionException ex1 ) {
+				logger.log( Level.SEVERE, null, ex1 );
+			}
 		}
     }//GEN-LAST:event_accountInfoButtonActionPerformed
 
@@ -272,16 +356,18 @@ public class MainTestForm extends javax.swing.JFrame {
 
 					return( true );
 				} catch( JToodleException jte ) {
+					errorTypeTextField.setText( jte.getClass().getName() );
 					errorCodeTextField.setText( "" + jte.getErrorCode() );
 					errorDescTextArea.setText( jte.getMessage() );
 
-					Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, jte );
+					logger.log( Level.SEVERE, null, jte );
 					return( false );
 				} catch( Exception ex ) {
-					errorCodeTextField.setText( ex.getClass().getName() );
+					errorTypeTextField.setText( ex.getClass().getName() );
+					errorCodeTextField.setText( "N/A" );
 					errorDescTextArea.setText( ex.getMessage() );
 
-					Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, ex );
+					logger.log( Level.SEVERE, null, ex );
 					return( false );
 				}
 			}
@@ -295,6 +381,48 @@ public class MainTestForm extends javax.swing.JFrame {
 			AuthCache.logout();
 		}
     }//GEN-LAST:event_logoutMenuItemActionPerformed
+
+    private void getFoldersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFoldersButtonActionPerformed
+		foldersComboBox.removeAllItems();
+		folderPropertySheet.setNodes( new Node[] {} );
+
+		String jsonString = new GetFolders().request();
+		logger.info( "FOLDERS --> " + jsonString );
+
+		try {
+			List<Folder> folderList = BeanParser.parseFolders( jsonString );
+
+			if( !NullSafe.isNullOrEmpty( folderList ) ) {
+				for( Folder f: folderList ) {
+					foldersComboBox.addItem( f );
+				}
+
+				foldersComboBoxActionPerformed( null );
+			}
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+			try {
+				foldersComboBox.addItem( ex );
+				folderPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
+			} catch( IntrospectionException ex1 ) {
+				logger.log( Level.SEVERE, null, ex1 );
+			}
+		}
+    }//GEN-LAST:event_getFoldersButtonActionPerformed
+
+    private void foldersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foldersComboBoxActionPerformed
+		try {
+			if( foldersComboBox.getSelectedItem() == null ) {
+				folderPropertySheet.setNodes( new Node[] {} );
+			} else {
+				folderPropertySheet.setNodes( new Node[] {
+					new BeanNode( foldersComboBox.getSelectedItem() )
+				});
+			}
+		} catch( IntrospectionException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
+    }//GEN-LAST:event_foldersComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -325,7 +453,7 @@ public class MainTestForm extends javax.swing.JFrame {
 				}
 			});
 		} catch( InterruptedException | InvocationTargetException ex ) {
-			Exceptions.printStackTrace( ex );
+			logger.log( Level.SEVERE, null, ex );
 		}
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -340,9 +468,15 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JLabel errorDescLabel;
     private javax.swing.JScrollPane errorDescPane;
     private javax.swing.JTextArea errorDescTextArea;
+    private javax.swing.JLabel errorTypeLabel;
+    private javax.swing.JTextField errorTypeTextField;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JPopupMenu.Separator exitSeparator;
     private javax.swing.JMenu fileMenu;
+    private org.openide.explorer.propertysheet.PropertySheet folderPropertySheet;
+    private javax.swing.JComboBox foldersComboBox;
+    private javax.swing.JPanel foldersPanel;
+    private javax.swing.JButton getFoldersButton;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JMenuBar menuBar;
