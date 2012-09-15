@@ -76,8 +76,8 @@ public interface AccountInfoMixIn extends UserIdMixIn {
 	public void setTimeZone( Integer timeZone );
 
 	@JsonProperty( "hidemonths" )
-	public Integer getHideMonths();
-	public void setHideMonths( Integer hideMonths );
+	public Integer getHiddenTasksMinDueMonths();
+	public void setHiddenTasksMinDueMonths( Integer hideMonths );
 
 	@JsonProperty( "hotlistpriority" )
 	public Priority getHotListMinTaskPriority();

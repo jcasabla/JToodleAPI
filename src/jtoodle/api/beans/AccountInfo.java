@@ -64,7 +64,7 @@ public class AccountInfo extends UserId {
 	private Boolean pro = null;
 	private DateFormat dateFormat = null;
 	private Integer timeZone = null;
-	private Integer hideMonths = null;
+	private Integer hiddenTasksMinDueMonths = null;
 	private Priority hotListMinTaskPriority = null;
 	private Integer hotListMaxDueDays = null;
 	private Boolean hotListIncludesStarredTasks = null;
@@ -115,12 +115,12 @@ public class AccountInfo extends UserId {
 		this.timeZone = timeZone;
 	}
 
-	public Integer getHideMonths() {
-		return hideMonths;
+	public Integer getHiddenTasksMinDueMonths() {
+		return hiddenTasksMinDueMonths;
 	}
 
-	public void setHideMonths( Integer hideMonths ) {
-		this.hideMonths = hideMonths;
+	public void setHiddenTasksMinDueMonths( Integer hiddenTasksMinDueMonths ) {
+		this.hiddenTasksMinDueMonths = hiddenTasksMinDueMonths;
 	}
 
 	public Priority getHotListMinTaskPriority() {
