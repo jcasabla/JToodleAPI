@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 import jtoodle.api.beans.BeanParser;
+import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Token;
 import jtoodle.api.beans.UserId;
 import jtoodle.api.util.NullSafe;
@@ -70,7 +71,7 @@ public class AuthCache {
 		logger.exiting( AuthCache.class.getName(), "clear()" );
 	}
 
-	public static void login( String email, String password ) {
+	public static void login( String email, String password ) throws JToodleException {
 		logger.entering( AuthCache.class.getName(), "clear()" );
 
 		clear();
@@ -172,7 +173,7 @@ public class AuthCache {
 		logger.exiting( AuthCache.class.getName(), "setUserId(String)" );
 	}
 
-	public static String getUserId() {
+	public static String getUserId() throws JToodleException {
 		logger.entering( AuthCache.class.getName(), "getUserId()" );
 
 		String userId = _prefs.get( KEY_USER_ID, null );
@@ -185,13 +186,9 @@ public class AuthCache {
 
 				UserId bean = BeanParser.parseUserId( alr.request() );
 
-				if( bean.hasError() ) {
-					bean.throwException();
-				} else {
-					userId = bean.getUserId();
-					setUserId( userId );
-					storeHashedPassword( _password );
-				}
+				userId = bean.getUserId();
+				setUserId( userId );
+				storeHashedPassword( _password );
 			} catch( IOException | NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
@@ -222,7 +219,7 @@ public class AuthCache {
 		logger.exiting( AuthCache.class.getName(), "setToken(String)" );
 	}
 
-	public static String getToken() {
+	public static String getToken() throws JToodleException {
 		logger.entering( AuthCache.class.getName(), "getToken()" );
 
 		String token = _prefs.get( KEY_TOKEN, null );
@@ -234,12 +231,8 @@ public class AuthCache {
 
 				Token bean = BeanParser.parseToken( tr.request() );
 
-				if( bean.hasError() ) {
-					bean.throwException();
-				} else {
-					token = bean.getToken();
-					setToken( token );
-				}
+				token = bean.getToken();
+				setToken( token );
 			} catch( IOException | NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
@@ -267,7 +260,7 @@ public class AuthCache {
 		logger.exiting( AuthCache.class.getName(), "setApiKey(String)" );
 	}
 
-	public static String getApiKey() {
+	public static String getApiKey() throws JToodleException {
 		logger.entering( AuthCache.class.getName(), "getApiKey()" );
 
 		String apiKey = _prefs.get( KEY_API_KEY, null );
