@@ -27,6 +27,11 @@ public interface WebRequestConstants {
 			.append( "/account/get.php" )
 			.toString();
 
+	public static final String URI_GET_FOLDERS = new StringBuilder()
+			.append( BASE_URI )
+			.append( "/folders/get.php" )
+			.toString();
+
 	////////////////////////////////////////////////////////////////////////////
 
 	public static final String APP_ID = "JToodler";
