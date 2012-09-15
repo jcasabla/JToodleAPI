@@ -65,19 +65,19 @@ public class AccountInfo extends UserId {
 	private DateFormat dateFormat = null;
 	private Integer timeZone = null;
 	private Integer hideMonths = null;
-	private Priority hotListPriority = null;
-	private Integer hotListDueDate = null;
-	private Boolean hotListStar = null;
-	private Boolean hotListStatus = null;
-	private Boolean showTabNums = null;
-	private Date lastEditTaskOn = null;
-	private Date lastDeleteTaskOn = null;
-	private Date lastEditFolderOn = null;
-	private Date lastEditContextOn = null;
-	private Date lastEditGoalOn = null;
-	private Date lastEditLocationOn = null;
-	private Date lastEditNotebookOn = null;
-	private Date lastDeleteNotebookOn = null;
+	private Priority hotListMinTaskPriority = null;
+	private Integer hotListMaxDueDays = null;
+	private Boolean hotListIncludesStarredTasks = null;
+	private Boolean hotListIncludesNextActionStatus = null;
+	private Boolean showSectionTaskCounts = null;
+	private Date lastTaskEditedOn = null;
+	private Date lastTaskDeletedOn = null;
+	private Date lastFolderEditedOn = null;
+	private Date lastContextEditedOn = null;
+	private Date lastGoalEditedOn = null;
+	private Date lastLocationEditedOn = null;
+	private Date lastNotebookEditedOn = null;
+	private Date lastNotebookDeletedOn = null;
 
 	public String getAlias() {
 		return alias;
@@ -93,6 +93,10 @@ public class AccountInfo extends UserId {
 
 	public void setPro( Boolean pro ) {
 		this.pro = pro;
+	}
+
+	public Boolean isPro() {
+		return pro;
 	}
 
 	public DateFormat getDateFormat() {
@@ -119,108 +123,120 @@ public class AccountInfo extends UserId {
 		this.hideMonths = hideMonths;
 	}
 
-	public Priority getHotListPriority() {
-		return hotListPriority;
+	public Priority getHotListMinTaskPriority() {
+		return hotListMinTaskPriority;
 	}
 
-	public void setHotListPriority( Priority hotListPriority ) {
-		this.hotListPriority = hotListPriority;
+	public void setHotListMinTaskPriority( Priority hotListMinTaskPriority ) {
+		this.hotListMinTaskPriority = hotListMinTaskPriority;
 	}
 
-	public Integer getHotListDueDate() {
-		return hotListDueDate;
+	public Integer getHotListMaxDueDays() {
+		return hotListMaxDueDays;
 	}
 
-	public void setHotListDueDate( Integer hotListDueDate ) {
-		this.hotListDueDate = hotListDueDate;
+	public void setHotListMaxDueDays( Integer hotListMaxDueDays ) {
+		this.hotListMaxDueDays = hotListMaxDueDays;
 	}
 
-	public Boolean getHotListStar() {
-		return hotListStar;
+	public Boolean getHotListIncludesStarredTasks() {
+		return hotListIncludesStarredTasks;
 	}
 
-	public void setHotListStar( Boolean hotListStar ) {
-		this.hotListStar = hotListStar;
+	public void setHotListIncludesStarredTasks( Boolean hotListIncludesStarredTasks ) {
+		this.hotListIncludesStarredTasks = hotListIncludesStarredTasks;
 	}
 
-	public Boolean getHotListStatus() {
-		return hotListStatus;
+	public Boolean hotListIncludesStarredTasks() {
+		return hotListIncludesStarredTasks;
 	}
 
-	public void setHotListStatus( Boolean hotListStatus ) {
-		this.hotListStatus = hotListStatus;
+	public Boolean getHotListIncludesNextActionStatus() {
+		return hotListIncludesNextActionStatus;
 	}
 
-	public Boolean getShowTabNums() {
-		return showTabNums;
+	public void setHotListIncludesNextActionStatus( Boolean hotListIncludesNextActionStatus ) {
+		this.hotListIncludesNextActionStatus = hotListIncludesNextActionStatus;
 	}
 
-	public void setShowTabNums( Boolean showTabNums ) {
-		this.showTabNums = showTabNums;
+	public Boolean hotListIncludesNextActionStatus() {
+		return hotListIncludesNextActionStatus;
 	}
 
-	public Date getLastEditTaskOn() {
-		return lastEditTaskOn;
+	public Boolean getShowSectionTaskCounts() {
+		return showSectionTaskCounts;
 	}
 
-	public void setLastEditTaskOn( Date lastEditTaskOn ) {
-		this.lastEditTaskOn = lastEditTaskOn;
+	public void setShowSectionTaskCounts( Boolean showSectionTaskCounts ) {
+		this.showSectionTaskCounts = showSectionTaskCounts;
 	}
 
-	public Date getLastDeleteTaskOn() {
-		return lastDeleteTaskOn;
+	public Boolean showSectionTaskCounts() {
+		return showSectionTaskCounts;
 	}
 
-	public void setLastDeleteTaskOn( Date lastDeleteTaskOn ) {
-		this.lastDeleteTaskOn = lastDeleteTaskOn;
+	public Date getLastTaskEditedOn() {
+		return lastTaskEditedOn;
 	}
 
-	public Date getLastEditFolderOn() {
-		return lastEditFolderOn;
+	public void setLastTaskEditedOn( Date lastTaskEditedOn ) {
+		this.lastTaskEditedOn = lastTaskEditedOn;
 	}
 
-	public void setLastEditFolderOn( Date lastEditFolderOn ) {
-		this.lastEditFolderOn = lastEditFolderOn;
+	public Date getLastTaskDeletedOn() {
+		return lastTaskDeletedOn;
 	}
 
-	public Date getLastEditContextOn() {
-		return lastEditContextOn;
+	public void setLastTaskDeletedOn( Date lastTaskDeletedOn ) {
+		this.lastTaskDeletedOn = lastTaskDeletedOn;
 	}
 
-	public void setLastEditContextOn( Date lastEditContextOn ) {
-		this.lastEditContextOn = lastEditContextOn;
+	public Date getLastFolderEditedOn() {
+		return lastFolderEditedOn;
 	}
 
-	public Date getLastEditGoalOn() {
-		return lastEditGoalOn;
+	public void setLastFolderEditedOn( Date lastFolderEditedOn ) {
+		this.lastFolderEditedOn = lastFolderEditedOn;
 	}
 
-	public void setLastEditGoalOn( Date lastEditGoalOn ) {
-		this.lastEditGoalOn = lastEditGoalOn;
+	public Date getLastContextEditedOn() {
+		return lastContextEditedOn;
 	}
 
-	public Date getLastEditLocationOn() {
-		return lastEditLocationOn;
+	public void setLastContextEditedOn( Date lastContextEditedOn ) {
+		this.lastContextEditedOn = lastContextEditedOn;
 	}
 
-	public void setLastEditLocationOn( Date lastEditLocationOn ) {
-		this.lastEditLocationOn = lastEditLocationOn;
+	public Date getLastGoalEditedOn() {
+		return lastGoalEditedOn;
 	}
 
-	public Date getLastEditNotebookOn() {
-		return lastEditNotebookOn;
+	public void setLastGoalEditedOn( Date lastGoalEditedOn ) {
+		this.lastGoalEditedOn = lastGoalEditedOn;
 	}
 
-	public void setLastEditNotebookOn( Date lastEditNotebookOn ) {
-		this.lastEditNotebookOn = lastEditNotebookOn;
+	public Date getLastLocationEditedOn() {
+		return lastLocationEditedOn;
 	}
 
-	public Date getLastDeleteNotebookOn() {
-		return lastDeleteNotebookOn;
+	public void setLastLocationEditedOn( Date lastLocationEditedOn ) {
+		this.lastLocationEditedOn = lastLocationEditedOn;
 	}
 
-	public void setLastDeleteNotebookOn( Date lastDeleteNotebookOn ) {
-		this.lastDeleteNotebookOn = lastDeleteNotebookOn;
+	public Date getLastNotebookEditedOn() {
+		return lastNotebookEditedOn;
+	}
+
+	public void setLastNotebookEditedOn( Date lastNotebookEditedOn ) {
+		this.lastNotebookEditedOn = lastNotebookEditedOn;
+	}
+
+	public Date getLastNotebookDeletedOn() {
+		return lastNotebookDeletedOn;
+	}
+
+	public void setLastNotebookDeletedOn( Date lastNotebookDeletedOn ) {
+		this.lastNotebookDeletedOn = lastNotebookDeletedOn;
 	}
 
 }

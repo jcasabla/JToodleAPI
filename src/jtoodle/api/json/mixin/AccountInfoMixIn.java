@@ -65,6 +65,8 @@ public interface AccountInfoMixIn extends UserIdMixIn {
 	public Boolean getPro();
 	public void setPro( Boolean pro );
 
+	public Boolean isPro();
+
 	@JsonProperty( "dateformat" )
 	public DateFormat getDateFormat();
 	public void setDateFormat( DateFormat dateFormat );
@@ -78,54 +80,60 @@ public interface AccountInfoMixIn extends UserIdMixIn {
 	public void setHideMonths( Integer hideMonths );
 
 	@JsonProperty( "hotlistpriority" )
-	public Priority getHotListPriority();
-	public void setHotListPriority( Priority hotListPriority );
+	public Priority getHotListMinTaskPriority();
+	public void setHotListMinTaskPriority( Priority hotListPriority );
 
 	@JsonProperty( "hotlistduedate" )
-	public Integer getHotListDueDate();
-	public void setHotListDueDate( Integer hotListDueDate );
+	public Integer getHotListMaxDueDays();
+	public void setHotListMaxDueDays( Integer hotListDueDate );
 
 	@JsonProperty( "hotliststar" )
-	public Boolean getHotListStar();
-	public void setHotListStar( Boolean hotListStar );
+	public Boolean getHotListIncludesStarredTasks();
+	public void setHotListIncludesStarredTasks( Boolean hotListStar );
+
+	public Boolean hotListIncludesStarredTasks();
 
 	@JsonProperty( "hotliststatus" )
-	public Boolean getHotListStatus();
-	public void setHotListStatus( Boolean hotListStatus );
+	public Boolean getHotListIncludesNextActionStatus();
+	public void setHotListIncludesNextActionStatus( Boolean hotListStatus );
+
+	public Boolean hotListIncludesNextActionStatus();
 
 	@JsonProperty( "showtabnums" )
-	public Boolean getShowTabNums();
-	public void setShowTabNums( Boolean showTabNums );
+	public Boolean getShowSectionTaskCounts();
+	public void setShowSectionTaskCounts( Boolean showTabNums );
+
+	public Boolean showSectionTaskCounts();
 
 	@JsonProperty( "lastedit_task" )
-	public Date getLastEditTaskOn();
-	public void setLastEditTaskOn( Date lastEditTaskOn );
+	public Date getLastTaskEditedOn();
+	public void setLastTaskEditedOn( Date lastEditTaskOn );
 
 	@JsonProperty( "lastdelete_task" )
-	public Date getLastDeleteTaskOn();
-	public void setLastDeleteTaskOn( Date lastDeleteTaskOn );
+	public Date getLastTaskDeletedOn();
+	public void setLastTaskDeletedOn( Date lastDeleteTaskOn );
 
 	@JsonProperty( "lastedit_folder" )
-	public Date getLastEditFolderOn();
-	public void setLastEditFolderOn( Date lastEditFolderOn );
+	public Date getLastFolderEditedOn();
+	public void setLastFolderEditedOn( Date lastEditFolderOn );
 
 	@JsonProperty( "lastedit_context" )
-	public Date getLastEditContextOn();
-	public void setLastEditContextOn( Date lastEditContextOn );
+	public Date getLastContextEditedOn();
+	public void setLastContextEditedOn( Date lastEditContextOn );
 
 	@JsonProperty( "lastedit_goal" )
-	public Date getLastEditGoalOn();
-	public void setLastEditGoalOn( Date lastEditGoalOn );
+	public Date getLastGoalEditedOn();
+	public void setLastGoalEditedOn( Date lastEditGoalOn );
 
 	@JsonProperty( "lastedit_location" )
-	public Date getLastEditLocationOn();
-	public void setLastEditLocationOn( Date lastEditLocationOn );
+	public Date getLastLocationEditedOn();
+	public void setLastLocationEditedOn( Date lastEditLocationOn );
 
 	@JsonProperty( "lastedit_notebook" )
-	public Date getLastEditNotebookOn();
-	public void setLastEditNotebookOn( Date lastEditNotebookOn );
+	public Date getLastNotebookEditedOn();
+	public void setLastNotebookEditedOn( Date lastEditNotebookOn );
 
 	@JsonProperty( "lastdelete_notebook" )
-	public Date getLastDeleteNotebookOn();
-	public void setLastDeleteNotebookOn( Date lastDeleteNotebookOn );
+	public Date getLastNotebookDeletedOn();
+	public void setLastNotebookDeletedOn( Date lastDeleteNotebookOn );
 }
