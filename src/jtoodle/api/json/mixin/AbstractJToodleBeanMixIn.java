@@ -4,15 +4,10 @@
  */
 package jtoodle.api.json.mixin;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 /**
  *
  * @author justo
  */
 interface AbstractJToodleBeanMixIn {
 
-	@JsonProperty( "errorDesc" )
-	abstract String getErrorDescription();
-	abstract void setErrorDescription( String s );
 }
