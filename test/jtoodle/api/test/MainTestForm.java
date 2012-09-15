@@ -387,7 +387,6 @@ public class MainTestForm extends javax.swing.JFrame {
 		folderPropertySheet.setNodes( new Node[] {} );
 
 		String jsonString = new GetFolders().request();
-		logger.info( "FOLDERS --> " + jsonString );
 
 		try {
 			List<Folder> folderList = BeanParser.parseFolders( jsonString );
