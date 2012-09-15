@@ -8,7 +8,7 @@ package jtoodle.api.beans;
  *
  * @author justo
  */
-public class TokenBean extends AbstractJToodlerBean {
+public class Token extends AbstractJToodleBean {
 
 	private String token = null;
 

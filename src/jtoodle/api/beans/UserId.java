@@ -8,7 +8,7 @@ package jtoodle.api.beans;
  *
  * @author justo
  */
-public class UserIdBean extends AbstractJToodlerBean {
+public class UserId extends AbstractJToodleBean {
 
 	private String userId = null;
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.json;
+package jtoodle.api.json.mixin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
@@ -13,7 +13,7 @@ import jtoodle.api.json.enums.Priority;
  *
  * @author justo
  */
-public interface AccountInfoBeanMixIn extends UserIdBeanMixIn {
+public interface AccountInfoMixIn extends UserIdMixIn {
 
 	/*
 	 * JSON sample from https://api.toodledo.com/2/account/doc_info.php

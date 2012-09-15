@@ -11,9 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import jtoodle.api.beans.BeanParseUtil;
-import jtoodle.api.beans.TokenBean;
-import jtoodle.api.beans.UserIdBean;
+import jtoodle.api.beans.BeanParser;
+import jtoodle.api.beans.Token;
+import jtoodle.api.beans.UserId;
 import jtoodle.api.util.NullSafe;
 import jtoodle.api.util.WebRequestConstants;
 import jtoodle.api.util.WebRequestUtils;
@@ -183,7 +183,7 @@ public class AuthCache {
 				alr.setEmail( getEmail() );
 				alr.setPassword( _password );
 
-				UserIdBean bean = BeanParseUtil.toUserIdBean( alr.request() );
+				UserId bean = BeanParser.parseUserId( alr.request() );
 
 				if( bean.hasError() ) {
 					bean.throwException();
@@ -232,7 +232,7 @@ public class AuthCache {
 				TokenRequest tr = new TokenRequest();
 				tr.setUserId( getUserId() );
 
-				TokenBean bean = BeanParseUtil.toTokenBean( tr.request() );
+				Token bean = BeanParser.parseToken( tr.request() );
 
 				if( bean.hasError() ) {
 					bean.throwException();

@@ -8,9 +8,9 @@ package jtoodle.api.beans;
  *
  * @author justo
  */
-public class JToodlerException extends IllegalArgumentException {
+public class JToodleException extends IllegalArgumentException {
 
-	public JToodlerException( Integer errorCode, String errorDescription ) {
+	public JToodleException( Integer errorCode, String errorDescription ) {
 		super( errorDescription );
 		this.errorCode = errorCode;
 	}

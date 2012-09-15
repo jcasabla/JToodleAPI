@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.json;
+package jtoodle.api.json.mixin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  * @author justo
  */
-interface AbstractJToodlerBeanMixIn {
+interface AbstractJToodleBeanMixIn {
 
 	@JsonProperty( "errorDesc" )
 	abstract String getErrorDescription();

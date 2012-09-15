@@ -12,7 +12,7 @@ import jtoodle.api.json.enums.Priority;
  *
  * @author justo
  */
-public class AccountInfoBean extends UserIdBean {
+public class AccountInfo extends UserId {
 
 	/*
 	 * JSON sample from https://api.toodledo.com/2/account/doc_info.php

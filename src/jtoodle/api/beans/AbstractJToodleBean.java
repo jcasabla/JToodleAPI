@@ -8,7 +8,7 @@ package jtoodle.api.beans;
  *
  * @author justo
  */
-public class AbstractJToodlerBean {
+public class AbstractJToodleBean {
 
 	private Integer errorCode;
 
@@ -35,7 +35,7 @@ public class AbstractJToodlerBean {
 	}
 
 	public void throwException() {
-		throw new JToodlerException( getErrorCode(), getErrorDescription() );
+		throw new JToodleException( getErrorCode(), getErrorDescription() );
 	}
 
 }

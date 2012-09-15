@@ -13,9 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthCache;
-import jtoodle.api.beans.AccountInfoBean;
-import jtoodle.api.beans.BeanParseUtil;
-import jtoodle.api.beans.JToodlerException;
+import jtoodle.api.beans.AccountInfo;
+import jtoodle.api.beans.BeanParser;
+import jtoodle.api.beans.JToodleException;
 import jtoodle.api.request.GetAccountInfo;
 import org.jdesktop.swingx.JXLoginPane;
 import org.jdesktop.swingx.auth.LoginService;
@@ -249,7 +249,7 @@ public class MainTestForm extends javax.swing.JFrame {
 		String jsonString = new GetAccountInfo().request();
 
 		try {
-			AccountInfoBean bean = BeanParseUtil.toAccountInfoBean( jsonString );
+			AccountInfo bean = BeanParser.parseAccountInfo( jsonString );
 			accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
 		} catch( IntrospectionException | IOException ex ) {
 			Logger.getLogger( MainTestForm.class.getName() ).log( Level.SEVERE, null, ex );
@@ -271,7 +271,7 @@ public class MainTestForm extends javax.swing.JFrame {
 					apiKeyTextField.setText( AuthCache.getApiKey() );
 
 					return( true );
-				} catch( JToodlerException jte ) {
+				} catch( JToodleException jte ) {
 					errorCodeTextField.setText( "" + jte.getErrorCode() );
 					errorDescTextArea.setText( jte.getMessage() );
 
