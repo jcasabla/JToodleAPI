@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import jtoodle.api.beans.BeanParser;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Token;
 import jtoodle.api.beans.UserId;
@@ -78,8 +77,8 @@ public class AuthCache {
 		setEmail( email );
 		setPassword( password );
 
-		getUserId();
-		getToken();
+		//getUserId();
+		//getToken();
 		getApiKey();
 
 		logger.exiting( AuthCache.class.getName(), "clear()" );
@@ -184,7 +183,7 @@ public class AuthCache {
 				alr.setEmail( getEmail() );
 				alr.setPassword( _password );
 
-				UserId bean = BeanParser.parseUserId( alr.request() );
+				UserId bean = alr.requestBean();
 
 				userId = bean.getUserId();
 				setUserId( userId );
@@ -229,7 +228,7 @@ public class AuthCache {
 				TokenRequest tr = new TokenRequest();
 				tr.setUserId( getUserId() );
 
-				Token bean = BeanParser.parseToken( tr.request() );
+				Token bean = tr.requestBean();
 
 				token = bean.getToken();
 				setToken( token );
@@ -267,10 +266,14 @@ public class AuthCache {
 
 		if( NullSafe.isNullOrEmpty( apiKey ) || tokenIsStale() ) {
 			try {
+				// hashed password doesn't get stored until the token is
+				// sucessfully retrieved, so it has to be called first
+				String token = getToken();
+
 				apiKey = WebRequestUtils.md5Hash( new StringBuilder()
 					.append( getHashedPassword() )
 					.append( WebRequestConstants.APP_TOKEN )
-					.append( getToken() )
+					.append( token )
 					.toString() );
 				setApiKey( apiKey );
 			} catch( NoSuchAlgorithmException ex ) {
