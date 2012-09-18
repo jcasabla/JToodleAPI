@@ -47,7 +47,7 @@ public class MainTestForm extends javax.swing.JFrame {
 	private void initComponents2() {
 		PropertyEditorManager.registerEditor(Date.class, DatePropertyEditor.class);
 
-		foldersComboBox.setRenderer( new DefaultListCellRenderer() {
+		beanResultsComboBox.setRenderer( new DefaultListCellRenderer() {
 			@Override
 			public Component getListCellRendererComponent( JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus ) {
 				if( value == null ) {
@@ -89,10 +89,10 @@ public class MainTestForm extends javax.swing.JFrame {
         accountInfoPanel = new javax.swing.JPanel();
         accountInfoButton = new javax.swing.JButton();
         accountInfoPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
-        foldersPanel = new javax.swing.JPanel();
-        getFoldersButton = new javax.swing.JButton();
-        foldersComboBox = new javax.swing.JComboBox();
-        folderPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
+        othersPanel = new javax.swing.JPanel();
+        beanTypeComboBox = new javax.swing.JComboBox();
+        beanResultsComboBox = new javax.swing.JComboBox();
+        beanPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         loginMenuItem = new javax.swing.JMenuItem();
@@ -190,7 +190,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -221,53 +221,52 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabbedPane.addTab("Account Info", accountInfoPanel);
 
-        getFoldersButton.setText("Get Folders");
-        getFoldersButton.addActionListener(new java.awt.event.ActionListener() {
+        beanTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Choose>", "Folders", "Tasks" }));
+        beanTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getFoldersButtonActionPerformed(evt);
+                beanTypeComboBoxActionPerformed(evt);
             }
         });
 
-        foldersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        foldersComboBox.addActionListener(new java.awt.event.ActionListener() {
+        beanResultsComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                foldersComboBoxActionPerformed(evt);
+                beanResultsComboBoxActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout foldersPanelLayout = new javax.swing.GroupLayout(foldersPanel);
-        foldersPanel.setLayout(foldersPanelLayout);
-        foldersPanelLayout.setHorizontalGroup(
-            foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(foldersPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout othersPanelLayout = new javax.swing.GroupLayout(othersPanel);
+        othersPanel.setLayout(othersPanelLayout);
+        othersPanelLayout.setHorizontalGroup(
+            othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, othersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(folderPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
-                    .addGroup(foldersPanelLayout.createSequentialGroup()
-                        .addComponent(getFoldersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(othersPanelLayout.createSequentialGroup()
+                        .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(foldersComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(beanResultsComboBox, 0, 448, Short.MAX_VALUE)))
                 .addContainerGap())
         );
-        foldersPanelLayout.setVerticalGroup(
-            foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(foldersPanelLayout.createSequentialGroup()
+        othersPanelLayout.setVerticalGroup(
+            othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(othersPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(foldersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(getFoldersButton)
-                    .addComponent(foldersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(beanResultsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(folderPropertySheet, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        tabbedPane.addTab("Folders", foldersPanel);
+        tabbedPane.addTab("Others", othersPanel);
 
         fileMenu.setText("File");
 
@@ -379,44 +378,58 @@ public class MainTestForm extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_logoutMenuItemActionPerformed
 
-    private void getFoldersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFoldersButtonActionPerformed
-		foldersComboBox.removeAllItems();
-		folderPropertySheet.setNodes( new Node[] {} );
-
+    private void beanResultsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanResultsComboBoxActionPerformed
 		try {
-			List<Folder> folderList = new GetFolders().requestBeanList();
-
-			if( !NullSafe.isNullOrEmpty( folderList ) ) {
-				for( Folder f: folderList ) {
-					foldersComboBox.addItem( f );
-				}
-
-				foldersComboBoxActionPerformed( null );
-			}
-		} catch( IOException | JToodleException ex ) {
-			logger.log( Level.SEVERE, null, ex );
-			try {
-				foldersComboBox.addItem( ex );
-				folderPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
-			} catch( IntrospectionException ex1 ) {
-				logger.log( Level.SEVERE, null, ex1 );
-			}
-		}
-    }//GEN-LAST:event_getFoldersButtonActionPerformed
-
-    private void foldersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foldersComboBoxActionPerformed
-		try {
-			if( foldersComboBox.getSelectedItem() == null ) {
-				folderPropertySheet.setNodes( new Node[] {} );
+			if( beanResultsComboBox.getSelectedItem() == null ) {
+				beanPropertySheet.setNodes( new Node[] {} );
 			} else {
-				folderPropertySheet.setNodes( new Node[] {
-					new BeanNode( foldersComboBox.getSelectedItem() )
+				beanPropertySheet.setNodes( new Node[] {
+					new BeanNode( beanResultsComboBox.getSelectedItem() )
 				});
 			}
 		} catch( IntrospectionException ex ) {
 			logger.log( Level.SEVERE, null, ex );
 		}
-    }//GEN-LAST:event_foldersComboBoxActionPerformed
+    }//GEN-LAST:event_beanResultsComboBoxActionPerformed
+
+    private void beanTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanTypeComboBoxActionPerformed
+		beanResultsComboBox.removeAllItems();
+		beanPropertySheet.setNodes( new Node[] {} );
+
+		try {
+			List beanList = null;
+
+			switch( beanTypeComboBox.getSelectedItem().toString() ) {
+				case "Folders": {
+					beanList = new GetFolders().requestBeanList();
+				}
+				case "Tasks": {
+
+				}
+				default:
+			}
+
+			if( !NullSafe.isNullOrEmpty( beanList ) ) {
+				for( Object o: beanList ) {
+					beanResultsComboBox.addItem( o );
+				}
+			} else {
+				beanResultsComboBox.addItem(
+					"<no results for: " + beanTypeComboBox.getSelectedItem() + ">" );
+			}
+
+			beanResultsComboBoxActionPerformed( null );
+
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+			try {
+				beanResultsComboBox.addItem( ex );
+				beanPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
+			} catch( IntrospectionException ex1 ) {
+				logger.log( Level.SEVERE, null, ex1 );
+			}
+		}
+    }//GEN-LAST:event_beanTypeComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,6 +470,9 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JLabel apiKeyLabel;
     private javax.swing.JTextField apiKeyTextField;
     private javax.swing.JPanel authenticationPanel;
+    private org.openide.explorer.propertysheet.PropertySheet beanPropertySheet;
+    private javax.swing.JComboBox beanResultsComboBox;
+    private javax.swing.JComboBox beanTypeComboBox;
     private javax.swing.JLabel errorCodeLabel;
     private javax.swing.JTextField errorCodeTextField;
     private javax.swing.JLabel errorDescLabel;
@@ -467,13 +483,10 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JPopupMenu.Separator exitSeparator;
     private javax.swing.JMenu fileMenu;
-    private org.openide.explorer.propertysheet.PropertySheet folderPropertySheet;
-    private javax.swing.JComboBox foldersComboBox;
-    private javax.swing.JPanel foldersPanel;
-    private javax.swing.JButton getFoldersButton;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JPanel othersPanel;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JLabel tokenLabel;
     private javax.swing.JTextField tokenTextField;
