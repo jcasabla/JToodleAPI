@@ -18,7 +18,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
-import jtoodle.api.beans.BeanParser;
 import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.request.GetAccountInfo;
@@ -325,10 +324,8 @@ public class MainTestForm extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void accountInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountInfoButtonActionPerformed
-		String jsonString = new GetAccountInfo().request();
-
 		try {
-			AccountInfo bean = BeanParser.parseAccountInfo( jsonString );
+			AccountInfo bean = new GetAccountInfo().requestBean();
 			accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
 		} catch( IntrospectionException | IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
@@ -386,10 +383,8 @@ public class MainTestForm extends javax.swing.JFrame {
 		foldersComboBox.removeAllItems();
 		folderPropertySheet.setNodes( new Node[] {} );
 
-		String jsonString = new GetFolders().request();
-
 		try {
-			List<Folder> folderList = BeanParser.parseFolders( jsonString );
+			List<Folder> folderList = new GetFolders().requestBeanList();
 
 			if( !NullSafe.isNullOrEmpty( folderList ) ) {
 				for( Folder f: folderList ) {

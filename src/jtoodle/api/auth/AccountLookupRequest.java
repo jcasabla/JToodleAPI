@@ -5,16 +5,17 @@
 package jtoodle.api.auth;
 
 import java.security.NoSuchAlgorithmException;
+import jtoodle.api.beans.UserId;
 import jtoodle.api.util.WebRequestUtils;
 
 /**
  *
  * @author justo
  */
-public class AccountLookupRequest extends AbstractAuthWebRequest {
+public class AccountLookupRequest extends AbstractAuthWebRequest<UserId> {
 
 	public AccountLookupRequest() {
-		super( URI_ACCOUNT_LOOKUP );
+		super( URI_ACCOUNT_LOOKUP, UserId.class );
 	}
 
 	public void setEmail( String email ) throws NoSuchAlgorithmException {

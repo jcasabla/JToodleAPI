@@ -7,6 +7,7 @@ package jtoodle.api.request;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jtoodle.api.auth.AuthCache;
+import jtoodle.api.beans.AbstractJToodleBean;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.util.AbstractWebRequest;
 
@@ -14,10 +15,10 @@ import jtoodle.api.util.AbstractWebRequest;
  *
  * @author justo
  */
-abstract class AbstractAPIWebRequest extends AbstractWebRequest {
+abstract class AbstractAPIWebRequest<V extends AbstractJToodleBean> extends AbstractWebRequest<V> {
 
-	public AbstractAPIWebRequest( String uri ) {
-		super( uri );
+	public AbstractAPIWebRequest( String uri, Class<V> clazz ) {
+		super( uri, clazz );
 
 		try {
 			setParameter( PARAM_NAME_KEY, AuthCache.getApiKey() );

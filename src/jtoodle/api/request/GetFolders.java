@@ -4,13 +4,15 @@
  */
 package jtoodle.api.request;
 
+import jtoodle.api.beans.Folder;
+
 /**
  *
  * @author justo
  */
-public class GetFolders extends AbstractAPIWebRequest {
+public class GetFolders extends AbstractAPIWebRequest<Folder> {
 
 	public GetFolders() {
-		super( URI_GET_FOLDERS );
+		super( URI_GET_FOLDERS, Folder.class );
 	}
 }

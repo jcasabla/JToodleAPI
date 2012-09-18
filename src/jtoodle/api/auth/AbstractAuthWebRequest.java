@@ -4,16 +4,17 @@
  */
 package jtoodle.api.auth;
 
+import jtoodle.api.beans.AbstractJToodleBean;
 import jtoodle.api.util.AbstractWebRequest;
 
 /**
  *
  * @author justo
  */
-public class AbstractAuthWebRequest extends AbstractWebRequest {
+public class AbstractAuthWebRequest<V extends AbstractJToodleBean> extends AbstractWebRequest<V> {
 
-	public AbstractAuthWebRequest( String uri ) {
-		super( uri );
+	public AbstractAuthWebRequest( String uri, Class<V> clazz ) {
+		super( uri, clazz );
 		setParameter( PARAM_NAME_APP_ID, APP_ID );
 	}
 

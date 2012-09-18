@@ -5,7 +5,6 @@
 package jtoodle.api.beans;
 
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.IOException;
@@ -50,24 +49,16 @@ public class BeanParser {
 
 	}
 
-	public static UserId parseUserId( String js ) throws IOException, JToodleException {
+	public static <T extends AbstractJToodleBean> T parseBean( String js, Class<T> clazz )
+	throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
-		return( mapper.readValue( js, UserId.class ) );
+		return( mapper.readValue( js, clazz ) );
 	}
 
-	public static Token parseToken( String js ) throws IOException, JToodleException {
+	public static <T extends AbstractJToodleBean> List<T> parseBeanList( String js, Class<T> clazz )
+	throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
-		return( mapper.readValue( js, Token.class ) );
-	}
-
-	public static AccountInfo parseAccountInfo( String js ) throws IOException, JToodleException {
-		throwJToodleExceptionIfError( js );
-		return( mapper.readValue( js, AccountInfo.class ) );
-	}
-
-	public static List<Folder> parseFolders( String js ) throws IOException, JToodleException {
-		throwJToodleExceptionIfError( js );
-		return( mapper.readValue( js, new TypeReference<List<Folder>>() {} ) );
+		return( mapper.readValue( js, mapper.getTypeFactory().constructCollectionType( List.class, clazz ) ) );
 	}
 
 	private static void throwJToodleExceptionIfError( String js ) throws IOException, JToodleException {

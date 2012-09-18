@@ -5,16 +5,17 @@
 package jtoodle.api.auth;
 
 import java.security.NoSuchAlgorithmException;
+import jtoodle.api.beans.Token;
 import jtoodle.api.util.WebRequestUtils;
 
 /**
  *
  * @author justo
  */
-public class TokenRequest extends AbstractAuthWebRequest {
+public class TokenRequest extends AbstractAuthWebRequest<Token> {
 
 	public TokenRequest() {
-		super( URI_GET_TOKEN );
+		super( URI_GET_TOKEN, Token.class );
 
 		setParameter( PARAM_NAME_VERSION, "1" );
 		setParameter( PARAM_NAME_DEVICE, "laptop" );
