@@ -18,10 +18,12 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
+import jtoodle.api.beans.BeanParser;
 import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.request.GetAccountInfo;
 import jtoodle.api.request.GetFolders;
+import jtoodle.api.request.GetTasks;
 import jtoodle.api.util.NullSafe;
 import org.jdesktop.swingx.JXLoginPane;
 import org.jdesktop.swingx.auth.LoginService;
@@ -402,9 +404,11 @@ public class MainTestForm extends javax.swing.JFrame {
 			switch( beanTypeComboBox.getSelectedItem().toString() ) {
 				case "Folders": {
 					beanList = new GetFolders().requestBeanList();
+					break;
 				}
 				case "Tasks": {
-
+					beanList = new GetTasks().requestBeanList();
+					break;
 				}
 				default:
 			}

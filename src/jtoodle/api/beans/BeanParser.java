@@ -4,21 +4,29 @@
  */
 package jtoodle.api.beans;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.MappingJsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import jtoodle.api.json.deser.TD_BooleanDeserializer;
 import jtoodle.api.json.deser.TD_DateDeserializer;
 import jtoodle.api.json.deser.TD_DateFormatDeserializer;
 import jtoodle.api.json.deser.TD_PriorityDeserializer;
+import jtoodle.api.json.deser.TD_ReminderTimeDeserializer;
 import jtoodle.api.json.enums.DateFormat;
 import jtoodle.api.json.enums.Priority;
+import jtoodle.api.json.enums.ReminderTime;
 import jtoodle.api.json.mixin.AccountInfoMixIn;
 import jtoodle.api.json.mixin.FolderMixIn;
 import jtoodle.api.json.mixin.JToodleExceptionMixIn;
+import jtoodle.api.json.mixin.TaskMixIn;
 import jtoodle.api.json.mixin.TokenMixIn;
 import jtoodle.api.json.mixin.UserIdMixIn;
 
@@ -38,6 +46,7 @@ public class BeanParser {
 		mapper.addMixInAnnotations( Token.class, TokenMixIn.class );
 		mapper.addMixInAnnotations( AccountInfo.class, AccountInfoMixIn.class );
 		mapper.addMixInAnnotations( Folder.class, FolderMixIn.class );
+		mapper.addMixInAnnotations( Task.class, TaskMixIn.class );
 
 		mapper.registerModule(
 			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
@@ -45,6 +54,7 @@ public class BeanParser {
 				.addDeserializer( Date.class, new TD_DateDeserializer() )
 				.addDeserializer( DateFormat.class, new TD_DateFormatDeserializer() )
 				.addDeserializer( Priority.class, new TD_PriorityDeserializer() )
+				.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
 		);
 
 	}
@@ -66,5 +76,19 @@ public class BeanParser {
 			JToodleException jte = mapper.readValue( js, JToodleException.class );
 			throw( jte );
 		}
+	}
+
+	public static List<Task> parseTaskList( String js ) throws IOException, JToodleException {
+		throwJToodleExceptionIfError( js );
+		List<LinkedHashMap> values = mapper.readValue( js, List.class );
+		List<Task> tasks = new ArrayList<>();
+
+		for( LinkedHashMap map : values ) {
+			if( map.containsKey( "id" ) ) {
+				tasks.add( mapper.convertValue( map, Task.class ) );
+			}
+		}
+
+		return( tasks );
 	}
 }
