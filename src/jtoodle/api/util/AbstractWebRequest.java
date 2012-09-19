@@ -58,7 +58,7 @@ public abstract class AbstractWebRequest<T extends AbstractJToodleBean> implemen
 		formparams.add( new BasicNameValuePair( parameterName, parameterValue ) );
 	}
 
-	private String requestStringResponse() throws IOException, JToodleException {
+	protected final String requestStringResponse() throws IOException, JToodleException {
 		logger.entering( getClass().getName(), "requestStringResponse()" );
 
 		HttpClient client = new DefaultHttpClient();
