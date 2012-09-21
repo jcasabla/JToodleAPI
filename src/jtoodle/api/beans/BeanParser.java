@@ -24,6 +24,7 @@ import jtoodle.api.json.mixin.AccountInfoMixIn;
 import jtoodle.api.json.mixin.FolderMixIn;
 import jtoodle.api.json.mixin.JToodleExceptionMixIn;
 import jtoodle.api.json.mixin.TaskMixIn;
+import jtoodle.api.json.mixin.TaskQueryResultMixIn;
 import jtoodle.api.json.mixin.TokenMixIn;
 import jtoodle.api.json.mixin.UserIdMixIn;
 
@@ -43,6 +44,7 @@ public class BeanParser {
 		mapper.addMixInAnnotations( Token.class, TokenMixIn.class );
 		mapper.addMixInAnnotations( AccountInfo.class, AccountInfoMixIn.class );
 		mapper.addMixInAnnotations( Folder.class, FolderMixIn.class );
+		mapper.addMixInAnnotations( TaskQueryResult.class, TaskQueryResultMixIn.class );
 		mapper.addMixInAnnotations( Task.class, TaskMixIn.class );
 
 		mapper.registerModule(
@@ -75,17 +77,27 @@ public class BeanParser {
 		}
 	}
 
-	public static List<Task> parseTaskList( String js ) throws IOException, JToodleException {
+	public static TaskQueryResult parseTaskQueryResults( String js )
+	throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
-		List<LinkedHashMap> values = mapper.readValue( js, List.class );
+
+		TaskQueryResult results = null;
 		List<Task> tasks = new ArrayList<>();
 
+		List<LinkedHashMap> values = mapper.readValue( js, List.class );
+
 		for( LinkedHashMap map : values ) {
-			if( map.containsKey( "id" ) ) {
+			if( map.containsKey( "num" ) ) {
+				results = mapper.convertValue( map, TaskQueryResult.class );
+			} else if( map.containsKey( "id" ) ) {
 				tasks.add( mapper.convertValue( map, Task.class ) );
 			}
 		}
 
-		return( tasks );
+		if( results != null ) {
+			results.setTasks( tasks );
+		}
+
+		return( results );
 	}
 }
