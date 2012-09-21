@@ -18,9 +18,9 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
-import jtoodle.api.beans.BeanParser;
 import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
+import jtoodle.api.beans.Task;
 import jtoodle.api.request.GetAccountInfo;
 import jtoodle.api.request.GetFolders;
 import jtoodle.api.request.GetTasks;
@@ -56,6 +56,8 @@ public class MainTestForm extends javax.swing.JFrame {
 					setText( "<null value>" );
 				} else if( value instanceof Folder ) {
 					setText( ((Folder)value).getName() );
+				} else if( value instanceof Task ) {
+					setText( ((Task)value).getTitle() );
 				} else {
 					setText( value.toString() );
 				}
