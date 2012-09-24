@@ -14,15 +14,15 @@ import java.util.prefs.Preferences;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Token;
 import jtoodle.api.beans.UserId;
+import jtoodle.api.intf.AuthenticationConstants;
 import jtoodle.api.util.NullSafe;
-import jtoodle.api.util.WebRequestConstants;
 import jtoodle.api.util.WebRequestUtils;
 
 /**
  *
  * @author justo
  */
-public class AuthCache {
+public class AuthCache implements AuthenticationConstants {
 
 	private static final Logger logger = Logger.getLogger( AuthCache.class.getName() );
 
@@ -272,7 +272,7 @@ public class AuthCache {
 
 				apiKey = WebRequestUtils.md5Hash( new StringBuilder()
 					.append( getHashedPassword() )
-					.append( WebRequestConstants.APP_TOKEN )
+					.append( AuthenticationConstants.APP_TOKEN )
 					.append( token )
 					.toString() );
 				setApiKey( apiKey );

@@ -2,13 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.request;
+package jtoodle.api.intf;
 
 /**
  *
  * @author justo
  */
-public interface IGetTasksConstants {
+public interface TaskConstants extends NonAuthConstants {
+
+	public static final String URI_GET_TASKS = new StringBuilder()
+			.append( BASE_URI )
+			.append( "/tasks/get.php" )
+			.toString();
 
 	/*
 	 * These search parameters are described at: http://api.toodledo.com/2/tasks/index.php

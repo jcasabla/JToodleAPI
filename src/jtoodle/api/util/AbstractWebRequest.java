@@ -29,7 +29,7 @@ import org.apache.http.util.EntityUtils;
  *
  * @author justo
  */
-public abstract class AbstractWebRequest<T extends AbstractJToodleBean> implements WebRequestConstants {
+public abstract class AbstractWebRequest<T extends AbstractJToodleBean> {
 
 	@SuppressWarnings( "NonConstantLogger" )
 	private final Logger logger = Logger.getLogger( getClass().getName() );

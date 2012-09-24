@@ -5,14 +5,16 @@
 package jtoodle.api.request;
 
 import jtoodle.api.beans.Folder;
+import jtoodle.api.intf.FolderConstants;
 
 /**
  *
  * @author justo
  */
-public class GetFolders extends AbstractAPIWebRequest<Folder> {
+public class GetFolders extends AbstractAPIWebRequest<Folder>
+implements FolderConstants {
 
 	public GetFolders() {
-		super( URI_GET_FOLDERS, Folder.class );
+		super( FolderConstants.URI_GET_FOLDERS, Folder.class );
 	}
 }

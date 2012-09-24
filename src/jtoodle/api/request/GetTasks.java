@@ -10,18 +10,19 @@ import java.util.List;
 import jtoodle.api.beans.BeanParser;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.TaskQueryResult;
+import jtoodle.api.intf.TaskConstants;
 
 /**
  *
  * @author justo
  */
 public class GetTasks extends AbstractAPIWebRequest<TaskQueryResult>
-implements IGetTasksConstants {
+implements TaskConstants {
 
 	public GetTasks() {
 		super( URI_GET_TASKS, TaskQueryResult.class );
-		setParameter( IGetTasksConstants.PARAM_GET_TASKS_FIELD_LIST,
-					  IGetTasksConstants.PARAM_VALUE_ALL_OPTIONAL_FIELDS );
+		setParameter( TaskConstants.PARAM_GET_TASKS_FIELD_LIST,
+					  TaskConstants.PARAM_VALUE_ALL_OPTIONAL_FIELDS );
 	}
 
 	@Override
@@ -67,34 +68,34 @@ implements IGetTasksConstants {
 
 	public void setStartDate( Date startDate ) {
 		if( startDate != null ) {
-			setParameter( IGetTasksConstants.PARAM_GET_TASKS_START_DATE,
+			setParameter( TaskConstants.PARAM_GET_TASKS_START_DATE,
 						  ""+startDate.getTime() );
 		}
 	}
 
 	public void setEndDate( Date endDate ) {
 		if( endDate != null ) {
-			setParameter( IGetTasksConstants.PARAM_GET_TASKS_END_DATE,
+			setParameter( TaskConstants.PARAM_GET_TASKS_END_DATE,
 						  ""+endDate.getTime() );
 		}
 	}
 
 	public void setCompletionCriteria( CompletionCriteria completionCriteria ) {
-		setParameter( IGetTasksConstants.PARAM_GET_TASKS_COMPLETED,
+		setParameter( TaskConstants.PARAM_GET_TASKS_COMPLETED,
 					  ""+completionCriteria.toodledoValue() );
 	}
 
 	public void setTaskId( Integer taskId ) {
-		setParameter( IGetTasksConstants.PARAM_GET_TASKS_ID, ""+taskId );
+		setParameter( TaskConstants.PARAM_GET_TASKS_ID, ""+taskId );
 	}
 
 	public void setPaginationRowStart( Integer rowStart ) {
-		setParameter( IGetTasksConstants.PARAM_GET_TASKS_PAGINATE_ROW_START,
+		setParameter( TaskConstants.PARAM_GET_TASKS_PAGINATE_ROW_START,
 					  ""+rowStart );
 	}
 
 	public void setPaginationNumTasks( Integer numTasks ) {
-		setParameter( IGetTasksConstants.PARAM_GET_TASKS_PAGINATE_NUM_TASKS,
+		setParameter( TaskConstants.PARAM_GET_TASKS_PAGINATE_NUM_TASKS,
 					  ""+numTasks );
 	}
 
@@ -107,7 +108,7 @@ implements IGetTasksConstants {
 			int val;
 			switch( this ) {
 				case All_Tasks : {
-					val = IGetTasksConstants.PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS;
+					val = TaskConstants.PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS;
 					break;
 				}
 				default : {

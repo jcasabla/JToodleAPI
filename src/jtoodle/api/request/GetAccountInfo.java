@@ -5,14 +5,16 @@
 package jtoodle.api.request;
 
 import jtoodle.api.beans.AccountInfo;
+import jtoodle.api.intf.AccountInfoConstants;
 
 /**
  *
  * @author justo
  */
-public class GetAccountInfo extends AbstractAPIWebRequest<AccountInfo> {
+public class GetAccountInfo extends AbstractAPIWebRequest<AccountInfo>
+implements AccountInfoConstants {
 
 	public GetAccountInfo() {
-		super( URI_GET_ACCOUNT_INFO, AccountInfo.class );
+		super( AccountInfoConstants.URI_GET_ACCOUNT_INFO, AccountInfo.class );
 	}
 }
