@@ -13,13 +13,14 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import jtoodle.api.json.deser.TD_BooleanDeserializer;
-import jtoodle.api.json.deser.TD_DateDeserializer;
-import jtoodle.api.json.deser.TD_DateFormatDeserializer;
-import jtoodle.api.json.deser.TD_PriorityDeserializer;
+import jtoodle.api.json.deser.TD_EnumDeserializer;
 import jtoodle.api.json.deser.TD_ReminderTimeDeserializer;
+import jtoodle.api.json.deser.TD_UnixDateDeserializer;
 import jtoodle.api.json.enums.DateFormat;
+import jtoodle.api.json.enums.DueDateModifier;
 import jtoodle.api.json.enums.Priority;
 import jtoodle.api.json.enums.ReminderTime;
+import jtoodle.api.json.enums.Status;
 import jtoodle.api.json.mixin.AccountInfoMixIn;
 import jtoodle.api.json.mixin.FolderMixIn;
 import jtoodle.api.json.mixin.JToodleExceptionMixIn;
@@ -50,9 +51,11 @@ public class BeanParser {
 		mapper.registerModule(
 			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
 				.addDeserializer( Boolean.class, new TD_BooleanDeserializer() )
-				.addDeserializer( Date.class, new TD_DateDeserializer() )
-				.addDeserializer( DateFormat.class, new TD_DateFormatDeserializer() )
-				.addDeserializer( Priority.class, new TD_PriorityDeserializer() )
+				.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
+				.addDeserializer( DateFormat.class, new TD_EnumDeserializer( DateFormat.class ) )
+				.addDeserializer( Priority.class, new TD_EnumDeserializer( Priority.class ) )
+				.addDeserializer( Status.class, new TD_EnumDeserializer( Status.class ) )
+				.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer( DueDateModifier.class ) )
 				.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
 		);
 

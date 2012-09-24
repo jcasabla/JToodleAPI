@@ -16,9 +16,9 @@ import java.util.Date;
  *
  * @author justo
  */
-public class TD_DateDeserializer extends JsonDeserializer<Date> {
+public class TD_UnixDateDeserializer extends JsonDeserializer<Date> {
 
-	//private static final Logger logger = Logger.getLogger( TD_DateDeserializer.class.getName() );
+	//private static final Logger logger = Logger.getLogger( TD_UnixDateDeserializer.class.getName() );
 
 	@Override
 	public Date deserialize( JsonParser jp, DeserializationContext dc ) throws IOException, JsonProcessingException {
@@ -30,7 +30,7 @@ public class TD_DateDeserializer extends JsonDeserializer<Date> {
 		//logger.info( getClass().getName() + " / deserialize / dateAsLong=" +
 		//			 dateAsLong + ", date=" + new Date( dateAsLong ) );
 
-		return( ( dateAsLong == 0 ) ? null : new Date( dateAsLong ) );
+		return( ( dateAsLong == 0 ) ? null : new Date( dateAsLong * 1000L ) );
 	}
 
 }

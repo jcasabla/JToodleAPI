@@ -2,6 +2,8 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
+    <Component class="jtoodle.api.test.BindableTaskQueryResult" name="taskQueryResult">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="menuBar">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="fileMenu">
@@ -128,7 +130,7 @@
                               <Component id="errorDescPane" min="-2" pref="293" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="217" max="32767" attributes="0"/>
+                      <EmptySpace pref="262" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -165,7 +167,7 @@
                           <Component id="errorDescPane" min="-2" max="-2" attributes="0"/>
                           <Component id="errorDescLabel" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="215" max="32767" attributes="0"/>
+                      <EmptySpace pref="224" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -273,7 +275,7 @@
                               <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="accountInfoPropertySheet" pref="580" max="32767" attributes="0"/>
+                          <Component id="accountInfoPropertySheet" pref="631" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -285,7 +287,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="accountInfoPropertySheet" pref="449" max="32767" attributes="0"/>
+                      <Component id="accountInfoPropertySheet" pref="458" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -319,11 +321,11 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="beanPropertySheet" max="32767" attributes="0"/>
+                          <Component id="beanPropertySheet" pref="631" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="beanTypeComboBox" min="-2" pref="126" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="beanResultsComboBox" pref="448" max="32767" attributes="0"/>
+                              <Component id="beanResultsComboBox" pref="499" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -339,7 +341,7 @@
                           <Component id="beanTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="beanPropertySheet" pref="452" max="32767" attributes="0"/>
+                      <Component id="beanPropertySheet" pref="458" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -372,6 +374,324 @@
             </Component>
             <Component class="org.openide.explorer.propertysheet.PropertySheet" name="beanPropertySheet">
             </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="tasksPanel">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Tasks">
+                <Property name="tabTitle" type="java.lang.String" value="Tasks"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jSeparator1" max="32767" attributes="0"/>
+                          <Component id="tasksScrollPane" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="tasksInResultLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tasksInResultTextField" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tasksInPageLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="tasksInPageTextField" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="endDateLabel" min="-2" max="-2" attributes="0"/>
+                                          <Component id="completionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="startDateLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="startDatePicker" max="32767" attributes="0"/>
+                                  <Component id="endDatePicker" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="completionComboBox" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="rowStartLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="numRowsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="taskIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="taskIdTextField" pref="115" max="32767" attributes="0"/>
+                                  <Component id="rowStartTextField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="numRowsTextField" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                              <Component id="searchButton" pref="121" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="startDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="startDatePicker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="taskIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="taskIdTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="endDatePicker" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="endDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rowStartLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rowStartTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="completionComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="completionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="numRowsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="numRowsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="searchButton" min="-2" pref="93" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tasksInResultLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tasksInResultTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tasksInPageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tasksInPageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="tasksScrollPane" pref="343" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="startDateLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Start Date:"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="startDatePicker">
+            </Component>
+            <Component class="javax.swing.JLabel" name="endDateLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="End Date:"/>
+              </Properties>
+            </Component>
+            <Component class="org.jdesktop.swingx.JXDatePicker" name="endDatePicker">
+            </Component>
+            <Component class="javax.swing.JLabel" name="completionLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Completion Status:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="completionComboBox">
+            </Component>
+            <Component class="javax.swing.JLabel" name="taskIdLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Task Id:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="taskIdTextField">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="rowStartLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Row Start:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="rowStartTextField">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="numRowsLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="# Rows:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="numRowsTextField">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="searchButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Search !"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="jSeparator1">
+            </Component>
+            <Component class="javax.swing.JLabel" name="tasksInResultLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tasks in Result:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tasksInResultTextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="taskQueryResult" sourcePath="${totalTaskCount}" target="tasksInResultTextField" targetPath="text" updateStrategy="1" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                  <Property name="name" type="java.lang.String" value="totalTasks"/>
+                </BindingProperty>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="tasksInPageLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tasks in Page:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tasksInPageTextField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="taskQueryResult" sourcePath="${queryTaskCount}" target="tasksInPageTextField" targetPath="text" updateStrategy="1" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                  <Property name="name" type="java.lang.String" value="queryTasks"/>
+                </BindingProperty>
+              </BindingProperties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="tasksScrollPane">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="tasksTable">
+                  <Properties>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="elements" source="taskQueryResult" sourcePath="${tasks}" target="tasksTable" targetPath="elements" updateStrategy="1" immediately="true">
+                      <Property name="name" type="java.lang.String" value="toodledoTasks"/>
+                      <Subbinding sourcePath="${id}">
+                        <BindingParameter name="NAME" value="Id"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${title}">
+                        <BindingParameter name="NAME" value="Title"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${priority}">
+                        <BindingParameter name="NAME" value="Priority"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.Priority.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${status}">
+                        <BindingParameter name="NAME" value="Status"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.Status.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${dueDate}">
+                        <BindingParameter name="NAME" value="Due Date"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${completedOn}">
+                        <BindingParameter name="NAME" value="Completed On"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${addedOn}">
+                        <BindingParameter name="NAME" value="Added On"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${modifiedOn}">
+                        <BindingParameter name="NAME" value="Modified On"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                    </BindingProperty>
+                  </BindingProperties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

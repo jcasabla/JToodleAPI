@@ -9,17 +9,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
-import jtoodle.api.json.enums.DateFormat;
 
 /**
  *
  * @author justo
  */
-public class TD_DateFormatDeserializer extends JsonDeserializer<DateFormat> {
+public class TD_EnumDeserializer<E extends Enum<E>> extends JsonDeserializer<E> {
+
+	private Class<E> enumClazz = null;
+
+	public TD_EnumDeserializer( Class<E> enumClazz ) {
+		this.enumClazz = enumClazz;
+	}
 
 	@Override
-	public DateFormat deserialize( JsonParser jp, DeserializationContext dc ) throws IOException, JsonProcessingException {
-		return( DateFormat.values()[ Integer.parseInt( jp.getText() ) ] );
+	public E deserialize( JsonParser jp, DeserializationContext dc ) throws IOException, JsonProcessingException {
+		return( enumClazz.getEnumConstants()[ Integer.parseInt( jp.getText() ) ] );
 	}
 
 }

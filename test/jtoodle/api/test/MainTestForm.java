@@ -65,6 +65,11 @@ public class MainTestForm extends javax.swing.JFrame {
 				return this;
 			}
 		});
+
+		completionComboBox.removeAllItems();
+		completionComboBox.addItem( GetTasks.CompletionCriteria.All_Tasks );
+		completionComboBox.addItem( GetTasks.CompletionCriteria.Completed_Tasks_Only );
+		completionComboBox.addItem( GetTasks.CompletionCriteria.Uncompleted_Tasks_Only );
 	}
 
     /**
@@ -75,7 +80,9 @@ public class MainTestForm extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        taskQueryResult = new jtoodle.api.test.BindableTaskQueryResult();
         tabbedPane = new javax.swing.JTabbedPane();
         authenticationPanel = new javax.swing.JPanel();
         userIdLabel = new javax.swing.JLabel();
@@ -98,6 +105,27 @@ public class MainTestForm extends javax.swing.JFrame {
         beanTypeComboBox = new javax.swing.JComboBox();
         beanResultsComboBox = new javax.swing.JComboBox();
         beanPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
+        tasksPanel = new javax.swing.JPanel();
+        startDateLabel = new javax.swing.JLabel();
+        startDatePicker = new org.jdesktop.swingx.JXDatePicker();
+        endDateLabel = new javax.swing.JLabel();
+        endDatePicker = new org.jdesktop.swingx.JXDatePicker();
+        completionLabel = new javax.swing.JLabel();
+        completionComboBox = new javax.swing.JComboBox();
+        taskIdLabel = new javax.swing.JLabel();
+        taskIdTextField = new javax.swing.JFormattedTextField();
+        rowStartLabel = new javax.swing.JLabel();
+        rowStartTextField = new javax.swing.JFormattedTextField();
+        numRowsLabel = new javax.swing.JLabel();
+        numRowsTextField = new javax.swing.JFormattedTextField();
+        searchButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        tasksInResultLabel = new javax.swing.JLabel();
+        tasksInResultTextField = new javax.swing.JTextField();
+        tasksInPageLabel = new javax.swing.JLabel();
+        tasksInPageTextField = new javax.swing.JTextField();
+        tasksScrollPane = new javax.swing.JScrollPane();
+        tasksTable = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         loginMenuItem = new javax.swing.JMenuItem();
@@ -166,7 +194,7 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
         authenticationPanelLayout.setVerticalGroup(
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +223,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -217,7 +245,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addGroup(accountInfoPanelLayout.createSequentialGroup()
                         .addComponent(accountInfoButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
+                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
                 .addContainerGap())
         );
         accountInfoPanelLayout.setVerticalGroup(
@@ -226,7 +254,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -252,11 +280,11 @@ public class MainTestForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, othersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE)
                     .addGroup(othersPanelLayout.createSequentialGroup()
                         .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(beanResultsComboBox, 0, 448, Short.MAX_VALUE)))
+                        .addComponent(beanResultsComboBox, 0, 499, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         othersPanelLayout.setVerticalGroup(
@@ -267,11 +295,173 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(beanResultsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         tabbedPane.addTab("Others", othersPanel);
+
+        startDateLabel.setText("Start Date:");
+
+        endDateLabel.setText("End Date:");
+
+        completionLabel.setText("Completion Status:");
+
+        taskIdLabel.setText("Task Id:");
+
+        taskIdTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        rowStartLabel.setText("Row Start:");
+
+        rowStartTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        numRowsLabel.setText("# Rows:");
+
+        numRowsTextField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        searchButton.setText("Search !");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        tasksInResultLabel.setText("Tasks in Result:");
+
+        tasksInResultTextField.setEditable(false);
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, taskQueryResult, org.jdesktop.beansbinding.ELProperty.create("${totalTaskCount}"), tasksInResultTextField, org.jdesktop.beansbinding.BeanProperty.create("text"), "totalTasks");
+        bindingGroup.addBinding(binding);
+
+        tasksInPageLabel.setText("Tasks in Page:");
+
+        tasksInPageTextField.setEditable(false);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, taskQueryResult, org.jdesktop.beansbinding.ELProperty.create("${queryTaskCount}"), tasksInPageTextField, org.jdesktop.beansbinding.BeanProperty.create("text"), "queryTasks");
+        bindingGroup.addBinding(binding);
+
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${tasks}");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, taskQueryResult, eLProperty, tasksTable, "toodledoTasks");
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
+        columnBinding.setColumnName("Title");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${priority}"));
+        columnBinding.setColumnName("Priority");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.Priority.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${status}"));
+        columnBinding.setColumnName("Status");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.Status.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dueDate}"));
+        columnBinding.setColumnName("Due Date");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${completedOn}"));
+        columnBinding.setColumnName("Completed On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${addedOn}"));
+        columnBinding.setColumnName("Added On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modifiedOn}"));
+        columnBinding.setColumnName("Modified On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding.setEditable(false);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        tasksScrollPane.setViewportView(tasksTable);
+
+        javax.swing.GroupLayout tasksPanelLayout = new javax.swing.GroupLayout(tasksPanel);
+        tasksPanel.setLayout(tasksPanelLayout);
+        tasksPanelLayout.setHorizontalGroup(
+            tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tasksPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addComponent(tasksScrollPane)
+                    .addGroup(tasksPanelLayout.createSequentialGroup()
+                        .addComponent(tasksInResultLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tasksInResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tasksInPageLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(tasksPanelLayout.createSequentialGroup()
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tasksPanelLayout.createSequentialGroup()
+                                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(endDateLabel)
+                                    .addComponent(completionLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(tasksPanelLayout.createSequentialGroup()
+                                .addComponent(startDateLabel)
+                                .addGap(64, 64, 64)))
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(startDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(endDatePicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(completionComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rowStartLabel)
+                            .addComponent(numRowsLabel)
+                            .addComponent(taskIdLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(taskIdTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(rowStartTextField)
+                            .addComponent(numRowsTextField))
+                        .addGap(18, 18, 18)
+                        .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        tasksPanelLayout.setVerticalGroup(
+            tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tasksPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tasksPanelLayout.createSequentialGroup()
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(startDateLabel)
+                            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(taskIdLabel)
+                            .addComponent(taskIdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(endDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endDateLabel)
+                            .addComponent(rowStartLabel)
+                            .addComponent(rowStartTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(completionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(completionLabel)
+                            .addComponent(numRowsLabel)
+                            .addComponent(numRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tasksInResultLabel)
+                    .addComponent(tasksInResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tasksInPageLabel)
+                    .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tabbedPane.addTab("Tasks", tasksPanel);
 
         fileMenu.setText("File");
 
@@ -319,6 +509,8 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tabbedPane))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -439,6 +631,35 @@ public class MainTestForm extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_beanTypeComboBoxActionPerformed
 
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+		try {
+			GetTasks request = new GetTasks();
+
+			request.setStartDate( startDatePicker.getDate() );
+			request.setEndDate( endDatePicker.getDate() );
+			request.setCompletionCriteria( (GetTasks.CompletionCriteria) completionComboBox.getSelectedItem() );
+			if( ! NullSafe.isNullOrEmpty( taskIdTextField.getText() ) ) {
+				request.setTaskId( Integer.parseInt( taskIdTextField.getText() ) );
+			}
+			if( ! NullSafe.isNullOrEmpty( rowStartTextField.getText() ) ) {
+				request.setPaginationRowStart( Integer.parseInt( rowStartTextField.getText() ) );
+			}
+			if( ! NullSafe.isNullOrEmpty( numRowsTextField.getText() ) ) {
+				request.setPaginationNumTasks( Integer.parseInt( numRowsTextField.getText() ) );
+			}
+
+			TaskQueryResult result = request.requestBean();
+
+			logger.info( "TaskQueryResult.totalTaskCount=" + result.getTotalTaskCount() );
+			logger.info( "TaskQueryResult.queryTaskCount=" + result.getQueryTaskCount() );
+			logger.info( "TaskQueryResult.taskListSize=" + result.getTasks().size() );
+
+			taskQueryResult.updateProperties( result );
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
+    }//GEN-LAST:event_searchButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -481,6 +702,10 @@ public class MainTestForm extends javax.swing.JFrame {
     private org.openide.explorer.propertysheet.PropertySheet beanPropertySheet;
     private javax.swing.JComboBox beanResultsComboBox;
     private javax.swing.JComboBox beanTypeComboBox;
+    private javax.swing.JComboBox completionComboBox;
+    private javax.swing.JLabel completionLabel;
+    private javax.swing.JLabel endDateLabel;
+    private org.jdesktop.swingx.JXDatePicker endDatePicker;
     private javax.swing.JLabel errorCodeLabel;
     private javax.swing.JTextField errorCodeTextField;
     private javax.swing.JLabel errorDescLabel;
@@ -491,14 +716,33 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JPopupMenu.Separator exitSeparator;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenuItem loginMenuItem;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JLabel numRowsLabel;
+    private javax.swing.JFormattedTextField numRowsTextField;
     private javax.swing.JPanel othersPanel;
+    private javax.swing.JLabel rowStartLabel;
+    private javax.swing.JFormattedTextField rowStartTextField;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel startDateLabel;
+    private org.jdesktop.swingx.JXDatePicker startDatePicker;
     private javax.swing.JTabbedPane tabbedPane;
+    private javax.swing.JLabel taskIdLabel;
+    private javax.swing.JFormattedTextField taskIdTextField;
+    private jtoodle.api.test.BindableTaskQueryResult taskQueryResult;
+    private javax.swing.JLabel tasksInPageLabel;
+    private javax.swing.JTextField tasksInPageTextField;
+    private javax.swing.JLabel tasksInResultLabel;
+    private javax.swing.JTextField tasksInResultTextField;
+    private javax.swing.JPanel tasksPanel;
+    private javax.swing.JScrollPane tasksScrollPane;
+    private javax.swing.JTable tasksTable;
     private javax.swing.JLabel tokenLabel;
     private javax.swing.JTextField tokenTextField;
     private javax.swing.JLabel userIdLabel;
     private javax.swing.JTextField userIdTextField;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
