@@ -52,10 +52,10 @@ public class BeanParser {
 			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
 				.addDeserializer( Boolean.class, new TD_BooleanDeserializer() )
 				.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
-				.addDeserializer( DateFormat.class, new TD_EnumDeserializer( DateFormat.class ) )
-				.addDeserializer( Priority.class, new TD_EnumDeserializer( Priority.class ) )
-				.addDeserializer( Status.class, new TD_EnumDeserializer( Status.class ) )
-				.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer( DueDateModifier.class ) )
+				.addDeserializer( DateFormat.class, new TD_EnumDeserializer<>( DateFormat.class ) )
+				.addDeserializer( Priority.class, new TD_EnumDeserializer<>( Priority.class ) )
+				.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
+				.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
 				.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
 		);
 
@@ -87,7 +87,9 @@ public class BeanParser {
 		TaskQueryResult results = null;
 		List<Task> tasks = new ArrayList<>();
 
-		List<LinkedHashMap> values = mapper.readValue( js, List.class );
+		List<LinkedHashMap> values = mapper.readValue(
+			js, mapper.getTypeFactory().constructCollectionType(
+				List.class, LinkedHashMap.class ) );
 
 		for( LinkedHashMap map : values ) {
 			if( map.containsKey( "num" ) ) {
