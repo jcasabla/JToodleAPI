@@ -72,6 +72,8 @@ public class MainTestForm extends javax.swing.JFrame {
 		completionComboBox.addItem( GetTasks.CompletionCriteria.All_Tasks );
 		completionComboBox.addItem( GetTasks.CompletionCriteria.Completed_Tasks_Only );
 		completionComboBox.addItem( GetTasks.CompletionCriteria.Uncompleted_Tasks_Only );
+
+		tasksTable.setDefaultRenderer( Date.class, new FullDateTableCellRenderer() );
 	}
 
     /**
