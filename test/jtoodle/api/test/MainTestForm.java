@@ -51,6 +51,7 @@ public class MainTestForm extends javax.swing.JFrame {
 
 	private void initComponents2() {
 		PropertyEditorManager.registerEditor(Date.class, DatePropertyEditor.class);
+		PropertyEditorManager.registerEditor(Class.class, ClassPropertyEditor.class);
 
 		beanResultsComboBox.setRenderer( new DefaultListCellRenderer() {
 			@Override
@@ -199,7 +200,7 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(270, Short.MAX_VALUE))
         );
         authenticationPanelLayout.setVerticalGroup(
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +266,7 @@ public class MainTestForm extends javax.swing.JFrame {
 
         tabbedPane.addTab("Account Info", accountInfoPanel);
 
-        beanTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Choose>", "Folders", "Tasks" }));
+        beanTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Choose>", "Folders", "Contexts", "Goals", "Locations" }));
         beanTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 beanTypeComboBoxActionPerformed(evt);
@@ -300,7 +301,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(beanResultsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -470,7 +471,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(tasksInPageLabel)
                     .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -614,12 +615,30 @@ public class MainTestForm extends javax.swing.JFrame {
 					beanList = new GetFolders().requestBeanList();
 					break;
 				}
-				case "Tasks": {
-					TaskQueryResult tqr = new GetTasks().requestBean();
-					beanList = tqr.getTasks();
+				case "Contexts": {
+					JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"This function is not yet available"
+					);
 					break;
 				}
-				default:
+				case "Goals": {
+					JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"This function is not yet available"
+					);
+					break;
+				}
+				case "Locations": {
+					JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"This function is not yet available"
+					);
+					break;
+				}
+				default: {
+					break;
+				}
 			}
 
 			if( !NullSafe.isNullOrEmpty( beanList ) ) {

@@ -130,7 +130,7 @@
                               <Component id="errorDescPane" min="-2" pref="293" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="264" max="32767" attributes="0"/>
+                      <EmptySpace pref="270" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -341,7 +341,7 @@
                           <Component id="beanTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="beanPropertySheet" pref="462" max="32767" attributes="0"/>
+                      <Component id="beanPropertySheet" pref="465" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -351,10 +351,12 @@
             <Component class="javax.swing.JComboBox" name="beanTypeComboBox">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
+                  <StringArray count="5">
                     <StringItem index="0" value="&lt;Choose&gt;"/>
                     <StringItem index="1" value="Folders"/>
-                    <StringItem index="2" value="Tasks"/>
+                    <StringItem index="2" value="Contexts"/>
+                    <StringItem index="3" value="Goals"/>
+                    <StringItem index="4" value="Locations"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -481,7 +483,7 @@
                           <Component id="tasksInPageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="tasksScrollPane" pref="347" max="32767" attributes="0"/>
+                      <Component id="tasksScrollPane" pref="363" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
