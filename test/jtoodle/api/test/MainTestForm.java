@@ -358,35 +358,48 @@ public class MainTestForm extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${childTaskCount}"));
+        columnBinding.setColumnName("Child Task Count");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${parentTaskId}"));
+        columnBinding.setColumnName("Parent Task Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${childTaskOrder}"));
+        columnBinding.setColumnName("Child Task Order");
+        columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
         columnBinding.setColumnName("Title");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${priority}"));
         columnBinding.setColumnName("Priority");
         columnBinding.setColumnClass(jtoodle.api.json.enums.Priority.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${status}"));
         columnBinding.setColumnName("Status");
         columnBinding.setColumnClass(jtoodle.api.json.enums.Status.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dueDate}"));
         columnBinding.setColumnName("Due Date");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${completedOn}"));
         columnBinding.setColumnName("Completed On");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${folderId}"));
+        columnBinding.setColumnName("Folder Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${contextId}"));
+        columnBinding.setColumnName("Context Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${goalId}"));
+        columnBinding.setColumnName("Goal Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${locationId}"));
+        columnBinding.setColumnName("Location Id");
+        columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${addedOn}"));
         columnBinding.setColumnName("Added On");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modifiedOn}"));
         columnBinding.setColumnName("Modified On");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         tasksScrollPane.setViewportView(tasksTable);
@@ -544,6 +557,10 @@ public class MainTestForm extends javax.swing.JFrame {
 			} catch( IntrospectionException ex1 ) {
 				logger.log( Level.SEVERE, null, ex1 );
 			}
+
+			if( handledInvalidKey( ex ) ) {
+				accountInfoButtonActionPerformed( null );
+			}
 		}
     }//GEN-LAST:event_accountInfoButtonActionPerformed
 
@@ -660,6 +677,10 @@ public class MainTestForm extends javax.swing.JFrame {
 			} catch( IntrospectionException ex1 ) {
 				logger.log( Level.SEVERE, null, ex1 );
 			}
+
+			if( handledInvalidKey( ex ) ) {
+				beanTypeComboBoxActionPerformed( null );
+			}
 		}
     }//GEN-LAST:event_beanTypeComboBoxActionPerformed
 
@@ -688,6 +709,10 @@ public class MainTestForm extends javax.swing.JFrame {
 			logger.log( Level.INFO, "TaskQueryResult.tasks.size={0}", result.getTasks().size() );
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
+
+			if( handledInvalidKey( ex ) ) {
+				searchButtonActionPerformed( null );
+			}
 		}
     }//GEN-LAST:event_searchButtonActionPerformed
 
@@ -700,6 +725,23 @@ public class MainTestForm extends javax.swing.JFrame {
 		this.numRowsTextField.setText( null );
 		((ListBindingManager)this.tasksTable.getModel()).setElements( new ArrayList(), true );
     }//GEN-LAST:event_clearSearchuttonActionPerformed
+
+	private boolean handledInvalidKey( Exception ex ) {
+		boolean val = false;
+
+		if( ex instanceof JToodleException ) {
+			JToodleException jte = (JToodleException) ex;
+
+			if( jte.getErrorCode() == 2 ) {
+				// Error Code 2 = Invalid Key
+				AuthCache.logout();
+				loginMenuItemActionPerformed( null );
+				val = true;
+			}
+		}
+
+		return( val );
+	}
 
     /**
      * @param args the command line arguments
