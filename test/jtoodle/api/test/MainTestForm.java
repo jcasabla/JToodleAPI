@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
 import jtoodle.api.beans.Folder;
@@ -701,8 +702,12 @@ public class MainTestForm extends javax.swing.JFrame {
 				request.setPaginationNumTasks( Integer.parseInt( numRowsTextField.getText() ) );
 			}
 
+			JTableUtil.configureTable( tasksTable, null );
+
 			TaskQueryResult result = request.requestBean();
 			taskQueryResult.updateProperties( result );
+
+			JTableUtil.resizeTableColumnsToFit( tasksTable );
 
 			logger.log( Level.INFO, "TaskQueryResult.totalTaskCount={0}", result.getTotalTaskCount() );
 			logger.log( Level.INFO, "TaskQueryResult.queryTaskCount={0}", result.getQueryTaskCount() );
