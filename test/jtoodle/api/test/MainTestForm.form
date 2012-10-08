@@ -660,10 +660,10 @@
                       <Subbinding sourcePath="${id}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                       </Subbinding>
-                      <Subbinding sourcePath="${childTaskCount}">
+                      <Subbinding sourcePath="${parentTaskId}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                       </Subbinding>
-                      <Subbinding sourcePath="${parentTaskId}">
+                      <Subbinding sourcePath="${childTaskCount}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                       </Subbinding>
                       <Subbinding sourcePath="${childTaskOrder}">
@@ -675,14 +675,47 @@
                       <Subbinding sourcePath="${priority}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.Priority.class"/>
                       </Subbinding>
+                      <Subbinding sourcePath="${starred}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Boolean.class"/>
+                      </Subbinding>
                       <Subbinding sourcePath="${status}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.Status.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${startDate}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${startTime}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${minutesToComplete}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Long.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${timerStartedOn}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${timerSecondsElapsed}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Long.class"/>
                       </Subbinding>
                       <Subbinding sourcePath="${dueDate}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
                       </Subbinding>
+                      <Subbinding sourcePath="${dueTime}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${dueDateModifier}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.DueDateModifier.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${reminderMinutes}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.ReminderTime.class"/>
+                      </Subbinding>
                       <Subbinding sourcePath="${completedOn}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${repeatPattern}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${repeatsFrom}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="jtoodle.api.json.enums.TaskRepeatsFrom.class"/>
                       </Subbinding>
                       <Subbinding sourcePath="${folderId}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
@@ -695,6 +728,15 @@
                       </Subbinding>
                       <Subbinding sourcePath="${locationId}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${tag}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${note}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${meta}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                       </Subbinding>
                       <Subbinding sourcePath="${addedOn}">
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
