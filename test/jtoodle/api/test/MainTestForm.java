@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
 import jtoodle.api.beans.Folder;
