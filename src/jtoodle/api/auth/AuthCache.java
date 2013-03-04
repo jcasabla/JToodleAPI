@@ -71,7 +71,7 @@ public class AuthCache implements AuthenticationConstants {
 	}
 
 	public static void login( String email, String password ) throws JToodleException {
-		logger.entering( AuthCache.class.getName(), "clear()" );
+		logger.entering( AuthCache.class.getName(), "login(String,String)" );
 
 		clear();
 		setEmail( email );
@@ -81,7 +81,7 @@ public class AuthCache implements AuthenticationConstants {
 		//getToken();
 		getApiKey();
 
-		logger.exiting( AuthCache.class.getName(), "clear()" );
+		logger.exiting( AuthCache.class.getName(), "login(String,String)" );
 	}
 
 	public static void logout() {
