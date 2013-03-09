@@ -75,6 +75,29 @@ public class MainTestForm extends javax.swing.JFrame {
 		completionComboBox.addItem( GetTasks.CompletionCriteria.Uncompleted_Tasks_Only );
 
 		tasksTable.setDefaultRenderer( Date.class, new FullDateTableCellRenderer() );
+
+		setAuthTextFields();
+		if( ! AuthCache.isAuthenticated() ) {
+			loginMenuItemActionPerformed( null );
+		}
+	}
+
+	private void setAuthTextFields() {
+		if( AuthCache.isAuthenticated() ) {
+			try {
+				userIdTextField.setText( AuthCache.getUserId() );
+				tokenTextField.setText( AuthCache.getToken() );
+				apiKeyTextField.setText( AuthCache.getApiKey() );
+			} catch( JToodleException ex ) {
+				logger.log( Level.SEVERE,
+							"MainTestForm.setAuthTextFields()",
+							ex );
+			}
+		} else {
+			userIdTextField.setText( null );
+			tokenTextField.setText( null );
+			apiKeyTextField.setText( null );
+		}
 	}
 
     /**
@@ -616,10 +639,6 @@ public class MainTestForm extends javax.swing.JFrame {
 				try {
 					AuthCache.login( name, new String( password ) );
 
-					userIdTextField.setText( AuthCache.getUserId() );
-					tokenTextField.setText( AuthCache.getToken() );
-					apiKeyTextField.setText( AuthCache.getApiKey() );
-
 					return( true );
 				} catch( JToodleException jte ) {
 					errorTypeTextField.setText( jte.getClass().getName() );
@@ -635,6 +654,8 @@ public class MainTestForm extends javax.swing.JFrame {
 
 					logger.log( Level.SEVERE, null, ex );
 					return( false );
+				} finally {
+					setAuthTextFields();
 				}
 			}
 		} );
@@ -645,6 +666,7 @@ public class MainTestForm extends javax.swing.JFrame {
 
 		if( yn == JOptionPane.OK_OPTION ) {
 			AuthCache.logout();
+			setAuthTextFields();
 		}
     }//GEN-LAST:event_logoutMenuItemActionPerformed
 
