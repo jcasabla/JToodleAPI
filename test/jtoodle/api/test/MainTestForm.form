@@ -131,7 +131,7 @@
                               <Component id="errorDescPane" min="-2" pref="293" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="270" max="32767" attributes="0"/>
+                      <EmptySpace pref="276" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -288,7 +288,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="accountInfoPropertySheet" pref="474" max="32767" attributes="0"/>
+                      <Component id="accountInfoPropertySheet" pref="494" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -342,7 +342,7 @@
                           <Component id="beanTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="beanPropertySheet" pref="476" max="32767" attributes="0"/>
+                      <Component id="beanPropertySheet" pref="497" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -395,7 +395,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="searchResultsSeparator" max="32767" attributes="0"/>
-                          <Component id="tasksScrollPane" pref="633" max="32767" attributes="0"/>
+                          <Component id="tasksScrollPane" pref="639" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="tasksInResultLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -484,7 +484,7 @@
                           <Component id="tasksInPageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="tasksScrollPane" pref="363" max="32767" attributes="0"/>
+                      <Component id="tasksScrollPane" pref="395" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
