@@ -94,8 +94,7 @@ public class AuthCache implements AuthenticationConstants {
 		logger.entering( AuthCache.class.getName(), "isAuthenticated()" );
 
 		String apiKey = _prefs.get( KEY_API_KEY, null );
-		boolean isLoggedIn = ( ! NullSafe.isNullOrEmpty( apiKey ) ) &&
-							 ( ! tokenIsStale() );
+		boolean isLoggedIn = ( ! NullSafe.isNullOrEmpty( apiKey ) );
 
 		logger.exiting( AuthCache.class.getName(), "isAuthenticated()" );
 

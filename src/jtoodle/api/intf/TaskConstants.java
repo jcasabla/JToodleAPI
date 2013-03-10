@@ -15,6 +15,11 @@ public interface TaskConstants extends NonAuthConstants {
 			.append( "/tasks/get.php" )
 			.toString();
 
+	public static final String URI_DELETE_TASKS = new StringBuilder()
+			.append( BASE_URI )
+			.append( "/tasks/delete.php" )
+			.toString();
+
 	/*
 	 * These search parameters are described at: http://api.toodledo.com/2/tasks/index.php
 	 */
@@ -40,4 +45,5 @@ public interface TaskConstants extends NonAuthConstants {
 		.toString()
 		.replace( " " , "" );
 
+	public static final String PARAM_DEL_TASKS_TASK_ID_LIST = "tasks";
 }

@@ -168,7 +168,7 @@
                           <Component id="errorDescPane" min="-2" max="-2" attributes="0"/>
                           <Component id="errorDescLabel" min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="260" max="32767" attributes="0"/>
+                      <EmptySpace pref="292" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -276,7 +276,7 @@
                               <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="accountInfoPropertySheet" pref="639" max="32767" attributes="0"/>
+                          <Component id="accountInfoPropertySheet" pref="645" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -288,7 +288,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="accountInfoPropertySheet" pref="494" max="32767" attributes="0"/>
+                      <Component id="accountInfoPropertySheet" pref="506" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -322,7 +322,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="beanPropertySheet" pref="639" max="32767" attributes="0"/>
+                          <Component id="beanPropertySheet" pref="645" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="beanTypeComboBox" min="-2" pref="126" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -342,7 +342,7 @@
                           <Component id="beanTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="beanPropertySheet" pref="497" max="32767" attributes="0"/>
+                      <Component id="beanPropertySheet" pref="508" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -404,7 +404,8 @@
                               <Component id="tasksInPageLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tasksInPageTextField" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="deleteTasksButton" min="-2" pref="135" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -439,8 +440,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="searchButton" pref="121" max="32767" attributes="0"/>
-                                  <Component id="clearSearchutton" pref="131" max="32767" attributes="0"/>
+                                  <Component id="searchButton" pref="137" max="32767" attributes="0"/>
+                                  <Component id="clearSearchutton" pref="137" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -482,9 +483,10 @@
                           <Component id="tasksInResultTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tasksInPageLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tasksInPageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="deleteTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="tasksScrollPane" pref="395" max="32767" attributes="0"/>
+                      <Component id="tasksScrollPane" pref="393" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -750,6 +752,15 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="deleteTasksButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteTasksButtonActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

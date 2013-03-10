@@ -15,7 +15,7 @@ import jtoodle.api.json.enums.TaskRepeatsFrom;
  *
  * @author justo
  */
-public class Task extends AbstractJToodleBean {
+public class Task extends AbstractJToodleBean implements IdBean {
 /*
  * Task Datatypes (http://api.toodledo.com/2/tasks/index.php)
  *

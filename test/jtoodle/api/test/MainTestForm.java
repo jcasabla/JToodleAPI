@@ -17,12 +17,15 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
 import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Task;
 import jtoodle.api.beans.TaskQueryResult;
+import jtoodle.api.request.DeleteTasks;
 import jtoodle.api.request.GetAccountInfo;
 import jtoodle.api.request.GetFolders;
 import jtoodle.api.request.GetTasks;
@@ -32,6 +35,7 @@ import org.jdesktop.swingx.JXLoginPane;
 import org.jdesktop.swingx.auth.LoginService;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -75,6 +79,18 @@ public class MainTestForm extends javax.swing.JFrame {
 		completionComboBox.addItem( GetTasks.CompletionCriteria.Uncompleted_Tasks_Only );
 
 		tasksTable.setDefaultRenderer( Date.class, new FullDateTableCellRenderer() );
+		tasksTable.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
+			@Override
+			public void valueChanged( ListSelectionEvent e ) {
+				if( ( tasksTable.getSelectedRows() != null ) &&
+					( tasksTable.getSelectedRows().length > 0 ) )
+				{
+					deleteTasksButton.setEnabled( true );
+				} else {
+					deleteTasksButton.setEnabled( false );
+				}
+			}
+		});
 
 		setAuthTextFields();
 		if( ! AuthCache.isAuthenticated() ) {
@@ -155,6 +171,7 @@ public class MainTestForm extends javax.swing.JFrame {
         tasksInPageTextField = new javax.swing.JTextField();
         tasksScrollPane = new javax.swing.JScrollPane();
         tasksTable = new javax.swing.JTable();
+        deleteTasksButton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         loginMenuItem = new javax.swing.JMenuItem();
@@ -223,7 +240,7 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         authenticationPanelLayout.setVerticalGroup(
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +269,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -274,7 +291,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addGroup(accountInfoPanelLayout.createSequentialGroup()
                         .addComponent(accountInfoButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
+                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
                 .addContainerGap())
         );
         accountInfoPanelLayout.setVerticalGroup(
@@ -283,7 +300,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -309,7 +326,7 @@ public class MainTestForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, othersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                     .addGroup(othersPanelLayout.createSequentialGroup()
                         .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -324,7 +341,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(beanResultsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -469,6 +486,14 @@ public class MainTestForm extends javax.swing.JFrame {
         jTableBinding.bind();
         tasksScrollPane.setViewportView(tasksTable);
 
+        deleteTasksButton.setText("Delete");
+        deleteTasksButton.setEnabled(false);
+        deleteTasksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteTasksButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tasksPanelLayout = new javax.swing.GroupLayout(tasksPanel);
         tasksPanel.setLayout(tasksPanelLayout);
         tasksPanelLayout.setHorizontalGroup(
@@ -477,7 +502,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchResultsSeparator)
-                    .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                    .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
                     .addGroup(tasksPanelLayout.createSequentialGroup()
                         .addComponent(tasksInResultLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -486,7 +511,8 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addComponent(tasksInPageLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tasksPanelLayout.createSequentialGroup()
                         .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tasksPanelLayout.createSequentialGroup()
@@ -513,8 +539,8 @@ public class MainTestForm extends javax.swing.JFrame {
                             .addComponent(numRowsTextField))
                         .addGap(18, 18, 18)
                         .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                            .addComponent(clearSearchutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                            .addComponent(clearSearchutton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         tasksPanelLayout.setVerticalGroup(
@@ -547,9 +573,10 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(tasksInResultLabel)
                     .addComponent(tasksInResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tasksInPageLabel)
-                    .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteTasksButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -794,6 +821,25 @@ public class MainTestForm extends javax.swing.JFrame {
 		((ListBindingManager)this.tasksTable.getModel()).setElements( new ArrayList(), true );
     }//GEN-LAST:event_clearSearchuttonActionPerformed
 
+    private void deleteTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTasksButtonActionPerformed
+        int[] rowIdx = tasksTable.getSelectedRows();
+		List<Task> tasks = new ArrayList<>(rowIdx.length);
+
+		for( int idx : rowIdx ) {
+			tasks.add( taskQueryResult.getTasks().get( idx ) );
+		}
+
+		DeleteTasks delTasks = new DeleteTasks();
+		delTasks.setTasks( tasks );
+
+		try {
+			List<Task> uTasks = delTasks.requestBeanList();
+			JOptionPane.showMessageDialog( rootPane, "Deleted " + uTasks.size() + " tasks" );
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
+    }//GEN-LAST:event_deleteTasksButtonActionPerformed
+
 	private boolean handledInvalidKey( Exception ex ) {
 		boolean val = false;
 
@@ -856,6 +902,7 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JButton clearSearchutton;
     private javax.swing.JComboBox completionComboBox;
     private javax.swing.JLabel completionLabel;
+    private javax.swing.JButton deleteTasksButton;
     private javax.swing.JLabel endDateLabel;
     private org.jdesktop.swingx.JXDatePicker endDatePicker;
     private javax.swing.JLabel errorCodeLabel;
