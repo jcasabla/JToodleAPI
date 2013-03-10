@@ -15,4 +15,11 @@ public interface FolderConstants extends NonAuthConstants {
 			.append( "/folders/get.php" )
 			.toString();
 
+	public static final String URI_DELETE_FOLDERS = new StringBuilder()
+			.append( BASE_URI )
+			.append( "/folders/delete.php" )
+			.toString();
+
+	public static final String PARAM_DEL_FOLDER_ID = "id";
+
 }

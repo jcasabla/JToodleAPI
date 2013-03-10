@@ -25,6 +25,7 @@ import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Task;
 import jtoodle.api.beans.TaskQueryResult;
+import jtoodle.api.request.DeleteFolder;
 import jtoodle.api.request.DeleteTasks;
 import jtoodle.api.request.GetAccountInfo;
 import jtoodle.api.request.GetFolders;
@@ -149,6 +150,7 @@ public class MainTestForm extends javax.swing.JFrame {
         beanTypeComboBox = new javax.swing.JComboBox();
         beanResultsComboBox = new javax.swing.JComboBox();
         beanPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
+        deleteBeanButton = new javax.swing.JButton();
         tasksPanel = new javax.swing.JPanel();
         startDateLabel = new javax.swing.JLabel();
         startDatePicker = new org.jdesktop.swingx.JXDatePicker();
@@ -319,6 +321,14 @@ public class MainTestForm extends javax.swing.JFrame {
             }
         });
 
+        deleteBeanButton.setText("Delete");
+        deleteBeanButton.setEnabled(false);
+        deleteBeanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBeanButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout othersPanelLayout = new javax.swing.GroupLayout(othersPanel);
         othersPanel.setLayout(othersPanelLayout);
         othersPanelLayout.setHorizontalGroup(
@@ -330,7 +340,9 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addGroup(othersPanelLayout.createSequentialGroup()
                         .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(beanResultsComboBox, 0, 499, Short.MAX_VALUE)))
+                        .addComponent(beanResultsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteBeanButton)))
                 .addContainerGap())
         );
         othersPanelLayout.setVerticalGroup(
@@ -339,9 +351,10 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(beanResultsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteBeanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -701,10 +714,14 @@ public class MainTestForm extends javax.swing.JFrame {
 		try {
 			if( beanResultsComboBox.getSelectedItem() == null ) {
 				beanPropertySheet.setNodes( new Node[] {} );
+				deleteBeanButton.setEnabled( false );
 			} else {
 				beanPropertySheet.setNodes( new Node[] {
 					new BeanNode( beanResultsComboBox.getSelectedItem() )
 				});
+				if( ! ( beanResultsComboBox.getSelectedItem() instanceof String ) ) {
+					deleteBeanButton.setEnabled( true );
+				}
 			}
 		} catch( IntrospectionException ex ) {
 			logger.log( Level.SEVERE, null, ex );
@@ -712,6 +729,7 @@ public class MainTestForm extends javax.swing.JFrame {
     }//GEN-LAST:event_beanResultsComboBoxActionPerformed
 
     private void beanTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanTypeComboBoxActionPerformed
+		deleteBeanButton.setEnabled( false );
 		beanResultsComboBox.removeAllItems();
 		beanPropertySheet.setNodes( new Node[] {} );
 
@@ -753,9 +771,11 @@ public class MainTestForm extends javax.swing.JFrame {
 				for( Object o: beanList ) {
 					beanResultsComboBox.addItem( o );
 				}
+				deleteBeanButton.setEnabled( true );
 			} else {
 				beanResultsComboBox.addItem(
 					"<no results for: " + beanTypeComboBox.getSelectedItem() + ">" );
+				deleteBeanButton.setEnabled( false );
 			}
 
 			beanResultsComboBoxActionPerformed( null );
@@ -763,6 +783,7 @@ public class MainTestForm extends javax.swing.JFrame {
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
 			try {
+				deleteBeanButton.setEnabled( false );
 				beanResultsComboBox.addItem( ex );
 				beanPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
 			} catch( IntrospectionException ex1 ) {
@@ -840,6 +861,31 @@ public class MainTestForm extends javax.swing.JFrame {
 		}
     }//GEN-LAST:event_deleteTasksButtonActionPerformed
 
+	private void deleteFolder( Folder folder ) {
+		DeleteFolder df = new DeleteFolder();
+		df.setFolder( folder );
+
+		try {
+			Folder reply = df.requestBean();
+			JOptionPane.showMessageDialog( rootPane, "Deleted folder: " + folder.getId() );
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
+	}
+
+    private void deleteBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBeanButtonActionPerformed
+        Object bean = beanResultsComboBox.getSelectedItem();
+		if( bean instanceof Folder ) {
+			deleteFolder( (Folder) bean );
+		} else {
+			JOptionPane.showMessageDialog(
+				rootPane,
+				"This function is not yet available" ,
+				null,
+				JOptionPane.WARNING_MESSAGE );
+		}
+    }//GEN-LAST:event_deleteBeanButtonActionPerformed
+
 	private boolean handledInvalidKey( Exception ex ) {
 		boolean val = false;
 
@@ -902,6 +948,7 @@ public class MainTestForm extends javax.swing.JFrame {
     private javax.swing.JButton clearSearchutton;
     private javax.swing.JComboBox completionComboBox;
     private javax.swing.JLabel completionLabel;
+    private javax.swing.JButton deleteBeanButton;
     private javax.swing.JButton deleteTasksButton;
     private javax.swing.JLabel endDateLabel;
     private org.jdesktop.swingx.JXDatePicker endDatePicker;
