@@ -22,11 +22,6 @@ implements FolderConstants {
 		super( URI_DELETE_FOLDERS, Folder.class );
 	}
 
-	@Override
-	public Folder requestBean() throws IOException, JToodleException {
-		return( BeanParser.parseBean( requestStringResponse(), Folder.class ) );
-	}
-
 	public void setFolder( Folder folder ) {
 		super.setParameter(	PARAM_DEL_FOLDER_ID, folder.getId().toString() );
 	}
