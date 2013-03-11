@@ -4,13 +4,10 @@
  */
 package jtoodle.api.request;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import jtoodle.api.beans.BeanParser;
 import jtoodle.api.beans.BeanWriter;
 import jtoodle.api.beans.IdBean;
-import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Task;
 import jtoodle.api.intf.TaskConstants;
 
