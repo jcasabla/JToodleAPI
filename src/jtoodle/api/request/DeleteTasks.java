@@ -25,11 +25,6 @@ implements TaskConstants {
 		super( URI_DELETE_TASKS, Task.class );
 	}
 
-	@Override
-	public List<Task> requestBeanList() throws IOException, JToodleException {
-		return( BeanParser.parseBeanList(requestStringResponse(), Task.class ) );
-	}
-
 	public void setTasks( List<Task> tasks ) {
 		List<IdBean> idBeans = new ArrayList<>( tasks.size() );
 		idBeans.addAll( tasks );
