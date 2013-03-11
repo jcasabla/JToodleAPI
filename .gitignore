@@ -1,4 +1,5 @@
 *.class
+/nbproject/private/private.properties
 
 # Package Files #
 *.jar
