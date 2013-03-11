@@ -27,7 +27,7 @@ implements TaskConstants {
 
 	@Override
 	public TaskQueryResult requestBean() throws IOException, JToodleException {
-		return( BeanParser.parseTaskQueryResults( requestStringResponse() ) );
+		return( BeanParser.parseTaskQueryResults( doRequestResponse() ) );
 	}
 
 	@Override
