@@ -4,10 +4,6 @@
  */
 package jtoodle.api.request;
 
-import java.io.IOException;
-import java.util.List;
-import jtoodle.api.beans.BeanParser;
-import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Folder;
 import jtoodle.api.intf.FolderConstants;
 
