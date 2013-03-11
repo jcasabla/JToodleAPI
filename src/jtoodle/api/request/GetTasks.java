@@ -26,12 +26,12 @@ implements TaskConstants {
 	}
 
 	@Override
-	public TaskQueryResult requestBean() throws IOException, JToodleException {
+	public TaskQueryResult singleRequestResponse() throws IOException, JToodleException {
 		return( BeanParser.parseTaskQueryResults( doRequestResponse() ) );
 	}
 
 	@Override
-	public List<TaskQueryResult> requestBeanList() throws IOException, JToodleException {
+	public List<TaskQueryResult> multiRequestResponse() throws IOException, JToodleException {
 		throw( new UnsupportedOperationException(
 			"This class only supports the public TaskQueryResult requestBean() method"
 		));

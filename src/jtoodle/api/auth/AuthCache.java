@@ -194,7 +194,7 @@ public class AuthCache implements AuthenticationConstants {
 				alr.setEmail( getEmail() );
 				alr.setPassword( _password );
 
-				UserId bean = alr.requestBean();
+				UserId bean = alr.singleRequestResponse();
 
 				userId = bean.getUserId();
 				setUserId( userId );
@@ -239,7 +239,7 @@ public class AuthCache implements AuthenticationConstants {
 				TokenRequest tr = new TokenRequest();
 				tr.setUserId( getUserId() );
 
-				Token bean = tr.requestBean();
+				Token bean = tr.singleRequestResponse();
 
 				token = bean.getToken();
 				setToken( token );

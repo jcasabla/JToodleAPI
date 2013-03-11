@@ -93,7 +93,7 @@ public abstract class AbstractWebRequest<T extends AbstractJToodleBean> {
 		return ( stringResponse );
 	}
 
-	public T requestBean() throws IOException, JToodleException {
+	public T singleRequestResponse() throws IOException, JToodleException {
 		logger.entering( getClass().getName(), "requestBean()" );
 		T bean = BeanParser.parseBean( doRequestResponse(), clazz );
 
@@ -101,7 +101,7 @@ public abstract class AbstractWebRequest<T extends AbstractJToodleBean> {
 		return ( bean );
 	}
 
-	public List<T> requestBeanList() throws IOException, JToodleException {
+	public List<T> multiRequestResponse() throws IOException, JToodleException {
 		logger.entering( getClass().getName(), "requestBeanList()" );
 		List<T> beanList = BeanParser.parseBeanList( doRequestResponse(), clazz );
 

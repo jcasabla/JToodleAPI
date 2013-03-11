@@ -653,7 +653,7 @@ public class MainTestForm extends javax.swing.JFrame {
 
     private void accountInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountInfoButtonActionPerformed
 		try {
-			AccountInfo bean = new GetAccountInfo().requestBean();
+			AccountInfo bean = new GetAccountInfo().singleRequestResponse();
 			accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
 		} catch( IntrospectionException | IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
@@ -738,7 +738,7 @@ public class MainTestForm extends javax.swing.JFrame {
 
 			switch( beanTypeComboBox.getSelectedItem().toString() ) {
 				case "Folders": {
-					beanList = new GetFolders().requestBeanList();
+					beanList = new GetFolders().multiRequestResponse();
 					break;
 				}
 				case "Contexts": {
@@ -815,7 +815,7 @@ public class MainTestForm extends javax.swing.JFrame {
 
 			JTableUtil.configureTable( tasksTable, null );
 
-			TaskQueryResult result = request.requestBean();
+			TaskQueryResult result = request.singleRequestResponse();
 			taskQueryResult.updateProperties( result );
 
 			JTableUtil.resizeTableColumnsToFit( tasksTable );
@@ -854,7 +854,7 @@ public class MainTestForm extends javax.swing.JFrame {
 		delTasks.setTasks( tasks );
 
 		try {
-			List<Task> uTasks = delTasks.requestBeanList();
+			List<Task> uTasks = delTasks.multiRequestResponse();
 			JOptionPane.showMessageDialog( rootPane, "Deleted " + uTasks.size() + " tasks" );
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
@@ -866,7 +866,7 @@ public class MainTestForm extends javax.swing.JFrame {
 		df.setFolder( folder );
 
 		try {
-			Folder reply = df.requestBean();
+			Folder reply = df.singleRequestResponse();
 			JOptionPane.showMessageDialog( rootPane, "Deleted folder: " + folder.getId() );
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
