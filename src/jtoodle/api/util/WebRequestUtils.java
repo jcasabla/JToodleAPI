@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author justo
  */
-public class WebRequestUtils {
+public final class WebRequestUtils {
 
 	private WebRequestUtils() {}
 
