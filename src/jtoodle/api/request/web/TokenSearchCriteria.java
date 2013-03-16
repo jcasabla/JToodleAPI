@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jtoodle.api.beans.Token;
 import jtoodle.api.intf.AuthenticationConstants;
-import jtoodle.api.util.WebRequestUtils;
+import jtoodle.api.util.Hasher;
 
 /**
  *
@@ -31,7 +31,7 @@ public class TokenSearchCriteria extends TaskOperations.OperationCriteria<Token>
 		try {
 			setOption(
 				AuthenticationConstants.PARAM_NAME_SIGNATURE,
-				WebRequestUtils.md5Hash( userId + AuthenticationConstants.APP_TOKEN )
+				Hasher.md5Hash( userId + AuthenticationConstants.APP_TOKEN )
 			);
 		} catch( NoSuchAlgorithmException ex ) {
 			Logger.getLogger( TokenSearchCriteria.class.getName() ).log( Level.SEVERE, null, ex );

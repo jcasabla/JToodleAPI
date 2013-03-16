@@ -20,7 +20,7 @@ import jtoodle.api.request.web.TokenSearchCriteria;
 import jtoodle.api.request.web.UserIdOperations;
 import jtoodle.api.request.web.UserIdSearchCriteria;
 import jtoodle.api.util.NullSafe;
-import jtoodle.api.util.WebRequestUtils;
+import jtoodle.api.util.Hasher;
 
 /**
  *
@@ -129,7 +129,7 @@ public class AuthCache implements AuthenticationConstants {
 		_password = password;
 
 		try {
-			String hashedPassword = WebRequestUtils.md5Hash( _password );
+			String hashedPassword = Hasher.md5Hash( _password );
 
 			if( !NullSafe.equals( getHashedPassword(), hashedPassword ) ) {
 				storeHashedPassword( null );
@@ -157,7 +157,7 @@ public class AuthCache implements AuthenticationConstants {
 			_prefs.remove( KEY_PASSWORD );
 		} else {
 			try {
-				_prefs.put( KEY_PASSWORD, WebRequestUtils.md5Hash( clearPassword ) );
+				_prefs.put( KEY_PASSWORD, Hasher.md5Hash( clearPassword ) );
 			} catch( NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
@@ -291,7 +291,7 @@ public class AuthCache implements AuthenticationConstants {
 				// sucessfully retrieved, so it has to be called first
 				String token = getToken();
 
-				apiKey = WebRequestUtils.md5Hash( new StringBuilder()
+				apiKey = Hasher.md5Hash( new StringBuilder()
 					.append( getHashedPassword() )
 					.append( AuthenticationConstants.APP_TOKEN )
 					.append( token )

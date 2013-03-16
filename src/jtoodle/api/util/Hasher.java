@@ -12,9 +12,9 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author justo
  */
-public final class WebRequestUtils {
+public final class Hasher {
 
-	private WebRequestUtils() {}
+	private Hasher() {}
 
 	public static String md5Hash( String in ) throws NoSuchAlgorithmException {
 		return( md5Hash( in, 32 ) );
