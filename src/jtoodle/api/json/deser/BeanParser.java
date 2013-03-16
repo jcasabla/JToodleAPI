@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.beans;
+package jtoodle.api.json.deser;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,6 +12,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import jtoodle.api.beans.AbstractJToodleBean;
+import jtoodle.api.beans.AccountInfo;
+import jtoodle.api.beans.DeletionResult;
+import jtoodle.api.beans.Folder;
+import jtoodle.api.beans.JToodleException;
+import jtoodle.api.beans.Task;
+import jtoodle.api.beans.TaskQueryResult;
+import jtoodle.api.beans.Token;
+import jtoodle.api.beans.UserId;
 import jtoodle.api.json.deser.TD_BooleanDeserializer;
 import jtoodle.api.json.deser.TD_EnumDeserializer;
 import jtoodle.api.json.deser.TD_ReminderTimeDeserializer;
@@ -22,6 +31,7 @@ import jtoodle.api.json.enums.Priority;
 import jtoodle.api.json.enums.ReminderTime;
 import jtoodle.api.json.enums.Status;
 import jtoodle.api.json.mixin.AccountInfoMixIn;
+import jtoodle.api.json.mixin.DeletionResultMixIn;
 import jtoodle.api.json.mixin.FolderMixIn;
 import jtoodle.api.json.mixin.JToodleExceptionMixIn;
 import jtoodle.api.json.mixin.TaskMixIn;
@@ -47,6 +57,7 @@ public class BeanParser {
 		mapper.addMixInAnnotations( Folder.class, FolderMixIn.class );
 		mapper.addMixInAnnotations( TaskQueryResult.class, TaskQueryResultMixIn.class );
 		mapper.addMixInAnnotations( Task.class, TaskMixIn.class );
+		mapper.addMixInAnnotations( DeletionResult.class, DeletionResultMixIn.class );
 
 		mapper.registerModule(
 			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
