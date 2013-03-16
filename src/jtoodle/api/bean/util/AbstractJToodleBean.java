@@ -8,6 +8,6 @@ package jtoodle.api.bean.util;
  *
  * @author justo
  */
-public class AbstractJToodleBean {
+public abstract class AbstractJToodleBean {
 
 }
