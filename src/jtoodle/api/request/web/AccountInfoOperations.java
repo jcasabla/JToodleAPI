@@ -4,7 +4,7 @@
  */
 package jtoodle.api.request.web;
 
-import jtoodle.api.bean.AccountInfo;
+import jtoodle.api.bean.core.AccountInfo;
 
 /**
  *

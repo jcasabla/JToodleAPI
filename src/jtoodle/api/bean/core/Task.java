@@ -2,9 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.bean;
+package jtoodle.api.bean.core;
 
 import java.util.Date;
+import jtoodle.api.bean.util.IdBean;
+import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.json.enums.DueDateModifier;
 import jtoodle.api.json.enums.Priority;
 import jtoodle.api.json.enums.ReminderTime;

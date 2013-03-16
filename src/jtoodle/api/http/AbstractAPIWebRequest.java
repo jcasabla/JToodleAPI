@@ -7,7 +7,7 @@ package jtoodle.api.http;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jtoodle.api.auth.AuthCache;
-import jtoodle.api.bean.JToodleException;
+import jtoodle.api.bean.util.JToodleException;
 
 /**
  *

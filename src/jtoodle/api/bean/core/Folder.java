@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.bean;
+package jtoodle.api.bean.core;
+
+import jtoodle.api.bean.util.AbstractJToodleBean;
 
 /**
  *

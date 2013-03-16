@@ -4,7 +4,7 @@
  */
 package jtoodle.api.request.web;
 
-import jtoodle.api.bean.UserId;
+import jtoodle.api.bean.auth.UserId;
 
 /**
  *

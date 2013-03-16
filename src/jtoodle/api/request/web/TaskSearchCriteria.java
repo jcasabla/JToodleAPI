@@ -5,7 +5,7 @@
 package jtoodle.api.request.web;
 
 import java.util.Date;
-import jtoodle.api.bean.Task;
+import jtoodle.api.bean.core.Task;
 
 /**
  *

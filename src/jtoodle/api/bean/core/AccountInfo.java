@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.bean;
+package jtoodle.api.bean.core;
 
 import java.util.Date;
+import jtoodle.api.bean.auth.UserId;
 import jtoodle.api.json.enums.DateFormat;
 import jtoodle.api.json.enums.Priority;
 

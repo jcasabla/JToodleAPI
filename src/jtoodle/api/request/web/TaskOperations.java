@@ -8,9 +8,9 @@ import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
 import java.util.List;
 import jtoodle.api.json.deser.BeanParser;
-import jtoodle.api.bean.JToodleException;
-import jtoodle.api.bean.Task;
-import jtoodle.api.bean.TaskQueryResult;
+import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.bean.core.Task;
+import jtoodle.api.bean.core.TaskQueryResult;
 import static jtoodle.api.request.web.WebBeanOperations.OperationType;
 import jtoodle.api.http.AbstractWebRequest;
 
