@@ -16,24 +16,21 @@ public class Folder extends AbstractJToodleBean {
  *		"name":"Shopping",
  *		"private":"0",
  *		"archived":"0",
- *		"ord":"1",
- *		"deleted"
+ *		"ord":"1"
  * },
  * {
  *		"id":"456",
  *		"name":"Home Repairs",
  *		"private":"0",
  *		"archived":"0",
- *		"ord":"2",
- *		"deleted"
+ *		"ord":"2"
  * },
  * {
  *		"id":"789",
  *		"name":"Vacation PLanning",
  *		"private":"0",
  *		"archived":"0",
- *		"ord":"3",
- *		"deleted"
+ *		"ord":"3"
  * }
  * ]
  */
@@ -43,7 +40,6 @@ public class Folder extends AbstractJToodleBean {
 	private Boolean _private = null;
 	private Boolean archived = null;
 	private Integer order = null;
-	private Integer deletedId = null;
 
 	public Integer getId() {
 		return id;
@@ -83,14 +79,6 @@ public class Folder extends AbstractJToodleBean {
 
 	public void setOrder( Integer order ) {
 		this.order = order;
-	}
-
-	public Integer getDeletedId() {
-		return deletedId;
-	}
-
-	public void setDeletedId( Integer deletedId ) {
-		this.deletedId = deletedId;
 	}
 
 }
