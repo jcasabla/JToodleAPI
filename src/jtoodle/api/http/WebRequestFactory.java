@@ -1,0 +1,22 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jtoodle.api.http;
+
+import jtoodle.api.auth.AuthCache;
+
+/**
+ *
+ * @author Justo_Casablanca
+ */
+public class WebRequestFactory {
+
+	public static AbstractWebRequest createWebRequest( String uri ) {
+		return(
+			AuthCache.isAuthenticated() ?
+				new AbstractAPIWebRequest( uri ) :
+				new AbstractAuthWebRequest( uri )
+		);
+	}
+}

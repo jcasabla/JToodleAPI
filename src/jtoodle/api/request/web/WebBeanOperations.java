@@ -4,6 +4,7 @@
  */
 package jtoodle.api.request.web;
 
+import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import jtoodle.api.json.deser.BeanParser;
 import jtoodle.api.beans.DeletionResult;
 import jtoodle.api.beans.JToodleException;
 import static jtoodle.api.request.web.WebOperations.BASE_URI;
-import jtoodle.api.util.AbstractWebRequest;
+import jtoodle.api.http.AbstractWebRequest;
 import jtoodle.api.util.NullSafe;
 
 /**

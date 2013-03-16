@@ -4,17 +4,15 @@
  */
 package jtoodle.api.request.web;
 
+import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import jtoodle.api.json.deser.BeanParser;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Task;
 import jtoodle.api.beans.TaskQueryResult;
 import static jtoodle.api.request.web.WebBeanOperations.OperationType;
-import jtoodle.api.util.AbstractWebRequest;
-import jtoodle.api.util.NullSafe;
+import jtoodle.api.http.AbstractWebRequest;
 
 /**
  *
