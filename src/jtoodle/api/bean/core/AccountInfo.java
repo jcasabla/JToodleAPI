@@ -5,7 +5,7 @@
 package jtoodle.api.bean.core;
 
 import java.util.Date;
-import jtoodle.api.bean.auth.UserId;
+import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.json.enums.DateFormat;
 import jtoodle.api.json.enums.Priority;
 
@@ -13,7 +13,7 @@ import jtoodle.api.json.enums.Priority;
  *
  * @author justo
  */
-public class AccountInfo extends UserId {
+public class AccountInfo extends AbstractJToodleBean {
 
 	/*
 	 * JSON sample from https://api.toodledo.com/2/account/doc_info.php
@@ -61,6 +61,7 @@ public class AccountInfo extends UserId {
 	 * lastdelete_notebook : A timestamp that indicates the last time that any notebook was deleted from this account. You can quickly check this field to determine if you need to identify and remove notebooks from your application.
 	 */
 
+	private String userId = null;
 	private String alias = null;
 	private Boolean pro = null;
 	private DateFormat dateFormat = null;
@@ -79,6 +80,14 @@ public class AccountInfo extends UserId {
 	private Date lastLocationEditedOn = null;
 	private Date lastNotebookEditedOn = null;
 	private Date lastNotebookDeletedOn = null;
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId( String userId ) {
+		this.userId = userId;
+	}
 
 	public String getAlias() {
 		return alias;
