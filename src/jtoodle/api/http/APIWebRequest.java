@@ -13,15 +13,15 @@ import jtoodle.api.bean.util.JToodleException;
  *
  * @author justo
  */
-public class AbstractAPIWebRequest extends AbstractWebRequest {
+public class APIWebRequest extends AbstractWebRequest {
 
-	public AbstractAPIWebRequest( String uri ) {
+	public APIWebRequest( String uri ) {
 		super( uri );
 
 		try {
 			setParameter( PARAM_NAME_KEY, AuthCache.getApiKey() );
 		} catch( JToodleException ex ) {
-			Logger.getLogger( AbstractAPIWebRequest.class.getName() ).log( Level.SEVERE, null, ex );
+			Logger.getLogger( APIWebRequest.class.getName() ).log( Level.SEVERE, null, ex );
 		}
 	}
 

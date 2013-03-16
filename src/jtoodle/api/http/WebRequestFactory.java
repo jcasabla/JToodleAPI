@@ -15,8 +15,8 @@ public class WebRequestFactory {
 	public static AbstractWebRequest createWebRequest( String uri ) {
 		return(
 			AuthCache.isAuthenticated() ?
-				new AbstractAPIWebRequest( uri ) :
-				new AbstractAuthWebRequest( uri )
+				new APIWebRequest( uri ) :
+				new AuthWebRequest( uri )
 		);
 	}
 }
