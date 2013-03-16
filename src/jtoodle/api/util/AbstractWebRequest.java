@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jtoodle.api.beans.AbstractJToodleBean;
-import jtoodle.api.beans.BeanParser;
-import jtoodle.api.beans.JToodleException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -29,20 +26,17 @@ import org.apache.http.util.EntityUtils;
  *
  * @author justo
  */
-public abstract class AbstractWebRequest<T extends AbstractJToodleBean> {
+public abstract class AbstractWebRequest {
 
 	@SuppressWarnings( "NonConstantLogger" )
 	private final Logger logger = Logger.getLogger( getClass().getName() );
 
 	private String uri = null;
 
-	private Class<T> clazz = null;
-
 	private List<NameValuePair> formparams = null;
 
-	public AbstractWebRequest( String uri, Class<T> clazz ) {
+	public AbstractWebRequest( String uri ) {
 		this.uri = uri;
-		this.clazz = clazz;
 		//setParameter( PARAM_NAME_FORMAT, "xml" );
 	}
 
@@ -58,8 +52,8 @@ public abstract class AbstractWebRequest<T extends AbstractJToodleBean> {
 		formparams.add( new BasicNameValuePair( parameterName, parameterValue ) );
 	}
 
-	protected final String doRequestResponse() throws IOException, JToodleException {
-		logger.entering( getClass().getName(), "requestStringResponse()" );
+	public final String doRequestResponse() throws IOException {
+		logger.entering( getClass().getName(), "doRequestResponse()" );
 
 		HttpClient client = new DefaultHttpClient();
 		HttpPost request = new HttpPost( uri );
@@ -88,25 +82,9 @@ public abstract class AbstractWebRequest<T extends AbstractJToodleBean> {
 		byte[] byteResponse = client.execute( request, handler );
 		String stringResponse = new String( byteResponse );
 
-		logger.exiting( getClass().getName(), "requestStringResponse()", stringResponse );
+		logger.exiting( getClass().getName(), "doRequestResponse()", stringResponse );
 
 		return ( stringResponse );
-	}
-
-	public T singleRequestResponse() throws IOException, JToodleException {
-		logger.entering( getClass().getName(), "requestBean()" );
-		T bean = BeanParser.parseBean( doRequestResponse(), clazz );
-
-		logger.exiting( getClass().getName(), "requestBean()", bean );
-		return ( bean );
-	}
-
-	public List<T> multiRequestResponse() throws IOException, JToodleException {
-		logger.entering( getClass().getName(), "requestBeanList()" );
-		List<T> beanList = BeanParser.parseBeanList( doRequestResponse(), clazz );
-
-		logger.exiting( getClass().getName(), "requestBeanList()", beanList );
-		return ( beanList );
 	}
 
 }
