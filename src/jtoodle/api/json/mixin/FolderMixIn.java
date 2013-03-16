@@ -16,7 +16,4 @@ public interface FolderMixIn extends AbstractJToodleBeanMixIn {
 	public Integer getOrder();
 	public void setOrder( Integer order );
 
-	@JsonProperty( "deleted" )
-	public Integer getDeletedId();
-	public void setDeletedId( Integer deletedId );
 }
