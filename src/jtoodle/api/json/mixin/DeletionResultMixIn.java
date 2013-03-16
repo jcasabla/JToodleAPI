@@ -4,19 +4,19 @@
  */
 package jtoodle.api.json.mixin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
  * @author justo
  */
-public interface FolderMixIn extends AbstractJToodleBeanMixIn {
-
-	@JsonProperty( "ord" )
-	public Integer getOrder();
-	public void setOrder( Integer order );
+public abstract class DeletionResultMixIn implements AbstractJToodleBeanMixIn {
 
 	@JsonProperty( "deleted" )
-	public Integer getDeletedId();
-	public void setDeletedId( Integer deletedId );
+	private Integer id = null;
+
+	@JsonIgnore
+	public abstract Integer getId();
+
 }
