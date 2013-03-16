@@ -131,7 +131,7 @@
                               <Component id="errorDescPane" min="-2" pref="293" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="276" max="32767" attributes="0"/>
+                      <EmptySpace pref="282" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -288,7 +288,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="accountInfoPropertySheet" pref="506" max="32767" attributes="0"/>
+                      <Component id="accountInfoPropertySheet" pref="526" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -345,7 +345,7 @@
                           <Component id="deleteBeanButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="beanPropertySheet" pref="506" max="32767" attributes="0"/>
+                      <Component id="beanPropertySheet" pref="526" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -416,7 +416,7 @@
                               <Component id="tasksInPageLabel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="tasksInPageTextField" min="-2" pref="90" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="174" max="32767" attributes="0"/>
                               <Component id="deleteTasksButton" min="-2" pref="135" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -498,7 +498,7 @@
                           <Component id="deleteTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="tasksScrollPane" pref="393" max="32767" attributes="0"/>
+                      <Component id="tasksScrollPane" pref="424" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
