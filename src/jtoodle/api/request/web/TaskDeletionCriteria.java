@@ -7,8 +7,8 @@ package jtoodle.api.request.web;
 import java.util.ArrayList;
 import java.util.List;
 import jtoodle.api.json.ser.BeanWriter;
-import jtoodle.api.beans.IdBean;
-import jtoodle.api.beans.Task;
+import jtoodle.api.bean.IdBean;
+import jtoodle.api.bean.Task;
 
 /**
  *

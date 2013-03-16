@@ -6,7 +6,7 @@ package jtoodle.api.json.mixin;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jtoodle.api.beans.TaskQueryResult;
+import jtoodle.api.bean.TaskQueryResult;
 
 /**
  *

@@ -6,9 +6,9 @@ package jtoodle.api.request.web;
 
 import java.io.IOException;
 import java.util.List;
-import jtoodle.api.beans.AbstractJToodleBean;
-import jtoodle.api.beans.DeletionResult;
-import jtoodle.api.beans.JToodleException;
+import jtoodle.api.bean.AbstractJToodleBean;
+import jtoodle.api.bean.DeletionResult;
+import jtoodle.api.bean.JToodleException;
 
 /**
  *

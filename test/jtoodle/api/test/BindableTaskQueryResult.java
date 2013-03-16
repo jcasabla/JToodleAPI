@@ -6,7 +6,7 @@ package jtoodle.api.test;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import jtoodle.api.beans.TaskQueryResult;
+import jtoodle.api.bean.TaskQueryResult;
 
 /**
  *

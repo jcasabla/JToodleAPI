@@ -5,7 +5,7 @@
 package jtoodle.api.json.ser;
 
 import java.util.List;
-import jtoodle.api.beans.IdBean;
+import jtoodle.api.bean.IdBean;
 
 /**
  *

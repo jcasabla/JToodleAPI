@@ -4,7 +4,7 @@
  */
 package jtoodle.api.request.web;
 
-import jtoodle.api.beans.Folder;
+import jtoodle.api.bean.Folder;
 import static jtoodle.api.request.web.WebBeanOperations.OperationType;
 
 /**

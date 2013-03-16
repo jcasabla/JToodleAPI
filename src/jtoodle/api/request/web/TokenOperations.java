@@ -4,7 +4,7 @@
  */
 package jtoodle.api.request.web;
 
-import jtoodle.api.beans.Token;
+import jtoodle.api.bean.Token;
 
 /**
  *
