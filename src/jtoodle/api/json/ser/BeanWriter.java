@@ -32,4 +32,5 @@ public class BeanWriter {
 
 		return( idSB.toString() );
 	}
+
 }

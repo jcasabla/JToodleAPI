@@ -4,9 +4,6 @@
  */
 package jtoodle.api.bean.util;
 
-import jtoodle.api.bean.util.IdBean;
-import jtoodle.api.bean.util.AbstractJToodleBean;
-
 /**
  *
  * @author Justo_Casablanca

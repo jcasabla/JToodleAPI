@@ -136,4 +136,5 @@ public interface AccountInfoMixIn extends UserIdMixIn {
 	@JsonProperty( "lastdelete_notebook" )
 	public Date getLastNotebookDeletedOn();
 	public void setLastNotebookDeletedOn( Date lastDeleteNotebookOn );
+
 }
