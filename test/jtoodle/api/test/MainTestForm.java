@@ -21,22 +21,23 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import jtoodle.api.auth.AuthCache;
 import jtoodle.api.beans.AccountInfo;
+import jtoodle.api.beans.DeletionResult;
 import jtoodle.api.beans.Folder;
 import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Task;
 import jtoodle.api.beans.TaskQueryResult;
-import jtoodle.api.request.DeleteFolder;
-import jtoodle.api.request.DeleteTasks;
-import jtoodle.api.request.GetAccountInfo;
-import jtoodle.api.request.GetFolders;
-import jtoodle.api.request.GetTasks;
+import jtoodle.api.request.web.AccountInfoOperations;
+import jtoodle.api.request.web.FolderDeletionCriteria;
+import jtoodle.api.request.web.FolderOperations;
+import jtoodle.api.request.web.TaskDeletionCriteria;
+import jtoodle.api.request.web.TaskOperations;
+import jtoodle.api.request.web.TaskSearchCriteria;
 import jtoodle.api.util.NullSafe;
 import org.jdesktop.swingbinding.impl.ListBindingManager;
 import org.jdesktop.swingx.JXLoginPane;
 import org.jdesktop.swingx.auth.LoginService;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
-import org.openide.util.Exceptions;
 
 /**
  *
@@ -75,9 +76,9 @@ public class MainTestForm extends javax.swing.JFrame {
 		});
 
 		completionComboBox.removeAllItems();
-		completionComboBox.addItem( GetTasks.CompletionCriteria.All_Tasks );
-		completionComboBox.addItem( GetTasks.CompletionCriteria.Completed_Tasks_Only );
-		completionComboBox.addItem( GetTasks.CompletionCriteria.Uncompleted_Tasks_Only );
+		completionComboBox.addItem( TaskSearchCriteria.CompletionCriteria.All_Tasks );
+		completionComboBox.addItem( TaskSearchCriteria.CompletionCriteria.Completed_Tasks_Only );
+		completionComboBox.addItem( TaskSearchCriteria.CompletionCriteria.Uncompleted_Tasks_Only );
 
 		tasksTable.setDefaultRenderer( Date.class, new FullDateTableCellRenderer() );
 		tasksTable.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
@@ -242,7 +243,7 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         authenticationPanelLayout.setVerticalGroup(
             authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +272,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addGroup(authenticationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(errorDescPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(errorDescLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(292, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Authentication", authenticationPanel);
@@ -293,7 +294,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addGroup(accountInfoPanelLayout.createSequentialGroup()
                         .addComponent(accountInfoButton)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
+                    .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE))
                 .addContainerGap())
         );
         accountInfoPanelLayout.setVerticalGroup(
@@ -302,7 +303,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(accountInfoButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -336,7 +337,7 @@ public class MainTestForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, othersPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(othersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                     .addGroup(othersPanelLayout.createSequentialGroup()
                         .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,7 +355,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBeanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -515,7 +516,7 @@ public class MainTestForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchResultsSeparator)
-                    .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                    .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
                     .addGroup(tasksPanelLayout.createSequentialGroup()
                         .addComponent(tasksInResultLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -524,7 +525,7 @@ public class MainTestForm extends javax.swing.JFrame {
                         .addComponent(tasksInPageLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                         .addComponent(deleteTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tasksPanelLayout.createSequentialGroup()
                         .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -552,8 +553,8 @@ public class MainTestForm extends javax.swing.JFrame {
                             .addComponent(numRowsTextField))
                         .addGap(18, 18, 18)
                         .addGroup(tasksPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                            .addComponent(clearSearchutton, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+                            .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(clearSearchutton, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         tasksPanelLayout.setVerticalGroup(
@@ -589,7 +590,7 @@ public class MainTestForm extends javax.swing.JFrame {
                     .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteTasksButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -637,9 +638,10 @@ public class MainTestForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabbedPane))
+                .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -653,7 +655,8 @@ public class MainTestForm extends javax.swing.JFrame {
 
     private void accountInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountInfoButtonActionPerformed
 		try {
-			AccountInfo bean = new GetAccountInfo().singleRequestResponse();
+			AccountInfoOperations aiOps = new AccountInfoOperations();
+			AccountInfo bean = aiOps.searchSingle();
 			accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
 		} catch( IntrospectionException | IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
@@ -738,7 +741,8 @@ public class MainTestForm extends javax.swing.JFrame {
 
 			switch( beanTypeComboBox.getSelectedItem().toString() ) {
 				case "Folders": {
-					beanList = new GetFolders().multiRequestResponse();
+					FolderOperations folderOps = new FolderOperations();
+					beanList = folderOps.search();
 					break;
 				}
 				case "Contexts": {
@@ -798,31 +802,43 @@ public class MainTestForm extends javax.swing.JFrame {
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
 		try {
-			GetTasks request = new GetTasks();
+			TaskSearchCriteria searchOptions = new TaskSearchCriteria();
 
-			request.setStartDate( startDatePicker.getDate() );
-			request.setEndDate( endDatePicker.getDate() );
-			request.setCompletionCriteria( (GetTasks.CompletionCriteria) completionComboBox.getSelectedItem() );
+			searchOptions.setStartDate( startDatePicker.getDate() );
+			searchOptions.setEndDate( endDatePicker.getDate() );
+
+			searchOptions.setCompletionCriteria(
+				(TaskSearchCriteria.CompletionCriteria)
+					completionComboBox.getSelectedItem() );
+
 			if( ! NullSafe.isNullOrEmpty( taskIdTextField.getText() ) ) {
-				request.setTaskId( Integer.parseInt( taskIdTextField.getText() ) );
+				searchOptions.setTaskId( Integer.parseInt( taskIdTextField.getText() ) );
 			}
 			if( ! NullSafe.isNullOrEmpty( rowStartTextField.getText() ) ) {
-				request.setPaginationRowStart( Integer.parseInt( rowStartTextField.getText() ) );
+				searchOptions.setPaginationRowStart( Integer.parseInt( rowStartTextField.getText() ) );
 			}
 			if( ! NullSafe.isNullOrEmpty( numRowsTextField.getText() ) ) {
-				request.setPaginationNumTasks( Integer.parseInt( numRowsTextField.getText() ) );
+				searchOptions.setPaginationNumTasks( Integer.parseInt( numRowsTextField.getText() ) );
 			}
 
 			JTableUtil.configureTable( tasksTable, null );
 
-			TaskQueryResult result = request.singleRequestResponse();
-			taskQueryResult.updateProperties( result );
+			TaskOperations taskOps = new TaskOperations();
+			taskOps.setOperationCriteria( searchOptions );
+
+			List<Task> results = taskOps.search();
+			TaskQueryResult tqResult = TaskQueryResult.createTaskQueryResult(
+				results.size(), results.size()
+			);
+
+			tqResult.setTasks( results );
+			taskQueryResult.updateProperties( tqResult );
 
 			JTableUtil.resizeTableColumnsToFit( tasksTable );
 
-			logger.log( Level.INFO, "TaskQueryResult.totalTaskCount={0}", result.getTotalTaskCount() );
-			logger.log( Level.INFO, "TaskQueryResult.queryTaskCount={0}", result.getQueryTaskCount() );
-			logger.log( Level.INFO, "TaskQueryResult.tasks.size={0}", result.getTasks().size() );
+			logger.log( Level.INFO, "TaskQueryResult.totalTaskCount={0}", taskQueryResult.getTotalTaskCount() );
+			logger.log( Level.INFO, "TaskQueryResult.queryTaskCount={0}", taskQueryResult.getQueryTaskCount() );
+			logger.log( Level.INFO, "TaskQueryResult.tasks.size={0}", taskQueryResult.getTasks().size() );
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
 
@@ -835,7 +851,7 @@ public class MainTestForm extends javax.swing.JFrame {
     private void clearSearchuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearSearchuttonActionPerformed
 		this.startDatePicker.setDate( null );
 		this.endDatePicker.setDate( null );
-		this.completionComboBox.setSelectedItem( GetTasks.CompletionCriteria.All_Tasks );
+		this.completionComboBox.setSelectedItem( TaskSearchCriteria.CompletionCriteria.All_Tasks );
 		this.taskIdTextField.setText( null );
 		this.rowStartTextField.setText( null );
 		this.numRowsTextField.setText( null );
@@ -850,24 +866,30 @@ public class MainTestForm extends javax.swing.JFrame {
 			tasks.add( taskQueryResult.getTasks().get( idx ) );
 		}
 
-		DeleteTasks delTasks = new DeleteTasks();
-		delTasks.setTasks( tasks );
+		TaskDeletionCriteria delC = new TaskDeletionCriteria();
+		delC.setTasks( tasks );
+
+		TaskOperations taskOps = new TaskOperations();
+		taskOps.setOperationCriteria( delC );
 
 		try {
-			List<Task> uTasks = delTasks.multiRequestResponse();
-			JOptionPane.showMessageDialog( rootPane, "Deleted " + uTasks.size() + " tasks" );
+			taskOps.delete();
+			//JOptionPane.showMessageDialog( rootPane, "Deleted " + uTasks.size() + " tasks" );
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
 		}
     }//GEN-LAST:event_deleteTasksButtonActionPerformed
 
 	private void deleteFolder( Folder folder ) {
-		DeleteFolder df = new DeleteFolder();
-		df.setFolder( folder );
+		FolderDeletionCriteria fdc = new FolderDeletionCriteria();
+		fdc.setFolder( folder );
+
+		FolderOperations folderOps = new FolderOperations();
+		folderOps.setOperationCriteria( fdc );
 
 		try {
-			Folder reply = df.singleRequestResponse();
-			JOptionPane.showMessageDialog( rootPane, "Deleted folder: " + folder.getId() );
+			DeletionResult reply = folderOps.deleteSingle();
+			JOptionPane.showMessageDialog( rootPane, "Deleted folder: " + reply.getId() );
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
 		}

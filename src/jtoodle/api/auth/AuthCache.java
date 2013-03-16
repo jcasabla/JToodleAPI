@@ -15,6 +15,10 @@ import jtoodle.api.beans.JToodleException;
 import jtoodle.api.beans.Token;
 import jtoodle.api.beans.UserId;
 import jtoodle.api.intf.AuthenticationConstants;
+import jtoodle.api.request.web.TokenOperations;
+import jtoodle.api.request.web.TokenSearchCriteria;
+import jtoodle.api.request.web.UserIdOperations;
+import jtoodle.api.request.web.UserIdSearchCriteria;
 import jtoodle.api.util.NullSafe;
 import jtoodle.api.util.WebRequestUtils;
 
@@ -190,16 +194,19 @@ public class AuthCache implements AuthenticationConstants {
 
 		if( NullSafe.isNullOrEmpty( userId ) ) {
 			try {
-				AccountLookupRequest alr = new AccountLookupRequest();
-				alr.setEmail( getEmail() );
-				alr.setPassword( _password );
+				UserIdSearchCriteria sc = new UserIdSearchCriteria();
+				sc.setEmail( getEmail() );
+				sc.setPassword( _password );
 
-				UserId bean = alr.singleRequestResponse();
+				UserIdOperations uidSearch = new UserIdOperations();
+				uidSearch.setOperationCriteria( sc );
 
+				UserId bean = uidSearch.searchSingle();
 				userId = bean.getUserId();
+
 				setUserId( userId );
 				storeHashedPassword( _password );
-			} catch( IOException | NoSuchAlgorithmException ex ) {
+			} catch( IOException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
@@ -236,14 +243,17 @@ public class AuthCache implements AuthenticationConstants {
 
 		if( NullSafe.isNullOrEmpty( token ) || tokenIsStale() ) {
 			try {
-				TokenRequest tr = new TokenRequest();
-				tr.setUserId( getUserId() );
+				TokenSearchCriteria tsc = new TokenSearchCriteria();
+				tsc.setUserId( getUserId() );
 
-				Token bean = tr.singleRequestResponse();
+				TokenOperations tokenOps = new TokenOperations();
+				tokenOps.setOperationCriteria( tsc );
 
+				Token bean = tokenOps.searchSingle();
 				token = bean.getToken();
+
 				setToken( token );
-			} catch( IOException | NoSuchAlgorithmException ex ) {
+			} catch( IOException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
