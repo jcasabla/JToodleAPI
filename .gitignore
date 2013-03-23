@@ -1,5 +1,4 @@
 *.class
-/nbproject/private/private.properties
 
 # Package Files #
 *.jar
@@ -7,3 +6,4 @@
 *.ear
 /build/
 /dist/
+/nbproject/private/
