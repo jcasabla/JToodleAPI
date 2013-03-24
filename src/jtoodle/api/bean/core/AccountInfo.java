@@ -85,24 +85,12 @@ public class AccountInfo extends AbstractJToodleBean {
 		return userId;
 	}
 
-	public void setUserId( String userId ) {
-		this.userId = userId;
-	}
-
 	public String getAlias() {
 		return alias;
 	}
 
-	public void setAlias( String alias ) {
-		this.alias = alias;
-	}
-
 	public Boolean getPro() {
 		return pro;
-	}
-
-	public void setPro( Boolean pro ) {
-		this.pro = pro;
 	}
 
 	public Boolean isPro() {
@@ -113,48 +101,24 @@ public class AccountInfo extends AbstractJToodleBean {
 		return dateFormat;
 	}
 
-	public void setDateFormat( DateFormat dateFormat ) {
-		this.dateFormat = dateFormat;
-	}
-
 	public Integer getTimeZone() {
 		return timeZone;
-	}
-
-	public void setTimeZone( Integer timeZone ) {
-		this.timeZone = timeZone;
 	}
 
 	public Integer getHiddenTasksMinDueMonths() {
 		return hiddenTasksMinDueMonths;
 	}
 
-	public void setHiddenTasksMinDueMonths( Integer hiddenTasksMinDueMonths ) {
-		this.hiddenTasksMinDueMonths = hiddenTasksMinDueMonths;
-	}
-
 	public Priority getHotListMinTaskPriority() {
 		return hotListMinTaskPriority;
-	}
-
-	public void setHotListMinTaskPriority( Priority hotListMinTaskPriority ) {
-		this.hotListMinTaskPriority = hotListMinTaskPriority;
 	}
 
 	public Integer getHotListMaxDueDays() {
 		return hotListMaxDueDays;
 	}
 
-	public void setHotListMaxDueDays( Integer hotListMaxDueDays ) {
-		this.hotListMaxDueDays = hotListMaxDueDays;
-	}
-
 	public Boolean getHotListIncludesStarredTasks() {
 		return hotListIncludesStarredTasks;
-	}
-
-	public void setHotListIncludesStarredTasks( Boolean hotListIncludesStarredTasks ) {
-		this.hotListIncludesStarredTasks = hotListIncludesStarredTasks;
 	}
 
 	public Boolean hotListIncludesStarredTasks() {
@@ -165,20 +129,12 @@ public class AccountInfo extends AbstractJToodleBean {
 		return hotListIncludesNextActionStatus;
 	}
 
-	public void setHotListIncludesNextActionStatus( Boolean hotListIncludesNextActionStatus ) {
-		this.hotListIncludesNextActionStatus = hotListIncludesNextActionStatus;
-	}
-
 	public Boolean hotListIncludesNextActionStatus() {
 		return hotListIncludesNextActionStatus;
 	}
 
 	public Boolean getShowSectionTaskCounts() {
 		return showSectionTaskCounts;
-	}
-
-	public void setShowSectionTaskCounts( Boolean showSectionTaskCounts ) {
-		this.showSectionTaskCounts = showSectionTaskCounts;
 	}
 
 	public Boolean showSectionTaskCounts() {
@@ -189,64 +145,32 @@ public class AccountInfo extends AbstractJToodleBean {
 		return lastTaskEditedOn;
 	}
 
-	public void setLastTaskEditedOn( Date lastTaskEditedOn ) {
-		this.lastTaskEditedOn = lastTaskEditedOn;
-	}
-
 	public Date getLastTaskDeletedOn() {
 		return lastTaskDeletedOn;
-	}
-
-	public void setLastTaskDeletedOn( Date lastTaskDeletedOn ) {
-		this.lastTaskDeletedOn = lastTaskDeletedOn;
 	}
 
 	public Date getLastFolderEditedOn() {
 		return lastFolderEditedOn;
 	}
 
-	public void setLastFolderEditedOn( Date lastFolderEditedOn ) {
-		this.lastFolderEditedOn = lastFolderEditedOn;
-	}
-
 	public Date getLastContextEditedOn() {
 		return lastContextEditedOn;
-	}
-
-	public void setLastContextEditedOn( Date lastContextEditedOn ) {
-		this.lastContextEditedOn = lastContextEditedOn;
 	}
 
 	public Date getLastGoalEditedOn() {
 		return lastGoalEditedOn;
 	}
 
-	public void setLastGoalEditedOn( Date lastGoalEditedOn ) {
-		this.lastGoalEditedOn = lastGoalEditedOn;
-	}
-
 	public Date getLastLocationEditedOn() {
 		return lastLocationEditedOn;
-	}
-
-	public void setLastLocationEditedOn( Date lastLocationEditedOn ) {
-		this.lastLocationEditedOn = lastLocationEditedOn;
 	}
 
 	public Date getLastNotebookEditedOn() {
 		return lastNotebookEditedOn;
 	}
 
-	public void setLastNotebookEditedOn( Date lastNotebookEditedOn ) {
-		this.lastNotebookEditedOn = lastNotebookEditedOn;
-	}
-
 	public Date getLastNotebookDeletedOn() {
 		return lastNotebookDeletedOn;
-	}
-
-	public void setLastNotebookDeletedOn( Date lastNotebookDeletedOn ) {
-		this.lastNotebookDeletedOn = lastNotebookDeletedOn;
 	}
 
 }

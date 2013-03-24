@@ -4,6 +4,7 @@
  */
 package jtoodle.api.json.mixin.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import jtoodle.api.json.enums.DateFormat;
@@ -14,7 +15,7 @@ import jtoodle.api.json.mixin.util.AbstractJToodleBeanMixIn;
  *
  * @author justo
  */
-public interface AccountInfoMixIn extends AbstractJToodleBeanMixIn {
+public abstract class AccountInfoMixIn implements AbstractJToodleBeanMixIn {
 
 	/*
 	 * JSON sample from https://api.toodledo.com/2/account/doc_info.php
@@ -63,83 +64,63 @@ public interface AccountInfoMixIn extends AbstractJToodleBeanMixIn {
 	 */
 
 	@JsonProperty( "userid" )
-	public abstract String getUserId();
-	public abstract void setUserId( String userId );
-
+	private String userId = null;
+	@JsonProperty( "alias" )
+	private String alias = null;
 	@JsonProperty( "pro" )
-	public Boolean getPro();
-	public void setPro( Boolean pro );
-
-	public Boolean isPro();
-
+	private Boolean pro = null;
 	@JsonProperty( "dateformat" )
-	public DateFormat getDateFormat();
-	public void setDateFormat( DateFormat dateFormat );
-
+	private DateFormat dateFormat = null;
 	@JsonProperty( "timezone" )
-	public Integer getTimeZone();
-	public void setTimeZone( Integer timeZone );
-
+	private Integer timeZone = null;
 	@JsonProperty( "hidemonths" )
-	public Integer getHiddenTasksMinDueMonths();
-	public void setHiddenTasksMinDueMonths( Integer hideMonths );
-
+	private Integer hiddenTasksMinDueMonths = null;
 	@JsonProperty( "hotlistpriority" )
-	public Priority getHotListMinTaskPriority();
-	public void setHotListMinTaskPriority( Priority hotListPriority );
-
+	private Priority hotListMinTaskPriority = null;
 	@JsonProperty( "hotlistduedate" )
-	public Integer getHotListMaxDueDays();
-	public void setHotListMaxDueDays( Integer hotListDueDate );
-
+	private Integer hotListMaxDueDays = null;
 	@JsonProperty( "hotliststar" )
-	public Boolean getHotListIncludesStarredTasks();
-	public void setHotListIncludesStarredTasks( Boolean hotListStar );
-
-	public Boolean hotListIncludesStarredTasks();
-
+	private Boolean hotListIncludesStarredTasks = null;
 	@JsonProperty( "hotliststatus" )
-	public Boolean getHotListIncludesNextActionStatus();
-	public void setHotListIncludesNextActionStatus( Boolean hotListStatus );
-
-	public Boolean hotListIncludesNextActionStatus();
-
+	private Boolean hotListIncludesNextActionStatus = null;
 	@JsonProperty( "showtabnums" )
-	public Boolean getShowSectionTaskCounts();
-	public void setShowSectionTaskCounts( Boolean showTabNums );
-
-	public Boolean showSectionTaskCounts();
-
+	private Boolean showSectionTaskCounts = null;
 	@JsonProperty( "lastedit_task" )
-	public Date getLastTaskEditedOn();
-	public void setLastTaskEditedOn( Date lastEditTaskOn );
-
+	private Date lastTaskEditedOn = null;
 	@JsonProperty( "lastdelete_task" )
-	public Date getLastTaskDeletedOn();
-	public void setLastTaskDeletedOn( Date lastDeleteTaskOn );
-
+	private Date lastTaskDeletedOn = null;
 	@JsonProperty( "lastedit_folder" )
-	public Date getLastFolderEditedOn();
-	public void setLastFolderEditedOn( Date lastEditFolderOn );
-
+	private Date lastFolderEditedOn = null;
 	@JsonProperty( "lastedit_context" )
-	public Date getLastContextEditedOn();
-	public void setLastContextEditedOn( Date lastEditContextOn );
-
+	private Date lastContextEditedOn = null;
 	@JsonProperty( "lastedit_goal" )
-	public Date getLastGoalEditedOn();
-	public void setLastGoalEditedOn( Date lastEditGoalOn );
-
+	private Date lastGoalEditedOn = null;
 	@JsonProperty( "lastedit_location" )
-	public Date getLastLocationEditedOn();
-	public void setLastLocationEditedOn( Date lastEditLocationOn );
-
+	private Date lastLocationEditedOn = null;
 	@JsonProperty( "lastedit_notebook" )
-	public Date getLastNotebookEditedOn();
-	public void setLastNotebookEditedOn( Date lastEditNotebookOn );
-
+	private Date lastNotebookEditedOn = null;
 	@JsonProperty( "lastdelete_notebook" )
-	public Date getLastNotebookDeletedOn();
-	public void setLastNotebookDeletedOn( Date lastDeleteNotebookOn );
+	private Date lastNotebookDeletedOn = null;
+
+	@JsonIgnore	public abstract String getUserId();
+	@JsonIgnore	public abstract String getAlias();
+	@JsonIgnore	public abstract Boolean getPro();
+	@JsonIgnore	public abstract Boolean isPro();
+	@JsonIgnore	public abstract DateFormat getDateFormat();
+	@JsonIgnore	public abstract Integer getTimeZone();
+	@JsonIgnore	public abstract Integer getHiddenTasksMinDueMonths();
+	@JsonIgnore	public abstract Priority getHotListMinTaskPriority();
+	@JsonIgnore	public abstract Integer getHotListMaxDueDays();
+	@JsonIgnore	public abstract Boolean getHotListIncludesStarredTasks();
+	@JsonIgnore	public abstract Boolean getHotListIncludesNextActionStatus();
+	@JsonIgnore	public abstract Boolean getShowSectionTaskCounts();
+	@JsonIgnore	public abstract Date getLastTaskEditedOn();
+	@JsonIgnore	public abstract Date getLastTaskDeletedOn();
+	@JsonIgnore	public abstract Date getLastFolderEditedOn();
+	@JsonIgnore	public abstract Date getLastContextEditedOn();
+	@JsonIgnore	public abstract Date getLastGoalEditedOn();
+	@JsonIgnore	public abstract Date getLastLocationEditedOn();
+	@JsonIgnore	public abstract Date getLastNotebookEditedOn();
+	@JsonIgnore	public abstract Date getLastNotebookDeletedOn();
 
 }
