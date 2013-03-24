@@ -12,11 +12,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import jtoodle.api.auth.AuthExceptionHandler;
 import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.TaskQueryResult;
+import jtoodle.api.bean.util.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.request.web.TaskDeletionCriteria;
 import jtoodle.api.request.web.TaskOperations;
@@ -389,8 +391,13 @@ public class TasksPanel extends javax.swing.JPanel {
         taskOps.setOperationCriteria( delC );
 
         try {
-            taskOps.delete();
-            //JOptionPane.showMessageDialog( rootPane, "Deleted " + uTasks.size() + " tasks" );
+            List<DeletionResult> dr = taskOps.delete();
+            JOptionPane.showMessageDialog( this, "Deleted " + dr.size() + " tasks" );
+
+			for( DeletionResult result : dr ) {
+				logger.log( Level.INFO, "Task deleted, id={0}",
+							new String[] { result.getId().toString() } );
+			}
         } catch( IOException | JToodleException ex ) {
             logger.log( Level.SEVERE, null, ex );
         }

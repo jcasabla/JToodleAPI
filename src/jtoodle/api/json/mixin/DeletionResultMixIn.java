@@ -13,8 +13,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public abstract class DeletionResultMixIn implements AbstractJToodleBeanMixIn {
 
-	@JsonProperty( "deleted" )
+	@JsonProperty( "id" )
 	private Integer id = null;
+
+	@JsonProperty( "deleted" )
+	private Integer deleted = null;
 
 	@JsonIgnore
 	public abstract Integer getId();

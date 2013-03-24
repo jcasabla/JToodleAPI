@@ -11,10 +11,11 @@ package jtoodle.api.bean.util;
 public class DeletionResult extends AbstractJToodleBean implements IdBean {
 
 	private Integer id = null;
+	private Integer deleted = null;
 
 	@Override
 	public Integer getId() {
-		return( id );
+		return( ( id == null ) ? deleted : id );
 	}
 
 }
