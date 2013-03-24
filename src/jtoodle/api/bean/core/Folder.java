@@ -4,13 +4,11 @@
  */
 package jtoodle.api.bean.core;
 
-import jtoodle.api.bean.util.AbstractJToodleBean;
-
 /**
  *
  * @author justo
  */
-public class Folder extends AbstractJToodleBean {
+public class Folder extends AbstractCoreBean {
 /*
  * JSON:[
  * {
@@ -37,19 +35,10 @@ public class Folder extends AbstractJToodleBean {
  * ]
  */
 
-	private Integer id = null;
 	private String name = null;
 	private Boolean _private = null;
 	private Boolean archived = null;
 	private Integer order = null;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId( Integer id ) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

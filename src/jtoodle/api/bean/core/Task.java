@@ -5,8 +5,6 @@
 package jtoodle.api.bean.core;
 
 import java.util.Date;
-import jtoodle.api.bean.util.IdBean;
-import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.json.enums.DueDateModifier;
 import jtoodle.api.json.enums.Priority;
 import jtoodle.api.json.enums.ReminderTime;
@@ -17,7 +15,7 @@ import jtoodle.api.json.enums.TaskRepeatsFrom;
  *
  * @author justo
  */
-public class Task extends AbstractJToodleBean implements IdBean {
+public class Task extends AbstractCoreBean {
 /*
  * Task Datatypes (http://api.toodledo.com/2/tasks/index.php)
  *
@@ -74,7 +72,6 @@ public class Task extends AbstractJToodleBean implements IdBean {
  * meta : A text string up to 255 bytes long for storing metadata about the task. This is useful for syncing data that cannot otherwise be synced to Toodledo. This data is unique per task ID. This data is private to your App ID. Neither the user, nor other App IDs can see the data that you put in here. Because of an implementation detail, using the meta field introduces extra latency to each API call, so you should only use this field when necessary.
  */
 
-	private Integer id = null;						// id
 	private String title = null;					// title
 	private String tag = null;						// tag
 	private Integer folderId = null;				// folder
@@ -103,14 +100,6 @@ public class Task extends AbstractJToodleBean implements IdBean {
 	private Date timerStartedOn = null;				// timeron
 	private String note = null;						// note
 	private String meta = null;						// meta
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId( Integer id ) {
-		this.id = id;
-	}
 
 	public String getTitle() {
 		return title;

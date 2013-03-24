@@ -2,18 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.json.mixin;
+package jtoodle.api.json.mixin.core;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import jtoodle.api.json.enums.DateFormat;
 import jtoodle.api.json.enums.Priority;
+import jtoodle.api.json.mixin.util.AbstractJToodleBeanMixIn;
 
 /**
  *
  * @author justo
  */
-public interface AccountInfoMixIn extends UserIdMixIn {
+public interface AccountInfoMixIn extends AbstractJToodleBeanMixIn {
 
 	/*
 	 * JSON sample from https://api.toodledo.com/2/account/doc_info.php
@@ -60,6 +61,10 @@ public interface AccountInfoMixIn extends UserIdMixIn {
 	 * lastedit_notebook : A timestamp that indicates the last time that any notebook was added or edited on this account. You can quickly check this field to determine if you need to download updates.
 	 * lastdelete_notebook : A timestamp that indicates the last time that any notebook was deleted from this account. You can quickly check this field to determine if you need to identify and remove notebooks from your application.
 	 */
+
+	@JsonProperty( "userid" )
+	public abstract String getUserId();
+	public abstract void setUserId( String userId );
 
 	@JsonProperty( "pro" )
 	public Boolean getPro();

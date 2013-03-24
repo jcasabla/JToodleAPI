@@ -5,7 +5,7 @@
 package jtoodle.api.json.ser;
 
 import java.util.List;
-import jtoodle.api.bean.util.IdBean;
+import jtoodle.api.bean.core.CoreBean;
 
 /**
  *
@@ -15,7 +15,7 @@ public class BeanWriter {
 
 	private BeanWriter() {}
 
-	public static String writeIdList( List<IdBean> idBeans ) {
+	public static String writeIdList( List<CoreBean> idBeans ) {
 		StringBuilder idSB = new StringBuilder();
 		idSB.append( "[" );
 

@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.bean.core.AccountInfo;
-import jtoodle.api.bean.util.DeletionResult;
+import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.core.Folder;
 import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.bean.core.Task;
@@ -26,14 +26,14 @@ import jtoodle.api.json.enums.DueDateModifier;
 import jtoodle.api.json.enums.Priority;
 import jtoodle.api.json.enums.ReminderTime;
 import jtoodle.api.json.enums.Status;
-import jtoodle.api.json.mixin.AccountInfoMixIn;
-import jtoodle.api.json.mixin.DeletionResultMixIn;
-import jtoodle.api.json.mixin.FolderMixIn;
-import jtoodle.api.json.mixin.JToodleExceptionMixIn;
-import jtoodle.api.json.mixin.TaskMixIn;
-import jtoodle.api.json.mixin.TaskQueryResultMixIn;
-import jtoodle.api.json.mixin.TokenMixIn;
-import jtoodle.api.json.mixin.UserIdMixIn;
+import jtoodle.api.json.mixin.core.AccountInfoMixIn;
+import jtoodle.api.json.mixin.core.DeletionResultMixIn;
+import jtoodle.api.json.mixin.core.FolderMixIn;
+import jtoodle.api.json.mixin.util.JToodleExceptionMixIn;
+import jtoodle.api.json.mixin.core.TaskMixIn;
+import jtoodle.api.json.mixin.core.TaskQueryResultMixIn;
+import jtoodle.api.json.mixin.auth.TokenMixIn;
+import jtoodle.api.json.mixin.auth.UserIdMixIn;
 
 /**
  *

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthExceptionHandler;
 import jtoodle.api.bean.core.Folder;
 import jtoodle.api.bean.core.Task;
-import jtoodle.api.bean.util.DeletionResult;
+import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.request.web.FolderDeletionCriteria;
 import jtoodle.api.request.web.FolderOperations;

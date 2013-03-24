@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.json.deser.BeanParser;
-import jtoodle.api.bean.util.DeletionResult;
+import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
 import static jtoodle.api.request.web.WebOperations.BASE_URI;
 import jtoodle.api.http.AbstractWebRequest;

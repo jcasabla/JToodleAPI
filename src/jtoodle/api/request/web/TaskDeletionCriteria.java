@@ -6,8 +6,8 @@ package jtoodle.api.request.web;
 
 import java.util.ArrayList;
 import java.util.List;
+import jtoodle.api.bean.core.CoreBean;
 import jtoodle.api.json.ser.BeanWriter;
-import jtoodle.api.bean.util.IdBean;
 import jtoodle.api.bean.core.Task;
 
 /**
@@ -21,7 +21,7 @@ public class TaskDeletionCriteria extends TaskOperations.OperationCriteria<Task>
 	}
 
 	public void setTasks( List<Task> tasksToDelete ) {
-		List<IdBean> tmp = new ArrayList<>( tasksToDelete.size() );
+		List<CoreBean> tmp = new ArrayList<>( tasksToDelete.size() );
 		tmp.addAll( tasksToDelete );
 
 		setOption( PARAM_DEL_TASKS_TASK_ID_LIST, BeanWriter.writeIdList( tmp ) );

@@ -2,20 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jtoodle.api.bean.util;
+package jtoodle.api.bean.core;
+
+import jtoodle.api.bean.util.AbstractJToodleBean;
 
 /**
  *
  * @author Justo_Casablanca
  */
-public class DeletionResult extends AbstractJToodleBean implements IdBean {
+public abstract class AbstractCoreBean extends AbstractJToodleBean
+implements CoreBean {
 
 	private Integer id = null;
-	private Integer deleted = null;
 
 	@Override
 	public Integer getId() {
-		return( ( id == null ) ? deleted : id );
+		return( id );
 	}
 
 }
