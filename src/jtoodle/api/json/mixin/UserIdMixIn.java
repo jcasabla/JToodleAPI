@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public interface UserIdMixIn extends AbstractJToodleBeanMixIn {
 
 	@JsonProperty( "userid" )
-	abstract String getUserId();
-	abstract void setUserId( String userId );
+	public abstract String getUserId();
+	public abstract void setUserId( String userId );
 
 }
