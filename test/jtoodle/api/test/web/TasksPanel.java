@@ -67,6 +67,7 @@ public class TasksPanel extends javax.swing.JPanel {
 	@SuppressWarnings( "unchecked" )
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         taskQueryResult = new jtoodle.api.test.util.BindableTaskQueryResult();
         startDateLabel = new javax.swing.JLabel();
@@ -139,6 +140,97 @@ public class TasksPanel extends javax.swing.JPanel {
             }
         });
 
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${tasks}");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, taskQueryResult, eLProperty, tasksTable);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${title}"));
+        columnBinding.setColumnName("Title");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${priority}"));
+        columnBinding.setColumnName("Priority");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.Priority.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${starred}"));
+        columnBinding.setColumnName("Starred");
+        columnBinding.setColumnClass(Boolean.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${parentTaskId}"));
+        columnBinding.setColumnName("Parent Task Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${childTaskCount}"));
+        columnBinding.setColumnName("Child Task Count");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${childTaskOrder}"));
+        columnBinding.setColumnName("Child Task Order");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${addedOn}"));
+        columnBinding.setColumnName("Added On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modifiedOn}"));
+        columnBinding.setColumnName("Modified On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${folderId}"));
+        columnBinding.setColumnName("Folder Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${goalId}"));
+        columnBinding.setColumnName("Goal Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${locationId}"));
+        columnBinding.setColumnName("Location Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${contextId}"));
+        columnBinding.setColumnName("Context Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${status}"));
+        columnBinding.setColumnName("Status");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.Status.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${repeatPattern}"));
+        columnBinding.setColumnName("Repeat Pattern");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${repeatsFrom}"));
+        columnBinding.setColumnName("Repeats From");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.TaskRepeatsFrom.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dueDate}"));
+        columnBinding.setColumnName("Due Date");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dueDateModifier}"));
+        columnBinding.setColumnName("Due Date Modifier");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.DueDateModifier.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dueTime}"));
+        columnBinding.setColumnName("Due Time");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${startDate}"));
+        columnBinding.setColumnName("Start Date");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${startTime}"));
+        columnBinding.setColumnName("Start Time");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${timerStartedOn}"));
+        columnBinding.setColumnName("Timer Started On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${timerSecondsElapsed}"));
+        columnBinding.setColumnName("Timer Seconds Elapsed");
+        columnBinding.setColumnClass(Long.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${minutesToComplete}"));
+        columnBinding.setColumnName("Minutes To Complete");
+        columnBinding.setColumnClass(Long.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${reminderMinutes}"));
+        columnBinding.setColumnName("Reminder Minutes");
+        columnBinding.setColumnClass(jtoodle.api.json.enums.ReminderTime.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${completedOn}"));
+        columnBinding.setColumnName("Completed On");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${meta}"));
+        columnBinding.setColumnName("Meta");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${note}"));
+        columnBinding.setColumnName("Note");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tag}"));
+        columnBinding.setColumnName("Tag");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         tasksScrollPane.setViewportView(tasksTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -220,6 +312,8 @@ public class TasksPanel extends javax.swing.JPanel {
                 .addComponent(tasksScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
     private void clearSearchuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearSearchuttonActionPerformed
@@ -325,5 +419,6 @@ public class TasksPanel extends javax.swing.JPanel {
     private javax.swing.JTextField tasksInResultTextField;
     private javax.swing.JScrollPane tasksScrollPane;
     private javax.swing.JTable tasksTable;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
