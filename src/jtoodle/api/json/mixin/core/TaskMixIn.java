@@ -14,7 +14,7 @@ import jtoodle.api.json.enums.TaskRepeatsFrom;
  *
  * @author justo
  */
-public abstract class TaskMixIn extends CoreBeanMixIn {
+public abstract class TaskMixIn extends TaskNotebookBeanMixIn {
 
 	//@JsonProperty( "id" )
 	//public abstract Integer getId();
@@ -27,10 +27,6 @@ public abstract class TaskMixIn extends CoreBeanMixIn {
 	//@JsonProperty( "tag" )
 	//public abstract String getTag();
 	//public abstract void setTag( String tag );
-
-	@JsonProperty( "folder" )
-	public abstract Integer getFolderId();
-	public abstract void setFolderId( Integer folderId );
 
 	@JsonProperty( "context" )
 	public abstract Integer getContextId();
@@ -104,17 +100,9 @@ public abstract class TaskMixIn extends CoreBeanMixIn {
 	public abstract Boolean getStarred();
 	public abstract void setStarred( Boolean starred );
 
-	@JsonProperty( "modified" )
-	public abstract Date getModifiedOn();
-	public abstract void setModifiedOn( Date modifiedOn );
-
 	@JsonProperty( "completed" )
 	public abstract Date getCompletedOn();
 	public abstract void setCompletedOn( Date completedOn );
-
-	@JsonProperty( "added" )
-	public abstract Date getAddedOn();
-	public abstract void setAddedOn( Date addedOn );
 
 	@JsonProperty( "timer" )
 	public abstract Long getTimerSecondsElapsed();

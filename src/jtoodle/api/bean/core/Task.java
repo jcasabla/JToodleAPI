@@ -15,7 +15,7 @@ import jtoodle.api.json.enums.TaskRepeatsFrom;
  *
  * @author justo
  */
-public class Task extends AbstractCoreBean {
+public class Task extends TaskNotebookBean {
 /*
  * Task Datatypes (http://api.toodledo.com/2/tasks/index.php)
  *
@@ -72,9 +72,7 @@ public class Task extends AbstractCoreBean {
  * meta : A text string up to 255 bytes long for storing metadata about the task. This is useful for syncing data that cannot otherwise be synced to Toodledo. This data is unique per task ID. This data is private to your App ID. Neither the user, nor other App IDs can see the data that you put in here. Because of an implementation detail, using the meta field introduces extra latency to each API call, so you should only use this field when necessary.
  */
 
-	private String title = null;					// title
 	private String tag = null;						// tag
-	private Integer folderId = null;				// folder
 	private Integer contextId = null;				// context
 	private Integer goalId = null;					// goal
 	private Integer locationId = null;				// location
@@ -93,21 +91,11 @@ public class Task extends AbstractCoreBean {
 	private Long minutesToComplete = null;			// length
 	private Priority priority = null;				// priority
 	private Boolean starred = null;					// star
-	private Date modifiedOn = null;					// modified
 	private Date completedOn = null;				// completed
-	private Date addedOn = null;					// added
 	private Long timerSecondsElapsed = null;		// timer
 	private Date timerStartedOn = null;				// timeron
 	private String note = null;						// note
 	private String meta = null;						// meta
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle( String title ) {
-		this.title = title;
-	}
 
 	public String getTag() {
 		return tag;
@@ -115,14 +103,6 @@ public class Task extends AbstractCoreBean {
 
 	public void setTag( String tag ) {
 		this.tag = tag;
-	}
-
-	public Integer getFolderId() {
-		return folderId;
-	}
-
-	public void setFolderId( Integer folderId ) {
-		this.folderId = folderId;
 	}
 
 	public Integer getContextId() {
@@ -269,28 +249,12 @@ public class Task extends AbstractCoreBean {
 		this.starred = starred;
 	}
 
-	public Date getModifiedOn() {
-		return modifiedOn;
-	}
-
-	public void setModifiedOn( Date modifiedOn ) {
-		this.modifiedOn = modifiedOn;
-	}
-
 	public Date getCompletedOn() {
 		return completedOn;
 	}
 
 	public void setCompletedOn( Date completedOn ) {
 		this.completedOn = completedOn;
-	}
-
-	public Date getAddedOn() {
-		return addedOn;
-	}
-
-	public void setAddedOn( Date addedOn ) {
-		this.addedOn = addedOn;
 	}
 
 	public Long getTimerSecondsElapsed() {
