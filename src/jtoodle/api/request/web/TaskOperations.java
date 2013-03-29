@@ -7,7 +7,7 @@ package jtoodle.api.request.web;
 import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
 import java.util.List;
-import jtoodle.api.json.deser.BeanParser;
+import jtoodle.api.json.bean.BeanParser;
 import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.TaskQueryResult;
@@ -23,7 +23,7 @@ public class TaskOperations extends WebBeanOperations<Task> {
 	public TaskOperations() {
 		super();
 
-		//registerURI( CRUD.Create, null );
+		registerURI( OperationType.ADD,  "/tasks/add.php" );
 		registerURI( OperationType.RETRIEVE, "/tasks/get.php" );
 		//registerURI( CRUD.Update, null );
 		registerURI( OperationType.DELETE, "/tasks/delete.php" );

@@ -44,6 +44,13 @@ public class BindableTaskQueryResult extends TaskQueryResult {
 		getTasks().add( aTask );
 	}
 
+	public void addTasks( List<Task> taskList ) {
+		if( getTasks() == null ) {
+			setTasks( new ArrayList<Task>() );
+		}
+		getTasks().addAll( taskList );
+	}
+
 	public void removeTasks( List<Task> taskList ) {
 		if( ! NullSafe.isNullOrEmpty( getTasks() ) ) {
 			getTasks().removeAll( taskList );
@@ -63,7 +70,9 @@ public class BindableTaskQueryResult extends TaskQueryResult {
 		setTotalTaskCount( result.getTotalTaskCount() );
 		pcs.firePropertyChange( "totalTaskCount", null, getTotalTaskCount() );
 
-		setTasks( result.getTasks() );
+		clearTasks();
+		getTasks().addAll( result.getTasks() );
+		//setTasks( result.getTasks() );
 	}
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport( this );

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jtoodle.api.bean.util.AbstractJToodleBean;
-import jtoodle.api.json.deser.BeanParser;
+import jtoodle.api.json.bean.BeanParser;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
 import static jtoodle.api.request.web.WebOperations.BASE_URI;
@@ -121,7 +121,13 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 	//@Override
 	public List<T> create() throws IOException, JToodleException {
-		throw new UnsupportedOperationException( "Not supported yet." );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[OperationType.ADD.ordinal()] );
+		setRequestParameters( OperationType.ADD, wr );
+
+		String json = wr.doRequestResponse();
+		List<T> beanOut = BeanParser.parseBeanList( json, getBeanClass() );
+
+		return( beanOut );
 	}
 
 	//@Override

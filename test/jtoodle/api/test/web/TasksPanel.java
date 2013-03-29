@@ -4,6 +4,7 @@
  */
 package jtoodle.api.test.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jtoodle.api.test.util.FullDateTableCellRenderer;
 import jtoodle.api.test.util.JTableUtil;
 import java.io.IOException;
@@ -22,10 +23,12 @@ import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.TaskQueryResult;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.request.web.TaskAddCriteria;
 import jtoodle.api.request.web.TaskDeletionCriteria;
 import jtoodle.api.request.web.TaskOperations;
 import jtoodle.api.request.web.TaskSearchCriteria;
 import jtoodle.api.util.NullSafe;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -66,15 +69,12 @@ public class TasksPanel extends javax.swing.JPanel {
 			@Override
 			public void tableChanged( TableModelEvent e ) {
 				switch( e.getType() ) {
-					case TableModelEvent.INSERT: {
-						saveTasksButton.setEnabled( true );
-						break;
-					}
+					case TableModelEvent.INSERT:
 					case TableModelEvent.DELETE: {
 						saveTasksButton.setEnabled( newTasksExist() );
 						break;
 					}
-				}
+ 				}
 			}
 			private boolean newTasksExist() {
 				boolean nte = false;
@@ -87,6 +87,18 @@ public class TasksPanel extends javax.swing.JPanel {
 				return( nte );
 			}
 		});
+	}
+
+	private List<Task> getNewTasks() {
+		List<Task> taskList = new ArrayList<>();
+
+		for( Task nTask : taskQueryResult.getTasks() ) {
+			if( nTask.getId() == null ) {
+				taskList.add( nTask );
+			}
+		}
+
+		return( taskList );
 	}
 
 	/** This method is called from within the constructor to
@@ -275,6 +287,11 @@ public class TasksPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(saveTasksButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.saveTasksButton.text")); // NOI18N
         saveTasksButton.setEnabled(false);
+        saveTasksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveTasksButtonActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(newTaskButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.newTaskButton.text")); // NOI18N
         newTaskButton.addActionListener(new java.awt.event.ActionListener() {
@@ -482,6 +499,29 @@ public class TasksPanel extends javax.swing.JPanel {
 		JTableUtil.configureTable( tasksTable, null );
 		JTableUtil.resizeTableColumnsToFit( tasksTable );
     }//GEN-LAST:event_newTaskButtonActionPerformed
+
+    private void saveTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTasksButtonActionPerformed
+		try {
+			List<Task> tempTasks = getNewTasks();
+
+			TaskAddCriteria tac = new TaskAddCriteria();
+			tac.setTasks( tempTasks);
+
+			TaskOperations taskOps = new TaskOperations();
+			taskOps.setOperationCriteria( tac );
+			List<Task> savedTasks = taskOps.create();
+
+			taskQueryResult.removeTasks( tempTasks );
+			taskQueryResult.addTasks( savedTasks );
+			
+			JTableUtil.configureTable( tasksTable, null );
+			JTableUtil.resizeTableColumnsToFit( tasksTable );
+		} catch( JsonProcessingException ex ) {
+			Exceptions.printStackTrace( ex );
+		} catch( IOException | JToodleException ex ) {
+			Exceptions.printStackTrace( ex );
+		}
+    }//GEN-LAST:event_saveTasksButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearSearchutton;
