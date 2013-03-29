@@ -74,14 +74,14 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" max="-2" attributes="0">
                   <Component id="startDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="startDatePicker" alignment="3" max="32767" attributes="0"/>
                   <Component id="taskIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="taskIdTextField" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="endDatePicker" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="endDateLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -89,7 +89,7 @@
                   <Component id="rowStartTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="clearSearchutton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="completionComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="completionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
                   <Component id="numRowsTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="searchButton" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tasksInResultLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tasksInResultTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -105,9 +105,9 @@
                   <Component id="tasksInPageTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="tasksScrollPane" min="-2" pref="206" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <Component id="tasksScrollPane" pref="206" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
