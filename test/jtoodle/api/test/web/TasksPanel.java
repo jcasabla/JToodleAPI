@@ -24,7 +24,6 @@ import jtoodle.api.request.web.TaskDeletionCriteria;
 import jtoodle.api.request.web.TaskOperations;
 import jtoodle.api.request.web.TaskSearchCriteria;
 import jtoodle.api.util.NullSafe;
-import org.jdesktop.swingbinding.impl.ListBindingManager;
 
 /**
  *
@@ -90,9 +89,11 @@ public class TasksPanel extends javax.swing.JPanel {
         tasksInResultTextField = new javax.swing.JTextField();
         tasksInPageLabel = new javax.swing.JLabel();
         tasksInPageTextField = new javax.swing.JTextField();
-        deleteTasksButton = new javax.swing.JButton();
         tasksScrollPane = new javax.swing.JScrollPane();
         tasksTable = new javax.swing.JTable();
+        deleteTasksButton = new javax.swing.JButton();
+        saveTasksButton = new javax.swing.JButton();
+        newTaskButton = new javax.swing.JButton();
 
         org.openide.awt.Mnemonics.setLocalizedText(startDateLabel, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.startDateLabel.text")); // NOI18N
 
@@ -129,6 +130,7 @@ public class TasksPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(tasksInResultLabel, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.tasksInResultLabel.text")); // NOI18N
 
         tasksInResultTextField.setEditable(false);
+        tasksInResultTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, taskQueryResult, org.jdesktop.beansbinding.ELProperty.create("${queryTaskCount}"), tasksInResultTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
@@ -136,17 +138,10 @@ public class TasksPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(tasksInPageLabel, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.tasksInPageLabel.text")); // NOI18N
 
         tasksInPageTextField.setEditable(false);
+        tasksInPageTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, taskQueryResult, org.jdesktop.beansbinding.ELProperty.create("${totalTaskCount}"), tasksInPageTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
-
-        org.openide.awt.Mnemonics.setLocalizedText(deleteTasksButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.deleteTasksButton.text")); // NOI18N
-        deleteTasksButton.setEnabled(false);
-        deleteTasksButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteTasksButtonActionPerformed(evt);
-            }
-        });
 
         org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${tasks}");
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, taskQueryResult, eLProperty, tasksTable);
@@ -241,6 +236,24 @@ public class TasksPanel extends javax.swing.JPanel {
         jTableBinding.bind();
         tasksScrollPane.setViewportView(tasksTable);
 
+        org.openide.awt.Mnemonics.setLocalizedText(deleteTasksButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.deleteTasksButton.text")); // NOI18N
+        deleteTasksButton.setEnabled(false);
+        deleteTasksButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteTasksButtonActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(saveTasksButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.saveTasksButton.text")); // NOI18N
+        saveTasksButton.setEnabled(false);
+
+        org.openide.awt.Mnemonics.setLocalizedText(newTaskButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.newTaskButton.text")); // NOI18N
+        newTaskButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newTaskButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,38 +261,43 @@ public class TasksPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tasksScrollPane)
+                    .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(newTaskButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveTasksButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteTasksButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tasksInResultLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tasksInResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tasksInPageLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(deleteTasksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(endDateLabel)
                             .addComponent(completionLabel)
-                            .addComponent(startDateLabel))
+                            .addComponent(startDateLabel)
+                            .addComponent(tasksInResultLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(startDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(endDatePicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tasksInResultTextField)
+                                .addGap(3, 3, 3))
+                            .addComponent(startDatePicker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(endDatePicker, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(completionComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rowStartLabel)
-                            .addComponent(numRowsLabel)
-                            .addComponent(taskIdLabel))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(taskIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(13, 13, 13))
+                                .addComponent(rowStartLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(numRowsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tasksInPageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(taskIdTextField)
                             .addComponent(rowStartTextField)
-                            .addComponent(numRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(numRowsTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                            .addComponent(tasksInPageTextField))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -309,15 +327,19 @@ public class TasksPanel extends javax.swing.JPanel {
                     .addComponent(numRowsLabel)
                     .addComponent(numRowsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tasksInResultLabel)
                     .addComponent(tasksInResultTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tasksInPageLabel)
-                    .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteTasksButton))
+                    .addComponent(tasksInPageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteTasksButton)
+                    .addComponent(saveTasksButton)
+                    .addComponent(newTaskButton))
                 .addContainerGap())
         );
 
@@ -331,7 +353,7 @@ public class TasksPanel extends javax.swing.JPanel {
         this.taskIdTextField.setText( null );
         this.rowStartTextField.setText( null );
         this.numRowsTextField.setText( null );
-        ((ListBindingManager)this.tasksTable.getModel()).setElements( new ArrayList(), true );
+        taskQueryResult.clearTasks();
     }//GEN-LAST:event_clearSearchuttonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -355,8 +377,6 @@ public class TasksPanel extends javax.swing.JPanel {
                 searchOptions.setPaginationNumTasks( Integer.parseInt( numRowsTextField.getText() ) );
             }
 
-            JTableUtil.configureTable( tasksTable, null );
-
             TaskOperations taskOps = new TaskOperations();
             taskOps.setOperationCriteria( searchOptions );
 
@@ -368,6 +388,7 @@ public class TasksPanel extends javax.swing.JPanel {
             tqResult.setTasks( results );
             taskQueryResult.updateProperties( tqResult );
 
+			JTableUtil.configureTable( tasksTable, null );
             JTableUtil.resizeTableColumnsToFit( tasksTable );
 
             logger.log( Level.INFO, "TaskQueryResult.totalTaskCount={0}", taskQueryResult.getTotalTaskCount() );
@@ -398,16 +419,29 @@ public class TasksPanel extends javax.swing.JPanel {
 
         try {
             List<DeletionResult> dr = taskOps.delete();
-            JOptionPane.showMessageDialog( this, "Deleted " + dr.size() + " tasks" );
+
+			taskQueryResult.removeTasks( tasks );
+
+			JTableUtil.configureTable( tasksTable, null );
+			JTableUtil.resizeTableColumnsToFit( tasksTable );
+
+			JOptionPane.showMessageDialog( this, "Deleted " + dr.size() + " tasks" );
 
 			for( DeletionResult result : dr ) {
 				logger.log( Level.INFO, "Task deleted, id={0}",
 							new String[] { result.getId().toString() } );
 			}
-        } catch( IOException | JToodleException ex ) {
-            logger.log( Level.SEVERE, null, ex );
-        }
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+		}
     }//GEN-LAST:event_deleteTasksButtonActionPerformed
+
+    private void newTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTaskButtonActionPerformed
+		taskQueryResult.addTask( new Task() );
+		
+		JTableUtil.configureTable( tasksTable, null );
+		JTableUtil.resizeTableColumnsToFit( tasksTable );
+    }//GEN-LAST:event_newTaskButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearSearchutton;
@@ -416,10 +450,12 @@ public class TasksPanel extends javax.swing.JPanel {
     private javax.swing.JButton deleteTasksButton;
     private javax.swing.JLabel endDateLabel;
     private org.jdesktop.swingx.JXDatePicker endDatePicker;
+    private javax.swing.JButton newTaskButton;
     private javax.swing.JLabel numRowsLabel;
     private javax.swing.JFormattedTextField numRowsTextField;
     private javax.swing.JLabel rowStartLabel;
     private javax.swing.JFormattedTextField rowStartTextField;
+    private javax.swing.JButton saveTasksButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel startDateLabel;
     private org.jdesktop.swingx.JXDatePicker startDatePicker;
