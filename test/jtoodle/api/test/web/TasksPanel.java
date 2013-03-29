@@ -130,9 +130,15 @@ public class TasksPanel extends javax.swing.JPanel {
 
         tasksInResultTextField.setEditable(false);
 
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, taskQueryResult, org.jdesktop.beansbinding.ELProperty.create("${queryTaskCount}"), tasksInResultTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
         org.openide.awt.Mnemonics.setLocalizedText(tasksInPageLabel, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.tasksInPageLabel.text")); // NOI18N
 
         tasksInPageTextField.setEditable(false);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, taskQueryResult, org.jdesktop.beansbinding.ELProperty.create("${totalTaskCount}"), tasksInPageTextField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         org.openide.awt.Mnemonics.setLocalizedText(deleteTasksButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.deleteTasksButton.text")); // NOI18N
         deleteTasksButton.setEnabled(false);
