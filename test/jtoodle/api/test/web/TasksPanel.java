@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import jtoodle.api.auth.AuthExceptionHandler;
 import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.TaskQueryResult;
@@ -45,6 +47,8 @@ public class TasksPanel extends javax.swing.JPanel {
 		completionComboBox.addItem( TaskSearchCriteria.CompletionCriteria.Completed_Tasks_Only );
 		completionComboBox.addItem( TaskSearchCriteria.CompletionCriteria.Uncompleted_Tasks_Only );
 
+		taskQueryResult.setTasks( new ArrayList<Task>() );
+
 		tasksTable.setDefaultRenderer( Date.class, new FullDateTableCellRenderer() );
 		tasksTable.getSelectionModel().addListSelectionListener( new ListSelectionListener() {
 			@Override
@@ -56,6 +60,31 @@ public class TasksPanel extends javax.swing.JPanel {
 				} else {
 					deleteTasksButton.setEnabled( false );
 				}
+			}
+		});
+		tasksTable.getModel().addTableModelListener( new TableModelListener() {
+			@Override
+			public void tableChanged( TableModelEvent e ) {
+				switch( e.getType() ) {
+					case TableModelEvent.INSERT: {
+						saveTasksButton.setEnabled( true );
+						break;
+					}
+					case TableModelEvent.DELETE: {
+						saveTasksButton.setEnabled( newTasksExist() );
+						break;
+					}
+				}
+			}
+			private boolean newTasksExist() {
+				boolean nte = false;
+				for( Task nTask : taskQueryResult.getTasks() ) {
+					if( nTask.getId() == null ) {
+						nte = true;
+						break;
+					}
+				}
+				return( nte );
 			}
 		});
 	}
@@ -404,36 +433,47 @@ public class TasksPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void deleteTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTasksButtonActionPerformed
+        List<Task> webTasks = new ArrayList<>();
+		List<Task> localTasks = new ArrayList<>();
+
         int[] rowIdx = tasksTable.getSelectedRows();
-        List<Task> tasks = new ArrayList<>(rowIdx.length);
 
         for( int idx : rowIdx ) {
-            tasks.add( taskQueryResult.getTasks().get( idx ) );
+			Task nTask = taskQueryResult.getTasks().get( idx );
+
+			if( nTask.getId() == null ) {
+				localTasks.add( nTask );
+			} else {
+				webTasks.add( nTask );
+			}
         }
 
-        TaskDeletionCriteria delC = new TaskDeletionCriteria();
-        delC.setTasks( tasks );
+		if( !NullSafe.isNullOrEmpty( webTasks ) ) {
+			TaskDeletionCriteria delC = new TaskDeletionCriteria();
+			delC.setTasks( webTasks );
 
-        TaskOperations taskOps = new TaskOperations();
-        taskOps.setOperationCriteria( delC );
+			TaskOperations taskOps = new TaskOperations();
+			taskOps.setOperationCriteria( delC );
 
-        try {
-            List<DeletionResult> dr = taskOps.delete();
+			try {
+				List<DeletionResult> dr = taskOps.delete();
+				taskQueryResult.removeTasks( webTasks );
 
-			taskQueryResult.removeTasks( tasks );
+				for( DeletionResult result : dr ) {
+					logger.log( Level.INFO, "Task deleted, id={0}",
+								new String[] { result.getId().toString() } );
+				}
 
-			JTableUtil.configureTable( tasksTable, null );
-			JTableUtil.resizeTableColumnsToFit( tasksTable );
-
-			JOptionPane.showMessageDialog( this, "Deleted " + dr.size() + " tasks" );
-
-			for( DeletionResult result : dr ) {
-				logger.log( Level.INFO, "Task deleted, id={0}",
-							new String[] { result.getId().toString() } );
+				JOptionPane.showMessageDialog( this, "Deleted " + dr.size() + " tasks" );
+			} catch( IOException | JToodleException ex ) {
+				logger.log( Level.SEVERE, null, ex );
 			}
-		} catch( IOException | JToodleException ex ) {
-			logger.log( Level.SEVERE, null, ex );
 		}
+
+		taskQueryResult.removeTasks( localTasks );
+
+		JTableUtil.configureTable( tasksTable, null );
+		JTableUtil.resizeTableColumnsToFit( tasksTable );
     }//GEN-LAST:event_deleteTasksButtonActionPerformed
 
     private void newTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTaskButtonActionPerformed
