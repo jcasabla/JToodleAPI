@@ -505,7 +505,7 @@ public class TasksPanel extends javax.swing.JPanel {
 			List<Task> tempTasks = getNewTasks();
 
 			TaskAddCriteria tac = new TaskAddCriteria();
-			tac.setTasks( tempTasks);
+			tac.setTasks( tempTasks );
 
 			TaskOperations taskOps = new TaskOperations();
 			taskOps.setOperationCriteria( tac );
