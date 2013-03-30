@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
 import jtoodle.api.bean.core.CoreBean;
 import jtoodle.api.bean.util.AbstractJToodleBean;
-import jtoodle.api.json.bean.ObjectMapperFactory;
 
 /**
  *
