@@ -70,8 +70,11 @@ public class TasksPanel extends javax.swing.JPanel {
 			public void tableChanged( TableModelEvent e ) {
 				switch( e.getType() ) {
 					case TableModelEvent.INSERT:
+					case TableModelEvent.UPDATE:
 					case TableModelEvent.DELETE: {
 						saveTasksButton.setEnabled( newTasksExist() );
+						JTableUtil.configureTable( tasksTable, null );
+						JTableUtil.resizeTableColumnsToFit( tasksTable );
 						break;
 					}
  				}
@@ -87,6 +90,9 @@ public class TasksPanel extends javax.swing.JPanel {
 				return( nte );
 			}
 		});
+
+		JTableUtil.configureTable( tasksTable, null );
+		JTableUtil.resizeTableColumnsToFit( tasksTable );
 	}
 
 	private List<Task> getNewTasks() {
@@ -393,12 +399,12 @@ public class TasksPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clearSearchuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearSearchuttonActionPerformed
-        this.startDatePicker.setDate( null );
-        this.endDatePicker.setDate( null );
-        this.completionComboBox.setSelectedItem( TaskSearchCriteria.CompletionCriteria.All_Tasks );
-        this.taskIdTextField.setText( null );
-        this.rowStartTextField.setText( null );
-        this.numRowsTextField.setText( null );
+        startDatePicker.setDate( null );
+        endDatePicker.setDate( null );
+        completionComboBox.setSelectedItem( TaskSearchCriteria.CompletionCriteria.All_Tasks );
+        taskIdTextField.setText( null );
+        rowStartTextField.setText( null );
+        numRowsTextField.setText( null );
         taskQueryResult.clearTasks();
     }//GEN-LAST:event_clearSearchuttonActionPerformed
 
@@ -433,9 +439,6 @@ public class TasksPanel extends javax.swing.JPanel {
 
             tqResult.setTasks( results );
             taskQueryResult.updateProperties( tqResult );
-
-			JTableUtil.configureTable( tasksTable, null );
-            JTableUtil.resizeTableColumnsToFit( tasksTable );
 
             logger.log( Level.INFO, "TaskQueryResult.totalTaskCount={0}", taskQueryResult.getTotalTaskCount() );
             logger.log( Level.INFO, "TaskQueryResult.queryTaskCount={0}", taskQueryResult.getQueryTaskCount() );
@@ -488,16 +491,10 @@ public class TasksPanel extends javax.swing.JPanel {
 		}
 
 		taskQueryResult.removeTasks( localTasks );
-
-		JTableUtil.configureTable( tasksTable, null );
-		JTableUtil.resizeTableColumnsToFit( tasksTable );
     }//GEN-LAST:event_deleteTasksButtonActionPerformed
 
     private void newTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTaskButtonActionPerformed
 		taskQueryResult.addTask( new Task() );
-		
-		JTableUtil.configureTable( tasksTable, null );
-		JTableUtil.resizeTableColumnsToFit( tasksTable );
     }//GEN-LAST:event_newTaskButtonActionPerformed
 
     private void saveTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTasksButtonActionPerformed
@@ -513,9 +510,6 @@ public class TasksPanel extends javax.swing.JPanel {
 
 			taskQueryResult.removeTasks( tempTasks );
 			taskQueryResult.addTasks( savedTasks );
-			
-			JTableUtil.configureTable( tasksTable, null );
-			JTableUtil.resizeTableColumnsToFit( tasksTable );
 		} catch( JsonProcessingException ex ) {
 			Exceptions.printStackTrace( ex );
 		} catch( IOException | JToodleException ex ) {
