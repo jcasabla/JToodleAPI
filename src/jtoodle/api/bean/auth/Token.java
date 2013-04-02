@@ -18,7 +18,4 @@ public class Token extends AbstractJToodleBean {
 		return token;
 	}
 
-	public void setToken( String token ) {
-		this.token = token;
-	}
 }

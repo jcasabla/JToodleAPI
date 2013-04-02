@@ -18,7 +18,4 @@ public class UserId extends AbstractJToodleBean {
 		return userId;
 	}
 
-	public void setUserId( String userId ) {
-		this.userId = userId;
-	}
 }
