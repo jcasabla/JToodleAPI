@@ -16,14 +16,6 @@ import java.io.IOException;
  */
 public class TD_BooleanSerializer extends JsonSerializer<Boolean> {
 
-	/*
-	@Override
-	public Boolean deserialize( JsonParser jp, DeserializationContext dc ) throws IOException, JsonProcessingException {
-		String boolS = jp.getText();
-		return( "1".equals(  boolS ) ? Boolean.TRUE : Boolean.FALSE );
-	}
-	*/
-
 	@Override
 	public void serialize( Boolean value, JsonGenerator jgen, SerializerProvider provider ) throws IOException, JsonProcessingException {
 		jgen.writeNumber( value ? 1 : 0 );
