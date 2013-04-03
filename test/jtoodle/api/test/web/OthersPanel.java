@@ -295,7 +295,7 @@ public class OthersPanel extends javax.swing.JPanel {
 				}
 			}
 		} catch( IntrospectionException ex ) {
-			Exceptions.printStackTrace( ex );
+			logger.log(  Level.SEVERE, null, ex );
 		}
 
 		addBeanButton.setEnabled( false );
@@ -360,7 +360,7 @@ public class OthersPanel extends javax.swing.JPanel {
 		} );
 	}
 
-	private void saveNewFolder() throws HeadlessException {
+	private void saveNewFolder() {
 		FolderAddCriteria fac = new FolderAddCriteria();
 		fac.setFolder( addedFolder );
 
@@ -372,16 +372,12 @@ public class OthersPanel extends javax.swing.JPanel {
 
 			if( !NullSafe.isNullOrEmpty( folders ) ) {
 				addedFolder = folders.get( 0 );
-				beanPropertySheet.setNodes( new Node[] {
-					new BeanNode( addedFolder )
-				} );
-
 				JOptionPane.showMessageDialog(
 						this.getRootPane(),
-						"New folder created: " + folders.get( 0 ).getId() );
+						"New folder created: " + addedFolder.getId() );
 			}
-		} catch( IOException | JToodleException | IntrospectionException ex ) {
-			Exceptions.printStackTrace( ex );
+		} catch( IOException | JToodleException ex ) {
+			logger.log(  Level.SEVERE, null, ex );
 		}
 	}
 
