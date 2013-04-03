@@ -16,7 +16,7 @@ public class FolderOperations extends WebBeanOperations<Folder> {
 	public FolderOperations() {
 		super();
 
-		//registerURI( CRUD.Create, null );
+		registerURI( OperationType.ADD, "/folders/add.php" );
 		registerURI( OperationType.RETRIEVE, "/folders/get.php" );
 		//registerURI( CRUD.Update, null );
 		registerURI( OperationType.DELETE, "/folders/delete.php" );

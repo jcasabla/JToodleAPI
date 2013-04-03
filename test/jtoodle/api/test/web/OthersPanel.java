@@ -15,9 +15,9 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthExceptionHandler;
 import jtoodle.api.bean.core.Folder;
-import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.request.web.FolderAddCriteria;
 import jtoodle.api.request.web.FolderDeletionCriteria;
 import jtoodle.api.request.web.FolderOperations;
 import jtoodle.api.util.NullSafe;
@@ -46,12 +46,10 @@ public class OthersPanel extends javax.swing.JPanel {
 					setText( "<null value>" );
 				} else if( value instanceof Folder ) {
 					setText( ((Folder)value).getName() );
-				} else if( value instanceof Task ) {
-					setText( ((Task)value).getTitle() );
 				} else {
 					setText( value.toString() );
 				}
-				return this;
+				return( this );
 			}
 		});
 	}
@@ -80,10 +78,13 @@ public class OthersPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addedFolder = new jtoodle.api.bean.core.Folder();
         beanTypeComboBox = new javax.swing.JComboBox();
         beanResultsComboBox = new javax.swing.JComboBox();
         deleteBeanButton = new javax.swing.JButton();
         beanPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
+        addBeanButton = new javax.swing.JButton();
+        saveBeanButton = new javax.swing.JButton();
 
         beanTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Choose>", "Folders", "Contexts", "Goals", "Locations" }));
         beanTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -106,20 +107,41 @@ public class OthersPanel extends javax.swing.JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(addBeanButton, org.openide.util.NbBundle.getMessage(OthersPanel.class, "OthersPanel.addBeanButton.text")); // NOI18N
+        addBeanButton.setEnabled(false);
+        addBeanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBeanButtonActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(saveBeanButton, org.openide.util.NbBundle.getMessage(OthersPanel.class, "OthersPanel.saveBeanButton.text")); // NOI18N
+        saveBeanButton.setEnabled(false);
+        saveBeanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBeanButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(beanPropertySheet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(beanResultsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteBeanButton)))
+                        .addComponent(deleteBeanButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(addBeanButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveBeanButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,8 +152,12 @@ public class OthersPanel extends javax.swing.JPanel {
                     .addComponent(beanResultsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBeanButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveBeanButton)
+                    .addComponent(addBeanButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -203,6 +229,9 @@ public class OthersPanel extends javax.swing.JPanel {
                 beanTypeComboBoxActionPerformed( null );
             }
         }
+
+		addBeanButton.setEnabled( beanTypeComboBox.getSelectedIndex() > 0 );
+		saveBeanButton.setEnabled( false );
     }//GEN-LAST:event_beanTypeComboBoxActionPerformed
 
     private void beanResultsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanResultsComboBoxActionPerformed
@@ -236,10 +265,124 @@ public class OthersPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteBeanButtonActionPerformed
 
+    private void addBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBeanButtonActionPerformed
+		try {
+			switch( beanTypeComboBox.getSelectedItem().toString() ) {
+				case "Folders": {
+					startNewFolder();
+					break;
+				}
+				case "Contexts": {
+					JOptionPane.showMessageDialog(
+							this.getRootPane(),
+							"This function is not yet available" );
+					break;
+				}
+				case "Goals": {
+					JOptionPane.showMessageDialog(
+							this.getRootPane(),
+							"This function is not yet available" );
+					break;
+				}
+				case "Locations": {
+					JOptionPane.showMessageDialog(
+							this.getRootPane(),
+							"This function is not yet available" );
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+		} catch( IntrospectionException ex ) {
+			Exceptions.printStackTrace( ex );
+		}
+
+		addBeanButton.setEnabled( false );
+		saveBeanButton.setEnabled( true );
+    }//GEN-LAST:event_addBeanButtonActionPerformed
+
+    private void saveBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBeanButtonActionPerformed
+		switch( beanTypeComboBox.getSelectedItem().toString() ) {
+			case "Folders": {
+				saveNewFolder();
+				beanTypeComboBoxActionPerformed( null );
+				for(int i=0; i < beanResultsComboBox.getItemCount(); i++) {
+					Folder f = (Folder) beanResultsComboBox.getItemAt( i );
+					if( f.getId().equals( addedFolder.getId() ) ) {
+						beanResultsComboBox.setSelectedIndex( i );
+						break;
+					}
+				}
+				break;
+			}
+			case "Contexts": {
+				JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"This function is not yet available" );
+				break;
+			}
+			case "Goals": {
+				JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"This function is not yet available" );
+				break;
+			}
+			case "Locations": {
+				JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"This function is not yet available" );
+				break;
+			}
+			default: {
+				break;
+			}
+		}
+
+		addBeanButton.setEnabled( false );
+		saveBeanButton.setEnabled( false );
+    }//GEN-LAST:event_saveBeanButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBeanButton;
+    private jtoodle.api.bean.core.Folder addedFolder;
     private org.openide.explorer.propertysheet.PropertySheet beanPropertySheet;
     private javax.swing.JComboBox beanResultsComboBox;
     private javax.swing.JComboBox beanTypeComboBox;
     private javax.swing.JButton deleteBeanButton;
+    private javax.swing.JButton saveBeanButton;
     // End of variables declaration//GEN-END:variables
+
+	private void startNewFolder() throws IntrospectionException {
+		addedFolder = new Folder();
+		beanPropertySheet.setNodes( new Node[] {
+			new BeanNode( addedFolder )
+		} );
+	}
+
+	private void saveNewFolder() throws HeadlessException {
+		FolderAddCriteria fac = new FolderAddCriteria();
+		fac.setFolder( addedFolder );
+
+		FolderOperations folderOps = new FolderOperations();
+		folderOps.setOperationCriteria( fac );
+
+		try {
+			List<Folder> folders = folderOps.create();
+
+			if( !NullSafe.isNullOrEmpty( folders ) ) {
+				addedFolder = folders.get( 0 );
+				beanPropertySheet.setNodes( new Node[] {
+					new BeanNode( addedFolder )
+				} );
+
+				JOptionPane.showMessageDialog(
+						this.getRootPane(),
+						"New folder created: " + folders.get( 0 ).getId() );
+			}
+		} catch( IOException | JToodleException | IntrospectionException ex ) {
+			Exceptions.printStackTrace( ex );
+		}
+	}
+
 }
