@@ -33,6 +33,7 @@ import jtoodle.api.json.mixin.core.FolderMixIn;
 import jtoodle.api.json.mixin.core.TaskMixIn;
 import jtoodle.api.json.mixin.core.TaskQueryResultMixIn;
 import jtoodle.api.json.mixin.util.JToodleExceptionMixIn;
+import jtoodle.api.json.ser.TD_BooleanSerializer;
 
 /**
  *
@@ -63,6 +64,17 @@ public final class ObjectMapperFactory {
 				.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
 				.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
 				.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
+		);
+
+		mapper.registerModule(
+			new SimpleModule( "TD_SerializationModule", Version.unknownVersion() )
+				.addSerializer( Boolean.class, new TD_BooleanSerializer() )
+				//.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
+				//.addDeserializer( DateFormat.class, new TD_EnumDeserializer<>( DateFormat.class ) )
+				//.addDeserializer( Priority.class, new TD_EnumDeserializer<>( Priority.class ) )
+				//.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
+				//.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
+				//.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
 		);
 
 	}
