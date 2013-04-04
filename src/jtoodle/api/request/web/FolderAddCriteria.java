@@ -14,7 +14,7 @@ import jtoodle.api.json.bean.ObjectMapperFactory;
  *
  * @author Justo_Casablanca
  */
-public class FolderAddCriteria extends TaskOperations.OperationCriteria<Folder> {
+public class FolderAddCriteria extends FolderOperations.OperationCriteria<Folder> {
 
 	public FolderAddCriteria() {
 		super( Folder.class, TaskOperations.OperationType.ADD );
@@ -28,11 +28,17 @@ public class FolderAddCriteria extends TaskOperations.OperationCriteria<Folder> 
 		while( fieldNames.hasNext() ) {
 			String fName = fieldNames.next();
 
-			if( ! "id".equals( fName ) ) {
-				JsonNode fValue = rootNode.findValue( fName );
+			switch( fName ) {
+				case "archived":
+				case "id":
+				case "ord":
+					break;
+				default: {
+					JsonNode fValue = rootNode.findValue( fName );
 
-				if( ! fValue.isNull() ) {
-					setOption( fName, fValue.asText() );
+					if( !fValue.isNull() ) {
+						setOption( fName, fValue.asText() );
+					}
 				}
 			}
 		}
