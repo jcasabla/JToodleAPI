@@ -10,7 +10,7 @@ import jtoodle.api.bean.core.Folder;
  *
  * @author Justo_Casablanca
  */
-public class FolderDeletionCriteria extends TaskOperations.OperationCriteria<Folder> {
+public class FolderDeletionCriteria extends FolderOperations.OperationCriteria<Folder> {
 
 	public FolderDeletionCriteria() {
 		super( Folder.class, TaskOperations.OperationType.DELETE );
