@@ -23,7 +23,6 @@ public class FolderTreeNodeTest {
 	public static void main( String[] args ) {
 		Folder f = new Folder();
 		f.setName( "My Folder Name" );
-		f.setOrder( 3 );
 		f.setPrivate( Boolean.TRUE );
 		f.setArchived( Boolean.FALSE );
 
