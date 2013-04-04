@@ -68,8 +68,4 @@ public class Folder extends AbstractCoreBean {
 		return order;
 	}
 
-	public void setOrder( Integer order ) {
-		this.order = order;
-	}
-
 }
