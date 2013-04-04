@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <NonVisualComponents>
-    <Component class="jtoodle.api.bean.core.Folder" name="addedFolder">
-    </Component>
-  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="1"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -29,13 +25,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="beanResultsComboBox" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="deleteBeanButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="addBeanButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="saveBeanButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="saveBeanButton" alignment="1" max="32767" attributes="0"/>
+                          <Component id="deleteBeanButton" alignment="1" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -52,10 +45,7 @@
                   <Component id="deleteBeanButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="saveBeanButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="addBeanButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="saveBeanButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="beanPropertySheet" pref="263" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -102,17 +92,6 @@
       </Events>
     </Component>
     <Component class="org.openide.explorer.propertysheet.PropertySheet" name="beanPropertySheet">
-    </Component>
-    <Component class="javax.swing.JButton" name="addBeanButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="jtoodle/api/test/web/Bundle.properties" key="OthersPanel.addBeanButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addBeanButtonActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="saveBeanButton">
       <Properties>

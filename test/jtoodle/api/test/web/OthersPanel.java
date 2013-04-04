@@ -14,12 +14,14 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthExceptionHandler;
+import jtoodle.api.bean.core.AbstractCoreBean;
 import jtoodle.api.bean.core.Folder;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.request.web.FolderAddCriteria;
 import jtoodle.api.request.web.FolderDeletionCriteria;
 import jtoodle.api.request.web.FolderOperations;
+import jtoodle.api.request.web.FolderUpdateCriteria;
 import jtoodle.api.util.NullSafe;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
@@ -78,12 +80,10 @@ public class OthersPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addedFolder = new jtoodle.api.bean.core.Folder();
         beanTypeComboBox = new javax.swing.JComboBox();
         beanResultsComboBox = new javax.swing.JComboBox();
         deleteBeanButton = new javax.swing.JButton();
         beanPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
-        addBeanButton = new javax.swing.JButton();
         saveBeanButton = new javax.swing.JButton();
 
         beanTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Choose>", "Folders", "Contexts", "Goals", "Locations" }));
@@ -104,14 +104,6 @@ public class OthersPanel extends javax.swing.JPanel {
         deleteBeanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBeanButtonActionPerformed(evt);
-            }
-        });
-
-        org.openide.awt.Mnemonics.setLocalizedText(addBeanButton, org.openide.util.NbBundle.getMessage(OthersPanel.class, "OthersPanel.addBeanButton.text")); // NOI18N
-        addBeanButton.setEnabled(false);
-        addBeanButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBeanButtonActionPerformed(evt);
             }
         });
 
@@ -136,12 +128,9 @@ public class OthersPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(beanResultsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteBeanButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addBeanButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveBeanButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(saveBeanButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteBeanButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,9 +142,7 @@ public class OthersPanel extends javax.swing.JPanel {
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBeanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveBeanButton)
-                    .addComponent(addBeanButton))
+                .addComponent(saveBeanButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addContainerGap())
@@ -163,113 +150,24 @@ public class OthersPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void beanTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanTypeComboBoxActionPerformed
-        deleteBeanButton.setEnabled( false );
-        beanResultsComboBox.removeAllItems();
-        beanPropertySheet.setNodes( new Node[] {} );
-
-        try {
-            List beanList = null;
-
-            switch( beanTypeComboBox.getSelectedItem().toString() ) {
-                case "Folders": {
-                    FolderOperations folderOps = new FolderOperations();
-                    beanList = folderOps.search();
-                    break;
-                }
-                case "Contexts": {
-                    JOptionPane.showMessageDialog(
-                        this.getRootPane(),
-                        "This function is not yet available"
-                    );
-                    break;
-                }
-                case "Goals": {
-                    JOptionPane.showMessageDialog(
-                        this.getRootPane(),
-                        "This function is not yet available"
-                    );
-                    break;
-                }
-                case "Locations": {
-                    JOptionPane.showMessageDialog(
-                        this.getRootPane(),
-                        "This function is not yet available"
-                    );
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-
-            if( !NullSafe.isNullOrEmpty( beanList ) ) {
-                for( Object o: beanList ) {
-                    beanResultsComboBox.addItem( o );
-                }
-                deleteBeanButton.setEnabled( true );
-            } else {
-                beanResultsComboBox.addItem(
-                    "<no results for: " + beanTypeComboBox.getSelectedItem() + ">" );
-                deleteBeanButton.setEnabled( false );
-            }
-
-            beanResultsComboBoxActionPerformed( null );
-
-        } catch( IOException | JToodleException ex ) {
-            logger.log( Level.SEVERE, null, ex );
-            try {
-                deleteBeanButton.setEnabled( false );
-                beanResultsComboBox.addItem( ex );
-                beanPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
-            } catch( IntrospectionException ex1 ) {
-                logger.log( Level.SEVERE, null, ex1 );
-            }
-
-            if( AuthExceptionHandler.handledInvalidKey( this, ex ) ) {
-                beanTypeComboBoxActionPerformed( null );
-            }
-        }
-
-		addBeanButton.setEnabled( beanTypeComboBox.getSelectedIndex() > 0 );
+		deleteBeanButton.setEnabled( false );
 		saveBeanButton.setEnabled( false );
-    }//GEN-LAST:event_beanTypeComboBoxActionPerformed
 
-    private void beanResultsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanResultsComboBoxActionPerformed
-        try {
-            if( beanResultsComboBox.getSelectedItem() == null ) {
-                beanPropertySheet.setNodes( new Node[] {} );
-                deleteBeanButton.setEnabled( false );
-            } else {
-                beanPropertySheet.setNodes( new Node[] {
-                    new BeanNode( beanResultsComboBox.getSelectedItem() )
-                });
-                if( ! ( beanResultsComboBox.getSelectedItem() instanceof String ) ) {
-                    deleteBeanButton.setEnabled( true );
-                }
-            }
-        } catch( IntrospectionException ex ) {
-            logger.log( Level.SEVERE, null, ex );
-        }
-    }//GEN-LAST:event_beanResultsComboBoxActionPerformed
+		beanResultsComboBox.removeAllItems();
+		beanPropertySheet.setNodes( new Node[] {} );
 
-    private void deleteBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBeanButtonActionPerformed
-        Object bean = beanResultsComboBox.getSelectedItem();
-        if( bean instanceof Folder ) {
-            deleteFolder( (Folder) bean );
-        } else {
-            JOptionPane.showMessageDialog(
-                this,
-                "This function is not yet available" ,
-                null,
-                JOptionPane.WARNING_MESSAGE );
-        }
-    }//GEN-LAST:event_deleteBeanButtonActionPerformed
-
-    private void addBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBeanButtonActionPerformed
 		try {
+			List beanList = null;
+
 			switch( beanTypeComboBox.getSelectedItem().toString() ) {
 				case "Folders": {
-					startNewFolder();
+					FolderOperations folderOps = new FolderOperations();
+					beanList = folderOps.search();
+
+					Folder f = new Folder();
+					f.setName( "<select here to add new Folder>" );
+					beanList.add( f );
+
 					break;
 				}
 				case "Contexts": {
@@ -294,26 +192,75 @@ public class OthersPanel extends javax.swing.JPanel {
 					break;
 				}
 			}
+
+			for( Object o : beanList ) {
+				beanResultsComboBox.addItem( o );
+			}
+
+			beanResultsComboBoxActionPerformed( null );
+
+		} catch( IOException | JToodleException ex ) {
+			logger.log( Level.SEVERE, null, ex );
+			try {
+				deleteBeanButton.setEnabled( false );
+				beanResultsComboBox.addItem( ex );
+				beanPropertySheet.setNodes( new Node[] { new BeanNode( ex ) } );
+			} catch( IntrospectionException ex1 ) {
+				logger.log( Level.SEVERE, null, ex1 );
+			}
+
+			if( AuthExceptionHandler.handledInvalidKey( this, ex ) ) {
+				beanTypeComboBoxActionPerformed( null );
+			}
+		}
+    }//GEN-LAST:event_beanTypeComboBoxActionPerformed
+
+    private void beanResultsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanResultsComboBoxActionPerformed
+		try {
+			AbstractCoreBean bean = (AbstractCoreBean) beanResultsComboBox.getSelectedItem();
+
+			if( bean != null ) {
+				beanPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
+				deleteBeanButton.setEnabled( bean.getId() != null );
+				saveBeanButton.setEnabled( true );
+			}
 		} catch( IntrospectionException ex ) {
-			logger.log(  Level.SEVERE, null, ex );
+			logger.log( Level.SEVERE, null, ex );
+		}
+    }//GEN-LAST:event_beanResultsComboBoxActionPerformed
+
+    private void deleteBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBeanButtonActionPerformed
+		Object bean = beanResultsComboBox.getSelectedItem();
+
+		if( bean instanceof Folder ) {
+			deleteFolder( (Folder) bean );
+		} else {
+			JOptionPane.showMessageDialog(
+					this,
+					"This function is not yet available",
+					null,
+					JOptionPane.WARNING_MESSAGE );
 		}
 
-		addBeanButton.setEnabled( false );
-		saveBeanButton.setEnabled( true );
-    }//GEN-LAST:event_addBeanButtonActionPerformed
+		beanTypeComboBoxActionPerformed( null );
+    }//GEN-LAST:event_deleteBeanButtonActionPerformed
 
     private void saveBeanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBeanButtonActionPerformed
 		switch( beanTypeComboBox.getSelectedItem().toString() ) {
 			case "Folders": {
-				saveNewFolder();
+				Folder f = (Folder) beanResultsComboBox.getSelectedItem();
+				f = saveOrUpdateFolder( f );
+
 				beanTypeComboBoxActionPerformed( null );
+
 				for(int i=0; i < beanResultsComboBox.getItemCount(); i++) {
-					Folder f = (Folder) beanResultsComboBox.getItemAt( i );
-					if( f.getId().equals( addedFolder.getId() ) ) {
+					Folder f2 = (Folder) beanResultsComboBox.getItemAt( i );
+					if( f2.getId().equals(  f.getId() ) ) {
 						beanResultsComboBox.setSelectedIndex( i );
 						break;
 					}
 				}
+					
 				break;
 			}
 			case "Contexts": {
@@ -339,13 +286,10 @@ public class OthersPanel extends javax.swing.JPanel {
 			}
 		}
 
-		addBeanButton.setEnabled( false );
 		saveBeanButton.setEnabled( false );
     }//GEN-LAST:event_saveBeanButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBeanButton;
-    private jtoodle.api.bean.core.Folder addedFolder;
     private org.openide.explorer.propertysheet.PropertySheet beanPropertySheet;
     private javax.swing.JComboBox beanResultsComboBox;
     private javax.swing.JComboBox beanTypeComboBox;
@@ -353,32 +297,37 @@ public class OthersPanel extends javax.swing.JPanel {
     private javax.swing.JButton saveBeanButton;
     // End of variables declaration//GEN-END:variables
 
-	private void startNewFolder() throws IntrospectionException {
-		addedFolder = new Folder();
-		beanPropertySheet.setNodes( new Node[] {
-			new BeanNode( addedFolder )
-		} );
-	}
+	private Folder saveOrUpdateFolder( Folder aFolder ) {
+		boolean add = ( aFolder.getId() == null );
+		FolderOperations.OperationCriteria<Folder> oc;
 
-	private void saveNewFolder() {
-		FolderAddCriteria fac = new FolderAddCriteria();
-		fac.setFolder( addedFolder );
-
+		if( add ) {
+			FolderAddCriteria fac = new FolderAddCriteria();
+			fac.setFolder( aFolder );
+			oc = fac;
+		} else {
+			FolderUpdateCriteria fuc = new FolderUpdateCriteria();
+			fuc.setFolder( aFolder );
+			oc = fuc;
+		}
+				
 		FolderOperations folderOps = new FolderOperations();
-		folderOps.setOperationCriteria( fac );
+		folderOps.setOperationCriteria( oc );
 
 		try {
-			List<Folder> folders = folderOps.create();
+			List<Folder> folders = add ? folderOps.create() : folderOps.update();
 
 			if( !NullSafe.isNullOrEmpty( folders ) ) {
-				addedFolder = folders.get( 0 );
+				aFolder = folders.get( 0 );
 				JOptionPane.showMessageDialog(
 						this.getRootPane(),
-						"New folder created: " + addedFolder.getId() );
+						"Folder " + ( add ? "created" : "updated" ) + ": " + aFolder.getId() );
 			}
 		} catch( IOException | JToodleException ex ) {
-			logger.log(  Level.SEVERE, null, ex );
+			logger.log( Level.SEVERE, null, ex );
 		}
+
+		return( aFolder );
 	}
 
 }

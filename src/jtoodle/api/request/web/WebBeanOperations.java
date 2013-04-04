@@ -132,7 +132,13 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 	//@Override
 	public List<T> update() throws IOException, JToodleException {
-		throw new UnsupportedOperationException( "Not supported yet." );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[OperationType.EDIT.ordinal()] );
+		setRequestParameters( OperationType.EDIT, wr );
+
+		String json = wr.doRequestResponse();
+		List<T> beanOut = BeanParser.parseBeanList( json, getBeanClass() );
+
+		return( beanOut );
 	}
 
 	public static enum OperationType {
