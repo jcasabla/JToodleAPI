@@ -11,12 +11,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import jtoodle.api.beans.JToodleException;
-import jtoodle.api.beans.Token;
-import jtoodle.api.beans.UserId;
+import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.bean.auth.Token;
+import jtoodle.api.bean.auth.UserId;
 import jtoodle.api.intf.AuthenticationConstants;
+import jtoodle.api.request.web.TokenOperations;
+import jtoodle.api.request.web.TokenSearchCriteria;
+import jtoodle.api.request.web.UserIdOperations;
+import jtoodle.api.request.web.UserIdSearchCriteria;
 import jtoodle.api.util.NullSafe;
-import jtoodle.api.util.WebRequestUtils;
+import jtoodle.api.util.Hasher;
 
 /**
  *
@@ -94,7 +98,8 @@ public class AuthCache implements AuthenticationConstants {
 		logger.entering( AuthCache.class.getName(), "isAuthenticated()" );
 
 		String apiKey = _prefs.get( KEY_API_KEY, null );
-		boolean isLoggedIn = ( ! NullSafe.isNullOrEmpty( apiKey ) );
+		boolean isLoggedIn = ( ! NullSafe.isNullOrEmpty( apiKey ) ) &&
+							 ( ! tokenIsStale() );
 
 		logger.exiting( AuthCache.class.getName(), "isAuthenticated()" );
 
@@ -125,7 +130,7 @@ public class AuthCache implements AuthenticationConstants {
 		_password = password;
 
 		try {
-			String hashedPassword = WebRequestUtils.md5Hash( _password );
+			String hashedPassword = Hasher.md5Hash( _password );
 
 			if( !NullSafe.equals( getHashedPassword(), hashedPassword ) ) {
 				storeHashedPassword( null );
@@ -153,7 +158,7 @@ public class AuthCache implements AuthenticationConstants {
 			_prefs.remove( KEY_PASSWORD );
 		} else {
 			try {
-				_prefs.put( KEY_PASSWORD, WebRequestUtils.md5Hash( clearPassword ) );
+				_prefs.put( KEY_PASSWORD, Hasher.md5Hash( clearPassword ) );
 			} catch( NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
@@ -190,16 +195,19 @@ public class AuthCache implements AuthenticationConstants {
 
 		if( NullSafe.isNullOrEmpty( userId ) ) {
 			try {
-				AccountLookupRequest alr = new AccountLookupRequest();
-				alr.setEmail( getEmail() );
-				alr.setPassword( _password );
+				UserIdSearchCriteria sc = new UserIdSearchCriteria();
+				sc.setEmail( getEmail() );
+				sc.setPassword( _password );
 
-				UserId bean = alr.singleRequestResponse();
+				UserIdOperations uidSearch = new UserIdOperations();
+				uidSearch.setOperationCriteria( sc );
 
+				UserId bean = uidSearch.searchSingle();
 				userId = bean.getUserId();
+
 				setUserId( userId );
 				storeHashedPassword( _password );
-			} catch( IOException | NoSuchAlgorithmException ex ) {
+			} catch( IOException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
@@ -236,14 +244,17 @@ public class AuthCache implements AuthenticationConstants {
 
 		if( NullSafe.isNullOrEmpty( token ) || tokenIsStale() ) {
 			try {
-				TokenRequest tr = new TokenRequest();
-				tr.setUserId( getUserId() );
+				TokenSearchCriteria tsc = new TokenSearchCriteria();
+				tsc.setUserId( getUserId() );
 
-				Token bean = tr.singleRequestResponse();
+				TokenOperations tokenOps = new TokenOperations();
+				tokenOps.setOperationCriteria( tsc );
 
+				Token bean = tokenOps.searchSingle();
 				token = bean.getToken();
+
 				setToken( token );
-			} catch( IOException | NoSuchAlgorithmException ex ) {
+			} catch( IOException ex ) {
 				logger.log( Level.SEVERE, null, ex );
 			}
 		}
@@ -281,7 +292,7 @@ public class AuthCache implements AuthenticationConstants {
 				// sucessfully retrieved, so it has to be called first
 				String token = getToken();
 
-				apiKey = WebRequestUtils.md5Hash( new StringBuilder()
+				apiKey = Hasher.md5Hash( new StringBuilder()
 					.append( getHashedPassword() )
 					.append( AuthenticationConstants.APP_TOKEN )
 					.append( token )
