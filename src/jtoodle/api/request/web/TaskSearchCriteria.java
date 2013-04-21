@@ -68,13 +68,13 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 	private static final String PARAM_GET_TASKS_ID = "id";
 	private static final String PARAM_GET_TASKS_PAGINATE_ROW_START = "start";
 	private static final String PARAM_GET_TASKS_PAGINATE_NUM_TASKS = "num";
-	private static final String PARAM_GET_TASKS_FIELD_LIST = "fields";
+	public static final String PARAM_GET_TASKS_FIELD_LIST = "fields";
 
 	private static final Integer PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS = -1;
 	//private static final Integer PARAM_VALUE_ONLY_UNCOMPLETED_TASKS = 0;
 	//private static final Integer PARAM_VALUE_ONLY_COMPLETED_TASKS = 1;
 
-	private static final String PARAM_VALUE_ALL_OPTIONAL_FIELDS =
+	public static final String PARAM_VALUE_ALL_OPTIONAL_FIELDS =
 		new StringBuilder()
 		.append( "folder, context, goal, location, tag, startdate, duedate, " )
 		.append( "duedatemod, starttime, duetime, remind, repeat, status, " )
