@@ -17,6 +17,8 @@ public class TaskAddCriteria extends TaskOperations.OperationCriteria<Task> {
 
 	public TaskAddCriteria() {
 		super( Task.class, TaskOperations.OperationType.ADD );
+		setOption( TaskSearchCriteria.PARAM_GET_TASKS_FIELD_LIST,
+				   TaskSearchCriteria.PARAM_VALUE_ALL_OPTIONAL_FIELDS );
 	}
 
 	public void setTasks( List<Task> tasksToAdd ) throws JsonProcessingException {
