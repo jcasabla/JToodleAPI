@@ -25,7 +25,7 @@ public class TaskOperations extends WebBeanOperations<Task> {
 
 		registerURI( OperationType.ADD,  "/tasks/add.php" );
 		registerURI( OperationType.RETRIEVE, "/tasks/get.php" );
-		//registerURI( CRUD.Update, null );
+		registerURI( OperationType.EDIT, "/tasks/edit.php" );
 		registerURI( OperationType.DELETE, "/tasks/delete.php" );
 	}
 
