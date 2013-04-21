@@ -10,7 +10,9 @@ import jtoodle.api.test.util.JTableUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +29,7 @@ import jtoodle.api.request.web.TaskAddCriteria;
 import jtoodle.api.request.web.TaskDeletionCriteria;
 import jtoodle.api.request.web.TaskOperations;
 import jtoodle.api.request.web.TaskSearchCriteria;
+import jtoodle.api.request.web.TaskUpdateCriteria;
 import jtoodle.api.util.NullSafe;
 import org.openide.util.Exceptions;
 
@@ -68,44 +71,54 @@ public class TasksPanel extends javax.swing.JPanel {
 		tasksTable.getModel().addTableModelListener( new TableModelListener() {
 			@Override
 			public void tableChanged( TableModelEvent e ) {
-				switch( e.getType() ) {
-					case TableModelEvent.INSERT:
-					case TableModelEvent.UPDATE:
-					case TableModelEvent.DELETE: {
-						saveTasksButton.setEnabled( newTasksExist() );
-						JTableUtil.configureTable( tasksTable, null );
-						JTableUtil.resizeTableColumnsToFit( tasksTable );
-						break;
-					}
- 				}
-			}
-			private boolean newTasksExist() {
-				boolean nte = false;
-				for( Task nTask : taskQueryResult.getTasks() ) {
-					if( nTask.getId() == null ) {
-						nte = true;
-						break;
-					}
-				}
-				return( nte );
-			}
+				logger.log(  Level.INFO,
+							 "tableChanged, TableModelEvent[type={0},firstRow={1},lastRow={2}]",
+							 new Object[] { ( e.getType() == TableModelEvent.INSERT ) ? "INSERT" :
+											( e.getType() == TableModelEvent.UPDATE ) ? "UPDATE" :
+											( e.getType() == TableModelEvent.DELETE ) ? "DELETE" :
+											( e.getType() == TableModelEvent.ALL_COLUMNS ) ? "ALL_COLUMNS" :
+											( e.getType() == TableModelEvent.HEADER_ROW ) ? "HEADER_ROW" :
+											"OTHER:" + e.getType(),
+											e.getFirstRow(), e.getLastRow() } );
+
+				if( e.getFirstRow() == e.getLastRow() ) {
+					Task t = taskQueryResult.getTasks().get( e.getFirstRow() );
+					logger.log(  Level.INFO, "Task.id={0}", new Object[] { t.getId() } );
+
+					switch( e.getType() ) {
+						case TableModelEvent.INSERT: {
+							if( t.getId() == null ) {
+								newTasks.add( t );
+								logger.log(  Level.INFO, "newTasks.size={0}", new Object[] { newTasks.size() } );
+							}
+							break;
+						}
+						case TableModelEvent.UPDATE: {
+							if( t.getId() != null ) {
+								editedTasks.add( t );
+								logger.log(  Level.INFO, "editedTasks.size={0}", new Object[] { editedTasks.size() } );
+							}
+							break;
+						}
+					} // switch
+
+					saveTasksButton.setEnabled(
+							!NullSafe.isNullOrEmpty( newTasks )
+							|| !NullSafe.isNullOrEmpty( editedTasks ) );
+
+					JTableUtil.configureTable( tasksTable, null );
+					JTableUtil.resizeTableColumnsToFit( tasksTable );
+				} // if
+			} // tableChanged
 		});
 
 		JTableUtil.configureTable( tasksTable, null );
 		JTableUtil.resizeTableColumnsToFit( tasksTable );
 	}
 
-	private List<Task> getNewTasks() {
-		List<Task> taskList = new ArrayList<>();
+	private Set<Task> newTasks = new HashSet<>();
 
-		for( Task nTask : taskQueryResult.getTasks() ) {
-			if( nTask.getId() == null ) {
-				taskList.add( nTask );
-			}
-		}
-
-		return( taskList );
-	}
+	private Set<Task> editedTasks = new HashSet<>();
 
 	/** This method is called from within the constructor to
 	 * initialize the form.
@@ -399,17 +412,30 @@ public class TasksPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clearSearchuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearSearchuttonActionPerformed
-        startDatePicker.setDate( null );
+		logger.entering( getClass().getSimpleName(), "clearSearchuttonActionPerformed" );
+
+		startDatePicker.setDate( null );
         endDatePicker.setDate( null );
         completionComboBox.setSelectedItem( TaskSearchCriteria.CompletionCriteria.All_Tasks );
         taskIdTextField.setText( null );
         rowStartTextField.setText( null );
         numRowsTextField.setText( null );
         taskQueryResult.clearTasks();
+
+		newTasks.clear();
+		editedTasks.clear();
+
+		JTableUtil.configureTable( tasksTable, null );
+		JTableUtil.resizeTableColumnsToFit( tasksTable );
     }//GEN-LAST:event_clearSearchuttonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        try {
+		logger.entering( getClass().getSimpleName(), "searchButtonActionPerformed" );
+
+		try {
+			newTasks.clear();
+			editedTasks.clear();
+
             TaskSearchCriteria searchOptions = new TaskSearchCriteria();
 
             searchOptions.setStartDate( startDatePicker.getDate() );
@@ -449,11 +475,16 @@ public class TasksPanel extends javax.swing.JPanel {
             if( AuthExceptionHandler.handledInvalidKey( this, ex ) ) {
                 searchButtonActionPerformed( null );
             }
-        }
+        } finally {
+			JTableUtil.configureTable( tasksTable, null );
+			JTableUtil.resizeTableColumnsToFit( tasksTable );
+		}
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void deleteTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteTasksButtonActionPerformed
-        List<Task> webTasks = new ArrayList<>();
+		logger.entering( getClass().getSimpleName(), "deleteTasksButtonActionPerformed" );
+
+		List<Task> webTasks = new ArrayList<>();
 		List<Task> localTasks = new ArrayList<>();
 
         int[] rowIdx = tasksTable.getSelectedRows();
@@ -487,6 +518,9 @@ public class TasksPanel extends javax.swing.JPanel {
 				JOptionPane.showMessageDialog( this, "Deleted " + dr.size() + " tasks" );
 			} catch( IOException | JToodleException ex ) {
 				logger.log( Level.SEVERE, null, ex );
+			} finally {
+				JTableUtil.configureTable( tasksTable, null );
+				JTableUtil.resizeTableColumnsToFit( tasksTable );
 			}
 		}
 
@@ -494,26 +528,57 @@ public class TasksPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteTasksButtonActionPerformed
 
     private void newTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTaskButtonActionPerformed
+		logger.entering( getClass().getSimpleName(), "newTaskButtonActionPerformed" );
 		taskQueryResult.addTask( new Task() );
     }//GEN-LAST:event_newTaskButtonActionPerformed
 
     private void saveTasksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveTasksButtonActionPerformed
-		try {
-			List<Task> tempTasks = getNewTasks();
+		logger.entering( getClass().getSimpleName(), "saveTasksButtonActionPerformed" );
 
-			TaskAddCriteria tac = new TaskAddCriteria();
-			tac.setTasks( tempTasks );
+		if( !NullSafe.isNullOrEmpty( newTasks ) ) {
+			logger.log( Level.INFO, "need to create {0} new tasks", new Object[] { newTasks.size() } );
 
-			TaskOperations taskOps = new TaskOperations();
-			taskOps.setOperationCriteria( tac );
-			List<Task> savedTasks = taskOps.create();
+			try {
+				List tempTasks = new ArrayList<>( newTasks );
 
-			taskQueryResult.removeTasks( tempTasks );
-			taskQueryResult.addTasks( savedTasks );
-		} catch( JsonProcessingException ex ) {
-			Exceptions.printStackTrace( ex );
-		} catch( IOException | JToodleException ex ) {
-			Exceptions.printStackTrace( ex );
+				TaskAddCriteria tac = new TaskAddCriteria();
+				tac.setTasks( tempTasks );
+
+				TaskOperations taskOps = new TaskOperations();
+				taskOps.setOperationCriteria( tac );
+				List<Task> savedTasks = taskOps.create();
+
+				taskQueryResult.removeTasks( tempTasks );
+				taskQueryResult.addTasks( savedTasks );
+				newTasks.clear();
+			} catch( JsonProcessingException ex ) {
+				Exceptions.printStackTrace( ex );
+			} catch( IOException | JToodleException ex ) {
+				Exceptions.printStackTrace( ex );
+			}
+		}
+
+		if( !NullSafe.isNullOrEmpty( editedTasks ) ) {
+			logger.log( Level.INFO, "need to update {0} modified tasks", new Object[] { editedTasks.size() } );
+
+			try {
+				List tempTasks = new ArrayList<>( editedTasks );
+
+				TaskUpdateCriteria tuc = new TaskUpdateCriteria();
+				tuc.setTasks( tempTasks );
+
+				TaskOperations taskOps = new TaskOperations();
+				taskOps.setOperationCriteria( tuc );
+				List<Task> updatedTasks = taskOps.update();
+
+				taskQueryResult.removeTasks( tempTasks );
+				taskQueryResult.addTasks( updatedTasks );
+				editedTasks.clear();
+			} catch( JsonProcessingException ex ) {
+				Exceptions.printStackTrace( ex );
+			} catch( IOException | JToodleException ex ) {
+				Exceptions.printStackTrace( ex );
+			}
 		}
     }//GEN-LAST:event_saveTasksButtonActionPerformed
 
