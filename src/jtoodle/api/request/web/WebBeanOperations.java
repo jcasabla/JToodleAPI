@@ -6,6 +6,7 @@ package jtoodle.api.request.web;
 
 import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,6 @@ import jtoodle.api.util.NullSafe;
  * @author Justo_Casablanca
  */
 public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
-//implements WebOperations<T> {
 
 	private final String[] URIs = new String[OperationType.values().length];
 
@@ -37,20 +37,26 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 			null : new StringBuilder().append( BASE_URI ).append( uri ).toString();
 	}
 
-	private final OperationCriteria[] CRITERIA = new OperationCriteria[OperationType.values().length];
-
-	protected OperationCriteria getOperationCriteria( OperationType op ) {
-		return( CRITERIA[op.ordinal()] );
+	private final List<OperationCriteria<T>> CRITERIA = new ArrayList<>( OperationType.values().length );
+	{
+		CRITERIA.add( null );
+		CRITERIA.add( null );
+		CRITERIA.add( null );
+		CRITERIA.add( null );
 	}
 
-	public void setOperationCriteria( OperationCriteria criteria ) {
-		CRITERIA[criteria.getOperationType().ordinal()] = criteria;
+	protected OperationCriteria<T> getOperationCriteria( OperationType op ) {
+		return( CRITERIA.get( op.ordinal() ) );
+	}
+
+	public void setOperationCriteria( OperationCriteria<T> criteria ) {
+		CRITERIA.set( criteria.getOperationType().ordinal(), criteria );
 	}
 
 	protected abstract Class<T> getBeanClass();
 
 	protected void setRequestParameters( OperationType op, AbstractWebRequest wr ) {
-		OperationCriteria criteria = getOperationCriteria( op );
+		OperationCriteria<T> criteria = getOperationCriteria( op );
 
 		if( criteria != null ) {
 			Map<String,String> options = criteria.getOptions();
@@ -86,17 +92,6 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 		return( beans );
 	}
-
-	/*@Override
-	public List<DeleteableJToodleBean> delete() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[CRUD.Delete.ordinal()] );
-		setRequestParameters( CRUD.Delete, wr );
-
-		String json = wr.doRequestResponse();
-		List<DeleteableJToodleBean> beansOut = BeanParser.parseBeanList( json, DeleteableJToodleBean.class );
-
-		return( beansOut );
-	}*/
 
 	//@Override
 	public DeletionResult deleteSingle() throws IOException, JToodleException {
@@ -160,7 +155,7 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 		private OperationType operationType = null;
 
 		// note: HashMap allows Java null as keys and values
-		private HashMap<String, String> paramValues = new HashMap<>();
+		private Map<String, String> paramValues = new HashMap<>();
 
 		public Map<String, String> getOptions() {
 			return ( paramValues );
@@ -183,6 +178,5 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 		public OperationType getOperationType() {
 			return operationType;
 		}
-
 	}
 }
