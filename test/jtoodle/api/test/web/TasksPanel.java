@@ -76,12 +76,20 @@ public class TasksPanel extends javax.swing.JPanel {
 							 new Object[] { ( e.getType() == TableModelEvent.INSERT ) ? "INSERT" :
 											( e.getType() == TableModelEvent.UPDATE ) ? "UPDATE" :
 											( e.getType() == TableModelEvent.DELETE ) ? "DELETE" :
-											( e.getType() == TableModelEvent.ALL_COLUMNS ) ? "ALL_COLUMNS" :
-											( e.getType() == TableModelEvent.HEADER_ROW ) ? "HEADER_ROW" :
 											"OTHER:" + e.getType(),
 											e.getFirstRow(), e.getLastRow() } );
 
-				if( e.getFirstRow() == e.getLastRow() ) {
+				// BUGFIX: If TableModelEvent.DELETE, the last row will already
+				// have been removed from taskQueryResult.getTasks(), and there-
+				// fore the code below:
+				//
+				//      Task t = taskQueryResult.getTasks().get( e.getFirstRow() );
+				//
+				// ... will produce a ConcurrentModificationException
+
+				if( ( e.getFirstRow() == e.getLastRow() ) &&
+					( e.getType() != TableModelEvent.DELETE ) )
+				{
 					Task t = taskQueryResult.getTasks().get( e.getFirstRow() );
 					logger.log(  Level.INFO, "Task.id={0}", new Object[] { t.getId() } );
 
@@ -539,7 +547,7 @@ public class TasksPanel extends javax.swing.JPanel {
 			logger.log( Level.INFO, "need to create {0} new tasks", new Object[] { newTasks.size() } );
 
 			try {
-				List tempTasks = new ArrayList<>( newTasks );
+				List<Task> tempTasks = new ArrayList<>( newTasks );
 
 				TaskAddCriteria tac = new TaskAddCriteria();
 				tac.setTasks( tempTasks );
@@ -562,7 +570,7 @@ public class TasksPanel extends javax.swing.JPanel {
 			logger.log( Level.INFO, "need to update {0} modified tasks", new Object[] { editedTasks.size() } );
 
 			try {
-				List tempTasks = new ArrayList<>( editedTasks );
+				List<Task> tempTasks = new ArrayList<>( editedTasks );
 
 				TaskUpdateCriteria tuc = new TaskUpdateCriteria();
 				tuc.setTasks( tempTasks );
