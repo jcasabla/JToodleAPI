@@ -8,14 +8,15 @@ import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import jtoodle.api.auth.AuthCache;
+import javax.swing.JFileChooser;
 import jtoodle.api.auth.AuthExceptionHandler;
 import jtoodle.api.bean.core.AccountInfo;
 import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.json.bean.BeanWriter;
 import jtoodle.api.request.web.AccountInfoOperations;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -24,6 +25,8 @@ import org.openide.nodes.Node;
 public class AccountInfoPanel extends javax.swing.JPanel {
 
 	private static final Logger logger = Logger.getLogger( AccountInfoPanel.class.getName() );
+
+	private AccountInfo bean = null;
 
 	/** Creates new form AccountInfoPanel */
 	public AccountInfoPanel() {
@@ -41,11 +44,20 @@ public class AccountInfoPanel extends javax.swing.JPanel {
 
         accountInfoButton = new javax.swing.JButton();
         accountInfoPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
+        saveToFileButton = new javax.swing.JButton();
 
         org.openide.awt.Mnemonics.setLocalizedText(accountInfoButton, org.openide.util.NbBundle.getMessage(AccountInfoPanel.class, "AccountInfoPanel.accountInfoButton.text")); // NOI18N
         accountInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accountInfoButtonActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(saveToFileButton, org.openide.util.NbBundle.getMessage(AccountInfoPanel.class, "AccountInfoPanel.saveToFileButton.text")); // NOI18N
+        saveToFileButton.setEnabled(false);
+        saveToFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToFileButtonActionPerformed(evt);
             }
         });
 
@@ -58,6 +70,8 @@ public class AccountInfoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(accountInfoButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveToFileButton)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
                 .addContainerGap())
@@ -66,7 +80,9 @@ public class AccountInfoPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(accountInfoButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accountInfoButton)
+                    .addComponent(saveToFileButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(accountInfoPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
@@ -76,7 +92,7 @@ public class AccountInfoPanel extends javax.swing.JPanel {
     private void accountInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountInfoButtonActionPerformed
         try {
             AccountInfoOperations aiOps = new AccountInfoOperations();
-            AccountInfo bean = aiOps.searchSingle();
+            bean = aiOps.searchSingle();
             accountInfoPropertySheet.setNodes( new Node[] { new BeanNode( bean ) } );
         } catch( IntrospectionException | IOException | JToodleException ex ) {
             logger.log( Level.SEVERE, null, ex );
@@ -89,11 +105,30 @@ public class AccountInfoPanel extends javax.swing.JPanel {
             if( AuthExceptionHandler.handledInvalidKey( this, ex ) ) {
                 accountInfoButtonActionPerformed( null );
             }
-        }
+        } finally {
+			saveToFileButton.setEnabled( bean != null );
+		}
     }//GEN-LAST:event_accountInfoButtonActionPerformed
+
+    private void saveToFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToFileButtonActionPerformed
+		final JFileChooser fc = new JFileChooser();
+		int rv = fc.showSaveDialog( this );
+
+		switch( rv ) {
+			case JFileChooser.APPROVE_OPTION: {
+				try {
+					BeanWriter.writeObject( fc.getSelectedFile(), bean );
+				} catch( IOException ex ) {
+					Exceptions.printStackTrace( ex );
+				}
+				break;
+			}
+		}
+    }//GEN-LAST:event_saveToFileButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton accountInfoButton;
     private org.openide.explorer.propertysheet.PropertySheet accountInfoPropertySheet;
+    private javax.swing.JButton saveToFileButton;
     // End of variables declaration//GEN-END:variables
 }

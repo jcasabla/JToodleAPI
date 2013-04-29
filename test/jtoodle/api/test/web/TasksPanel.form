@@ -25,7 +25,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="tasksScrollPane" alignment="0" pref="528" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="saveToFileButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="newTaskButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="saveTasksButton" min="-2" max="-2" attributes="0"/>
@@ -119,6 +120,7 @@
                   <Component id="deleteTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveTasksButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newTaskButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveToFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -388,6 +390,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newTaskButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="saveToFileButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jtoodle/api/test/web/Bundle.properties" key="TasksPanel.saveToFileButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToFileButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

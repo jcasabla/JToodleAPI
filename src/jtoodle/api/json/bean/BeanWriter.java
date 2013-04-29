@@ -5,6 +5,9 @@
 package jtoodle.api.json.bean;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import jtoodle.api.bean.core.CoreBean;
 import jtoodle.api.bean.util.AbstractJToodleBean;
@@ -45,4 +48,13 @@ public class BeanWriter {
 		return( idSB.toString() );
 	}
 
+	public static void writeObjectList( File file, List oList ) throws IOException {
+		ObjectWriter ow = ObjectMapperFactory.getInstance().writerWithDefaultPrettyPrinter();
+		ow.writeValue( file, oList );
+	}
+
+	public static void writeObject( File file, Object obj ) throws IOException {
+		ObjectWriter ow = ObjectMapperFactory.getInstance().writerWithDefaultPrettyPrinter();
+		ow.writeValue( file, obj );
+	}
 }

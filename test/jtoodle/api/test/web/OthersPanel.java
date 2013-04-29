@@ -7,10 +7,12 @@ package jtoodle.api.test.web;
 import java.awt.Component;
 import java.beans.IntrospectionException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthExceptionHandler;
@@ -18,6 +20,7 @@ import jtoodle.api.bean.core.AbstractCoreBean;
 import jtoodle.api.bean.core.Folder;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.json.bean.BeanWriter;
 import jtoodle.api.request.web.FolderAddCriteria;
 import jtoodle.api.request.web.FolderDeletionCriteria;
 import jtoodle.api.request.web.FolderOperations;
@@ -25,6 +28,7 @@ import jtoodle.api.request.web.FolderUpdateCriteria;
 import jtoodle.api.util.NullSafe;
 import org.openide.nodes.BeanNode;
 import org.openide.nodes.Node;
+import org.openide.util.Exceptions;
 
 /**
  *
@@ -85,6 +89,7 @@ public class OthersPanel extends javax.swing.JPanel {
         deleteBeanButton = new javax.swing.JButton();
         beanPropertySheet = new org.openide.explorer.propertysheet.PropertySheet();
         saveBeanButton = new javax.swing.JButton();
+        saveToFileButton = new javax.swing.JButton();
 
         beanTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Choose>", "Folders", "Contexts", "Goals", "Locations" }));
         beanTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +120,14 @@ public class OthersPanel extends javax.swing.JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(saveToFileButton, org.openide.util.NbBundle.getMessage(OthersPanel.class, "OthersPanel.saveToFileButton.text")); // NOI18N
+        saveToFileButton.setEnabled(false);
+        saveToFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToFileButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,9 +137,14 @@ public class OthersPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(beanPropertySheet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(beanResultsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(beanResultsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(saveToFileButton)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(saveBeanButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -142,7 +160,9 @@ public class OthersPanel extends javax.swing.JPanel {
                     .addComponent(beanTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteBeanButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveBeanButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveBeanButton)
+                    .addComponent(saveToFileButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(beanPropertySheet, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                 .addContainerGap())
@@ -152,6 +172,7 @@ public class OthersPanel extends javax.swing.JPanel {
     private void beanTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beanTypeComboBoxActionPerformed
 		deleteBeanButton.setEnabled( false );
 		saveBeanButton.setEnabled( false );
+		saveToFileButton.setEnabled( false );
 
 		beanResultsComboBox.removeAllItems();
 		beanPropertySheet.setNodes( new Node[] {} );
@@ -198,6 +219,8 @@ public class OthersPanel extends javax.swing.JPanel {
 			}
 
 			beanResultsComboBoxActionPerformed( null );
+
+			saveToFileButton.setEnabled( beanResultsComboBox.getItemCount() > 1 );
 
 		} catch( IOException | JToodleException ex ) {
 			logger.log( Level.SEVERE, null, ex );
@@ -289,12 +312,33 @@ public class OthersPanel extends javax.swing.JPanel {
 		saveBeanButton.setEnabled( false );
     }//GEN-LAST:event_saveBeanButtonActionPerformed
 
+    private void saveToFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToFileButtonActionPerformed
+		final JFileChooser fc = new JFileChooser();
+		int rv = fc.showSaveDialog( this );
+
+		switch( rv ) {
+			case JFileChooser.APPROVE_OPTION: {
+				try {
+					List<Object> l = new ArrayList<>();
+					for(int i=0; i < beanResultsComboBox.getItemCount()-1; i++) {
+						l.add( beanResultsComboBox.getItemAt( i ) );
+					}
+					BeanWriter.writeObjectList( fc.getSelectedFile(), l );
+				} catch( IOException ex ) {
+					Exceptions.printStackTrace( ex );
+				}
+				break;
+			}
+		}
+    }//GEN-LAST:event_saveToFileButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openide.explorer.propertysheet.PropertySheet beanPropertySheet;
     private javax.swing.JComboBox beanResultsComboBox;
     private javax.swing.JComboBox beanTypeComboBox;
     private javax.swing.JButton deleteBeanButton;
     private javax.swing.JButton saveBeanButton;
+    private javax.swing.JButton saveToFileButton;
     // End of variables declaration//GEN-END:variables
 
 	private Folder saveOrUpdateFolder( Folder aFolder ) {

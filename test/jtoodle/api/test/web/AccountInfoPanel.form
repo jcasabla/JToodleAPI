@@ -21,6 +21,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="saveToFileButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="accountInfoPropertySheet" alignment="0" pref="530" max="32767" attributes="0"/>
@@ -33,7 +35,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="accountInfoButton" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="accountInfoButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveToFileButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="accountInfoPropertySheet" pref="341" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -53,6 +58,17 @@
       </Events>
     </Component>
     <Component class="org.openide.explorer.propertysheet.PropertySheet" name="accountInfoPropertySheet">
+    </Component>
+    <Component class="javax.swing.JButton" name="saveToFileButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="jtoodle/api/test/web/Bundle.properties" key="AccountInfoPanel.saveToFileButton.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+        </Property>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToFileButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

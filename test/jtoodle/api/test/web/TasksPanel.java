@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,6 +26,7 @@ import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.TaskQueryResult;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.JToodleException;
+import jtoodle.api.json.bean.BeanWriter;
 import jtoodle.api.request.web.TaskAddCriteria;
 import jtoodle.api.request.web.TaskDeletionCriteria;
 import jtoodle.api.request.web.TaskOperations;
@@ -117,6 +119,9 @@ public class TasksPanel extends javax.swing.JPanel {
 					JTableUtil.configureTable( tasksTable, null );
 					JTableUtil.resizeTableColumnsToFit( tasksTable );
 				} // if
+
+				saveToFileButton.setEnabled(
+						!NullSafe.isNullOrEmpty( taskQueryResult.getTasks() ) );
 			} // tableChanged
 		});
 
@@ -162,6 +167,7 @@ public class TasksPanel extends javax.swing.JPanel {
         deleteTasksButton = new javax.swing.JButton();
         saveTasksButton = new javax.swing.JButton();
         newTaskButton = new javax.swing.JButton();
+        saveToFileButton = new javax.swing.JButton();
 
         org.openide.awt.Mnemonics.setLocalizedText(startDateLabel, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.startDateLabel.text")); // NOI18N
 
@@ -327,6 +333,14 @@ public class TasksPanel extends javax.swing.JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(saveToFileButton, org.openide.util.NbBundle.getMessage(TasksPanel.class, "TasksPanel.saveToFileButton.text")); // NOI18N
+        saveToFileButton.setEnabled(false);
+        saveToFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveToFileButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,7 +350,8 @@ public class TasksPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tasksScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(saveToFileButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(newTaskButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveTasksButton)
@@ -412,7 +427,8 @@ public class TasksPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteTasksButton)
                     .addComponent(saveTasksButton)
-                    .addComponent(newTaskButton))
+                    .addComponent(newTaskButton)
+                    .addComponent(saveToFileButton))
                 .addContainerGap())
         );
 
@@ -590,6 +606,22 @@ public class TasksPanel extends javax.swing.JPanel {
 		}
     }//GEN-LAST:event_saveTasksButtonActionPerformed
 
+    private void saveToFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToFileButtonActionPerformed
+		final JFileChooser fc = new JFileChooser();
+		int rv = fc.showSaveDialog( this );
+
+		switch( rv ) {
+			case JFileChooser.APPROVE_OPTION: {
+				try {
+					BeanWriter.writeObjectList( fc.getSelectedFile(), taskQueryResult.getTasks() );
+				} catch( IOException ex ) {
+					Exceptions.printStackTrace( ex );
+				}
+				break;
+			}
+		}
+    }//GEN-LAST:event_saveToFileButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearSearchutton;
     private javax.swing.JComboBox completionComboBox;
@@ -603,6 +635,7 @@ public class TasksPanel extends javax.swing.JPanel {
     private javax.swing.JLabel rowStartLabel;
     private javax.swing.JFormattedTextField rowStartTextField;
     private javax.swing.JButton saveTasksButton;
+    private javax.swing.JButton saveToFileButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JLabel startDateLabel;
     private org.jdesktop.swingx.JXDatePicker startDatePicker;
