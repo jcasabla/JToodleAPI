@@ -22,16 +22,16 @@ public class BeanParser {
 	private BeanParser() {
 	}
 
-	public static <T extends AbstractJToodleBean> T parseBean( String js,
-															   Class<T> clazz )
-			throws IOException, JToodleException {
+	public static <T extends AbstractJToodleBean>
+		T parseBean( String js, Class<T> clazz )
+		throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
 		return ObjectMapperFactory.getInstance().readValue( js, clazz );
 	}
 
-	public static <T extends AbstractJToodleBean> List<T> parseBeanList( 
-			String js, Class<T> clazz )
-			throws IOException, JToodleException {
+	public static <T extends AbstractJToodleBean> 
+		List<T> parseBeanList( String js, Class<T> clazz )
+		throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
 		return ObjectMapperFactory.getInstance()
 					.readValue( js,
@@ -41,17 +41,17 @@ public class BeanParser {
 										clazz ) );
 	}
 
-	private static void throwJToodleExceptionIfError( String js ) throws
-			IOException, JToodleException {
+	private static void throwJToodleExceptionIfError( String js )
+		throws IOException, JToodleException {
 		if( js.contains( "errorCode" ) ) {
 			JToodleException jte = ObjectMapperFactory.getInstance().
-					readValue( js, JToodleException.class );
+				readValue( js, JToodleException.class );
 			throw ( jte );
 		}
 	}
 
 	public static TaskQueryResult parseTaskQueryResults( String js )
-			throws IOException, JToodleException {
+		throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
 
 		TaskQueryResult results = null;
