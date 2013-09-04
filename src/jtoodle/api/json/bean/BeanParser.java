@@ -22,23 +22,23 @@ public class BeanParser {
 	private BeanParser() {
 	}
 
-	public static <T extends AbstractJToodleBean>
-		T parseBean( String js, Class<T> clazz )
+	public static <T extends AbstractJToodleBean> T parseBean( String js,
+															   Class<T> clazz )
 		throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
 		return ObjectMapperFactory.getInstance().readValue( js, clazz );
 	}
 
-	public static <T extends AbstractJToodleBean> 
-		List<T> parseBeanList( String js, Class<T> clazz )
+	public static <T extends AbstractJToodleBean> List<T> parseBeanList( 
+		String js, Class<T> clazz )
 		throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
 		return ObjectMapperFactory.getInstance()
-					.readValue( js,
-								ObjectMapperFactory.getInstance().
-									getTypeFactory().constructCollectionType( 
-										List.class,
-										clazz ) );
+			.readValue( js,
+						ObjectMapperFactory.getInstance().
+							getTypeFactory().constructCollectionType(
+								List.class,
+								clazz ) );
 	}
 
 	private static void throwJToodleExceptionIfError( String js )
@@ -57,7 +57,8 @@ public class BeanParser {
 		TaskQueryResult results = null;
 		List<Task> tasks = new ArrayList<>();
 
-		List<LinkedHashMap> values = ObjectMapperFactory.getInstance().readValue(
+		List<LinkedHashMap> values = ObjectMapperFactory.getInstance()
+			.readValue(
 				js,
 				ObjectMapperFactory.getInstance().getTypeFactory().
 					constructCollectionType( List.class, LinkedHashMap.class ) );
