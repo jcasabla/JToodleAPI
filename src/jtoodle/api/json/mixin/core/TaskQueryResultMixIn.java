@@ -16,10 +16,8 @@ public abstract class TaskQueryResultMixIn {
 
 	@JsonCreator
 	public static TaskQueryResult createTaskQueryResult(
-		  @JsonProperty( "num" ) Integer queryTaskCount
-		, @JsonProperty( "total" ) Integer totalTaskCount
-	)
-	{
+		@JsonProperty( "num" ) Integer queryTaskCount,
+		@JsonProperty( "total" ) Integer totalTaskCount ) {
 		return null;
 	}
 
