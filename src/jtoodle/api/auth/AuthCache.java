@@ -26,7 +26,7 @@ import jtoodle.api.util.NullSafe;
  *
  * @author justo
  */
-public class AuthCache implements AuthenticationConstants {
+public class AuthCache {
 
 	private static final Logger logger =
 			Logger.getLogger( AuthCache.class.getName() );

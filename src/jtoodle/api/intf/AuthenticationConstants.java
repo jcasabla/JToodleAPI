@@ -8,7 +8,10 @@ package jtoodle.api.intf;
  *
  * @author justo
  */
-public interface AuthenticationConstants {
+public final class AuthenticationConstants {
+
+	private AuthenticationConstants() {
+	}
 
 	public static final String PARAM_NAME_SIGNATURE = "sig";
 
