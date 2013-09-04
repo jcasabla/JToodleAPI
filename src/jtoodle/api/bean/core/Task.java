@@ -73,28 +73,51 @@ public class Task extends TaskNotebookBean {
 	 */
 
 	private String tag = null;						// tag
+
 	private Integer contextId = null;				// context
+
 	private Integer goalId = null;					// goal
+
 	private Integer locationId = null;				// location
+
 	private Integer parentTaskId = null;			// parent
+
 	private Integer childTaskCount = null;			// children
+
 	private Integer childTaskOrder = null;			// order
+
 	private Date dueDate = null;					// duedate
+
 	private DueDateModifier dueDateModifier = null;	// duedatemod
+
 	private Date startDate = null;					// startdate
+
 	private Date dueTime = null;					// duetime
+
 	private Date startTime = null;					// starttime
+
 	private ReminderTime reminderMinutes = null;	// remind
+
 	private String repeatPattern = null;			// repeat
+
 	private TaskRepeatsFrom repeatsFrom = null;		// repeatfrom
+
 	private Status status = null;					// status
+
 	private Long minutesToComplete = null;			// length
+
 	private Priority priority = null;				// priority
+
 	private Boolean starred = null;					// star
+
 	private Date completedOn = null;				// completed
+
 	private Long timerSecondsElapsed = null;		// timer
+
 	private Date timerStartedOn = null;				// timeron
+
 	private String note = null;						// note
+
 	private String meta = null;						// meta
 
 	public String getTag() {
