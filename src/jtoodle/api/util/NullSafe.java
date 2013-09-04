@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 public final class NullSafe {
 
-	public NullSafe() {
+	private NullSafe() {
 	}
 
 	public static boolean equals( Object o1, Object o2 ) {
