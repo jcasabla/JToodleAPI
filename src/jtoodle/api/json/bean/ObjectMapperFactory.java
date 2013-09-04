@@ -47,14 +47,17 @@ public final class ObjectMapperFactory {
 	private static final ObjectMapper mapper = new ObjectMapper();
 
 	static {
-		mapper.addMixInAnnotations( JToodleException.class, JToodleExceptionMixIn.class );
+		mapper.addMixInAnnotations( JToodleException.class,
+									JToodleExceptionMixIn.class );
 		mapper.addMixInAnnotations( UserId.class, UserIdMixIn.class );
 		mapper.addMixInAnnotations( Token.class, TokenMixIn.class );
 		mapper.addMixInAnnotations( AccountInfo.class, AccountInfoMixIn.class );
 		mapper.addMixInAnnotations( Folder.class, FolderMixIn.class );
-		mapper.addMixInAnnotations( TaskQueryResult.class, TaskQueryResultMixIn.class );
+		mapper.addMixInAnnotations( TaskQueryResult.class,
+									TaskQueryResultMixIn.class );
 		mapper.addMixInAnnotations( Task.class, TaskMixIn.class );
-		mapper.addMixInAnnotations( DeletionResult.class, DeletionResultMixIn.class );
+		mapper.addMixInAnnotations( DeletionResult.class,
+									DeletionResultMixIn.class );
 
 		mapper.registerModule(
 			new SimpleModule( "TD_DeserializationModule", Version.unknownVersion() )
@@ -69,14 +72,14 @@ public final class ObjectMapperFactory {
 
 		mapper.registerModule(
 			new SimpleModule( "TD_SerializationModule", Version.unknownVersion() )
-				.addSerializer( Boolean.class, new TD_BooleanSerializer() )
-				//.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
-				//.addDeserializer( DateFormat.class, new TD_EnumDeserializer<>( DateFormat.class ) )
-				//.addDeserializer( Priority.class, new TD_EnumDeserializer<>( Priority.class ) )
-				//.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
-				//.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
-				//.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
-				);
+			.addSerializer( Boolean.class, new TD_BooleanSerializer() )
+			//.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
+			//.addDeserializer( DateFormat.class, new TD_EnumDeserializer<>( DateFormat.class ) )
+			//.addDeserializer( Priority.class, new TD_EnumDeserializer<>( Priority.class ) )
+			//.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
+			//.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
+			//.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
+			);
 
 	}
 
