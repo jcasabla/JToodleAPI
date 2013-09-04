@@ -52,9 +52,7 @@ public enum ReminderTime {
 	 Reminder_2_Weeks;
 
 	 public boolean isNonProOption() {
-		 return(
-			( ( this == No_Reminder ) || ( this == Reminder_1_Hour ) )
-		);
+		 return ( this == No_Reminder ) || ( this == Reminder_1_Hour );
 	 }
 
 	 private static final int MINS_PER_HOUR = 60;
@@ -89,7 +87,7 @@ public enum ReminderTime {
 			}
 		 }
 
-		 return( mins );
+		 return mins;
 	 }
 
 	 public static ReminderTime toReminderTime( Long minutes ) {
@@ -102,7 +100,7 @@ public enum ReminderTime {
 			 }
 		 }
 
-		 return( rt );
+		 return rt;
 	 }
 
 }

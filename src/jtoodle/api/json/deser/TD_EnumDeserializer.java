@@ -24,7 +24,7 @@ public class TD_EnumDeserializer<E extends Enum<E>> extends JsonDeserializer<E> 
 
 	@Override
 	public E deserialize( JsonParser jp, DeserializationContext dc ) throws IOException, JsonProcessingException {
-		return( enumClazz.getEnumConstants()[ Integer.parseInt( jp.getText() ) ] );
+		return enumClazz.getEnumConstants()[ Integer.parseInt( jp.getText() ) ];
 	}
 
 }

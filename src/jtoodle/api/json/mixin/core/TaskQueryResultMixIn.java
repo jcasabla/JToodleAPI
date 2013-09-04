@@ -20,7 +20,7 @@ public abstract class TaskQueryResultMixIn {
 		, @JsonProperty( "total" ) Integer totalTaskCount
 	)
 	{
-		return( null );
+		return null;
 	}
 
 }

@@ -20,7 +20,7 @@ public class TD_BooleanDeserializer extends JsonDeserializer<Boolean> {
 	public Boolean deserialize( JsonParser jp, DeserializationContext dc )
 			throws IOException, JsonProcessingException {
 		String boolS = jp.getText();
-		return( "1".equals( boolS ) ? Boolean.TRUE : Boolean.FALSE );
+		return ( "1".equals( boolS ) ? Boolean.TRUE : Boolean.FALSE );
 	}
 
 }

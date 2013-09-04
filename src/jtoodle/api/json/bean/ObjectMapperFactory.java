@@ -81,7 +81,7 @@ public final class ObjectMapperFactory {
 	}
 
 	public static ObjectMapper getInstance() {
-		return( mapper );
+		return mapper;
 	}
 
 }

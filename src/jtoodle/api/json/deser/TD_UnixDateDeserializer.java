@@ -31,7 +31,7 @@ public class TD_UnixDateDeserializer extends JsonDeserializer<Date> {
 		//logger.info( getClass().getName() + " / deserialize / dateAsLong=" +
 		//			 dateAsLong + ", date=" + new Date( dateAsLong ) );
 
-		return( ( dateAsLong == 0 ) ? null : new Date( dateAsLong * 1000L ) );
+		return ( ( dateAsLong == 0 ) ? null : new Date( dateAsLong * 1000L ) );
 	}
 
 }

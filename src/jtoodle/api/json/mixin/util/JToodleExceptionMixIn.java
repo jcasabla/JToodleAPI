@@ -20,7 +20,7 @@ public abstract class JToodleExceptionMixIn {
 		, @JsonProperty( "errorDesc" ) String errorDescription
 	)
 	{
-		return( null );
+		return null;
 	}
 
 }

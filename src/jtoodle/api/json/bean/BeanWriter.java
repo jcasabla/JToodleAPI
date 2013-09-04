@@ -23,12 +23,12 @@ public class BeanWriter {
 
 	public static <T extends AbstractJToodleBean> String jsonString( List<T> beans )
 			throws JsonProcessingException {
-		return( ObjectMapperFactory.getInstance().writeValueAsString( beans ) );
+		return ObjectMapperFactory.getInstance().writeValueAsString( beans );
 	}
 
 	public static <T extends AbstractJToodleBean> String jsonString( T bean )
 			throws JsonProcessingException {
-		return( ObjectMapperFactory.getInstance().writeValueAsString( bean ) );
+		return ObjectMapperFactory.getInstance().writeValueAsString( bean );
 	}
 
 	public static String writeIdList( List<CoreBean> idBeans ) {
@@ -46,7 +46,7 @@ public class BeanWriter {
 
 		idSB.append( "]" );
 
-		return( idSB.toString() );
+		return idSB.toString();
 	}
 
 	public static void writeObjectList( File file, List oList ) throws IOException {
