@@ -29,14 +29,14 @@ import jtoodle.api.util.NullSafe;
 public class AuthCache implements AuthenticationConstants {
 
 	private static final Logger logger =
-		Logger.getLogger( AuthCache.class.getName() );
+			Logger.getLogger( AuthCache.class.getName() );
 
 	private static final long MAX_TOKEN_AGE =
-		4 // hours
-		* 60 // minutes/hour
-		* 60 // seconds/minute
-		* 1000 // millis/second
-		;
+			4 // hours
+			* 60 // minutes/hour
+			* 60 // seconds/minute
+			* 1000 // millis/second
+			;
 
 	private static final String KEY_EMAIL = "email";
 
@@ -53,7 +53,7 @@ public class AuthCache implements AuthenticationConstants {
 	private static final String KEY_TOKEN_TIMESTAMP_TEXT = "token_timestamp_text";
 
 	private static final Preferences _prefs = Preferences.userRoot()
-		.node( "/jtoodle/api/auth" );
+			.node( "/jtoodle/api/auth" );
 
 	private static String _password = null;
 
@@ -307,10 +307,10 @@ public class AuthCache implements AuthenticationConstants {
 				String token = getToken();
 
 				apiKey = Hasher.md5Hash( new StringBuilder()
-					.append( getHashedPassword() )
-					.append( AuthenticationConstants.APP_TOKEN )
-					.append( token )
-					.toString() );
+						.append( getHashedPassword() )
+						.append( AuthenticationConstants.APP_TOKEN )
+						.append( token )
+						.toString() );
 				setApiKey( apiKey );
 			} catch( NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );

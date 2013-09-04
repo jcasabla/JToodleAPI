@@ -11,7 +11,7 @@ import jtoodle.api.bean.util.AbstractJToodleBean;
  * @author Justo_Casablanca
  */
 public abstract class AbstractCoreBean extends AbstractJToodleBean
-	implements CoreBean {
+		implements CoreBean {
 
 	private Integer id = null;
 

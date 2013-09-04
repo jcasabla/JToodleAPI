@@ -35,12 +35,12 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 
 	protected void registerURI( OperationType op, String uri ) {
 		URIs[op.ordinal()] = NullSafe.isNullOrEmpty( uri )
-			? null : new StringBuilder().append( BASE_URI ).append( uri )
-			.toString();
+				? null : new StringBuilder().append( BASE_URI ).append( uri )
+				.toString();
 	}
 
 	private final List<OperationCriteria<T>> CRITERIA =
-		new ArrayList<>( OperationType.values().length );
+			new ArrayList<>( OperationType.values().length );
 
 	{
 		CRITERIA.add( null );
@@ -78,7 +78,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 
 	public T searchSingle() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
-			getURI( OperationType.RETRIEVE ) );
+				getURI( OperationType.RETRIEVE ) );
 		setRequestParameters( OperationType.RETRIEVE, wr );
 
 		String json = wr.doRequestResponse();
@@ -90,7 +90,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	//@Override
 	public List<T> search() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
-			getURI( OperationType.RETRIEVE ) );
+				getURI( OperationType.RETRIEVE ) );
 		setRequestParameters( OperationType.RETRIEVE, wr );
 
 		String json = wr.doRequestResponse();
@@ -102,7 +102,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	//@Override
 	public DeletionResult deleteSingle() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
-			URIs[OperationType.DELETE.ordinal()] );
+				URIs[OperationType.DELETE.ordinal()] );
 		setRequestParameters( OperationType.DELETE, wr );
 
 		String json = wr.doRequestResponse();
@@ -114,7 +114,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 
 	public List<DeletionResult> delete() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
-			URIs[OperationType.DELETE.ordinal()] );
+				URIs[OperationType.DELETE.ordinal()] );
 		setRequestParameters( OperationType.DELETE, wr );
 
 		String json = wr.doRequestResponse();
@@ -127,7 +127,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	//@Override
 	public List<T> create() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
-			URIs[OperationType.ADD.ordinal()] );
+				URIs[OperationType.ADD.ordinal()] );
 		setRequestParameters( OperationType.ADD, wr );
 
 		String json = wr.doRequestResponse();
@@ -139,7 +139,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	//@Override
 	public List<T> update() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
-			URIs[OperationType.EDIT.ordinal()] );
+				URIs[OperationType.EDIT.ordinal()] );
 		setRequestParameters( OperationType.EDIT, wr );
 
 		String json = wr.doRequestResponse();

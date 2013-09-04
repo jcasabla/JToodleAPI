@@ -21,14 +21,14 @@ public class BeanWriter {
 	private BeanWriter() {
 	}
 
-	public static <T extends AbstractJToodleBean> String jsonString( 
-		List<T> beans )
-		throws JsonProcessingException {
+	public static <T extends AbstractJToodleBean> String jsonString(
+			List<T> beans )
+			throws JsonProcessingException {
 		return ObjectMapperFactory.getInstance().writeValueAsString( beans );
 	}
 
 	public static <T extends AbstractJToodleBean> String jsonString( T bean )
-		throws JsonProcessingException {
+			throws JsonProcessingException {
 		return ObjectMapperFactory.getInstance().writeValueAsString( bean );
 	}
 
@@ -52,13 +52,13 @@ public class BeanWriter {
 
 	public static void writeObjectList( File file, List oList ) throws IOException {
 		ObjectWriter ow = ObjectMapperFactory.getInstance()
-			.writerWithDefaultPrettyPrinter();
+				.writerWithDefaultPrettyPrinter();
 		ow.writeValue( file, oList );
 	}
 
 	public static void writeObject( File file, Object obj ) throws IOException {
 		ObjectWriter ow = ObjectMapperFactory.getInstance()
-			.writerWithDefaultPrettyPrinter();
+				.writerWithDefaultPrettyPrinter();
 		ow.writeValue( file, obj );
 	}
 

@@ -20,7 +20,7 @@ public class TD_BooleanSerializer extends JsonSerializer<Boolean> {
 	public void serialize( Boolean value,
 						   JsonGenerator jgen,
 						   SerializerProvider provider )
-		throws IOException, JsonProcessingException {
+			throws IOException, JsonProcessingException {
 		jgen.writeNumber( value ? 1 : 0 );
 	}
 

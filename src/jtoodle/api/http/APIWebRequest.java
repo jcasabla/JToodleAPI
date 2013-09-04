@@ -22,7 +22,7 @@ public class APIWebRequest extends AbstractWebRequest {
 			setParameter( PARAM_NAME_KEY, AuthCache.getApiKey() );
 		} catch( JToodleException ex ) {
 			Logger.getLogger( APIWebRequest.class.getName() )
-				.log( Level.SEVERE, null, ex );
+					.log( Level.SEVERE, null, ex );
 		}
 	}
 

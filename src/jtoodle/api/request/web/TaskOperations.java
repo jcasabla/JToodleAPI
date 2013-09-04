@@ -37,7 +37,7 @@ public class TaskOperations extends WebBeanOperations<Task> {
 	@Override
 	public List<Task> search() throws IOException, JToodleException {
 		AbstractWebRequest wr = WebRequestFactory.
-			createWebRequest( getURI( OperationType.RETRIEVE ) );
+				createWebRequest( getURI( OperationType.RETRIEVE ) );
 		setRequestParameters( OperationType.RETRIEVE, wr );
 
 		String json = wr.doRequestResponse();
