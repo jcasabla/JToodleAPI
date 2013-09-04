@@ -33,14 +33,13 @@ public class TokenSearchCriteria extends TaskOperations.OperationCriteria<Token>
 				AuthenticationConstants.PARAM_NAME_SIGNATURE,
 				Hasher.md5Hash( userId + AuthenticationConstants.APP_TOKEN ) );
 		} catch( NoSuchAlgorithmException ex ) {
-			Logger.getLogger( TokenSearchCriteria.class.getName() ).log( Level.SEVERE, null, ex );
+			Logger.getLogger( TokenSearchCriteria.class.getName() ).log( 
+				Level.SEVERE, null, ex );
 		}
 	}
-
 	private static final String PARAM_NAME_VERSION = "vers";
 	private static final String PARAM_NAME_DEVICE = "device";
 	private static final String PARAM_NAME_OS = "os";
-
 	public static final String PARAM_NAME_USER_ID = "userid";
 
 }
