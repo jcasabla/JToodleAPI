@@ -28,14 +28,15 @@ import jtoodle.api.util.NullSafe;
  */
 public class AuthCache implements AuthenticationConstants {
 
-	private static final Logger logger = Logger.getLogger( AuthCache.class.getName() );
+	private static final Logger logger =
+		Logger.getLogger( AuthCache.class.getName() );
 
 	private static final long MAX_TOKEN_AGE =
-			4 // hours
-			* 60 // minutes/hour
-			* 60 // seconds/minute
-			* 1000 // millis/second
-			;
+		4 // hours
+		* 60 // minutes/hour
+		* 60 // seconds/minute
+		* 1000 // millis/second
+		;
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_PASSWORD = "hashed_password";
 	private static final String KEY_USER_ID = "user_id";
@@ -43,8 +44,8 @@ public class AuthCache implements AuthenticationConstants {
 	private static final String KEY_API_KEY = "api_key";
 	private static final String KEY_TOKEN_TIMESTAMP_MILLIS = "token_timestamp_millis";
 	private static final String KEY_TOKEN_TIMESTAMP_TEXT = "token_timestamp_text";
-	private static final Preferences _prefs = Preferences.userRoot().node( 
-			"/jtoodle/api/auth" );
+	private static final Preferences _prefs = Preferences.userRoot()
+		.node( "/jtoodle/api/auth" );
 	private static String _password = null;
 
 	private static void save() {
@@ -145,13 +146,15 @@ public class AuthCache implements AuthenticationConstants {
 	private static String getHashedPassword() {
 		logger.entering( AuthCache.class.getName(), "getHashedPassword()" );
 		String returnValue = _prefs.get( KEY_PASSWORD, null );
-		logger.exiting( AuthCache.class.getName(), "getHashedPassword()", returnValue );
+		logger.exiting( AuthCache.class.getName(), "getHashedPassword()",
+						returnValue );
 
 		return returnValue;
 	}
 
 	private static void storeHashedPassword( String clearPassword ) {
-		logger.entering( AuthCache.class.getName(), "storeHashedPassword(String)", clearPassword );
+		logger.entering( AuthCache.class.getName(),
+						 "storeHashedPassword(String)", clearPassword );
 
 		if( NullSafe.isNullOrEmpty( clearPassword ) ) {
 			_prefs.remove( KEY_PASSWORD );
@@ -165,11 +168,13 @@ public class AuthCache implements AuthenticationConstants {
 
 		save();
 
-		logger.exiting( AuthCache.class.getName(), "storeHashedPassword(String)" );
+		logger.exiting( AuthCache.class.getName(),
+						"storeHashedPassword(String)" );
 	}
 
 	private static void setUserId( String userId ) {
-		logger.entering( AuthCache.class.getName(), "setUserId(String)", userId );
+		logger.entering( AuthCache.class.getName(), "setUserId(String)",
+						 userId );
 
 		String storedUserId = _prefs.get( KEY_USER_ID, null );
 
@@ -264,7 +269,8 @@ public class AuthCache implements AuthenticationConstants {
 	}
 
 	private static void setApiKey( String apiKey ) {
-		logger.entering( AuthCache.class.getName(), "setApiKey(String)", apiKey );
+		logger.entering( AuthCache.class.getName(), "setApiKey(String)",
+						 apiKey );
 
 		String storedApiKey = _prefs.get( KEY_API_KEY, null );
 
@@ -292,10 +298,10 @@ public class AuthCache implements AuthenticationConstants {
 				String token = getToken();
 
 				apiKey = Hasher.md5Hash( new StringBuilder()
-						.append( getHashedPassword() )
-						.append( AuthenticationConstants.APP_TOKEN )
-						.append( token )
-						.toString() );
+					.append( getHashedPassword() )
+					.append( AuthenticationConstants.APP_TOKEN )
+					.append( token )
+					.toString() );
 				setApiKey( apiKey );
 			} catch( NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
