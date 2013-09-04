@@ -37,15 +37,24 @@ public class AuthCache implements AuthenticationConstants {
 		* 60 // seconds/minute
 		* 1000 // millis/second
 		;
+
 	private static final String KEY_EMAIL = "email";
+
 	private static final String KEY_PASSWORD = "hashed_password";
+
 	private static final String KEY_USER_ID = "user_id";
+
 	private static final String KEY_TOKEN = "token";
+
 	private static final String KEY_API_KEY = "api_key";
+
 	private static final String KEY_TOKEN_TIMESTAMP_MILLIS = "token_timestamp_millis";
+
 	private static final String KEY_TOKEN_TIMESTAMP_TEXT = "token_timestamp_text";
+
 	private static final Preferences _prefs = Preferences.userRoot()
 		.node( "/jtoodle/api/auth" );
+
 	private static String _password = null;
 
 	private static void save() {
