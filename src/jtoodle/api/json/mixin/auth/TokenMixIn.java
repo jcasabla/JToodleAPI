@@ -11,5 +11,4 @@ import jtoodle.api.json.mixin.util.AbstractJToodleBeanMixIn;
  * @author justo
  */
 public interface TokenMixIn extends AbstractJToodleBeanMixIn {
-
 }
