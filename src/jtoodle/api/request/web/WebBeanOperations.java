@@ -34,8 +34,9 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	}
 
 	protected void registerURI( OperationType op, String uri ) {
-		URIs[op.ordinal()] = NullSafe.isNullOrEmpty( uri ) ?
-			null : new StringBuilder().append( BASE_URI ).append( uri ).toString();
+		URIs[op.ordinal()] = NullSafe.isNullOrEmpty( uri )
+			? null : new StringBuilder().append( BASE_URI ).append( uri )
+			.toString();
 	}
 
 	private final List<OperationCriteria<T>> CRITERIA =
@@ -62,7 +63,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		OperationCriteria<T> criteria = getOperationCriteria( op );
 
 		if( criteria != null ) {
-			Map<String,String> options = criteria.getOptions();
+			Map<String, String> options = criteria.getOptions();
 			Set<String> keySet = options.keySet();
 
 			for( String key : keySet ) {
