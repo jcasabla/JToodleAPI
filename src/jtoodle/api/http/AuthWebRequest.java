@@ -11,7 +11,7 @@ import jtoodle.api.intf.AuthenticationConstants;
  * @author justo
  */
 public class AuthWebRequest extends AbstractWebRequest
-		implements AuthenticationConstants {
+	implements AuthenticationConstants {
 
 	public AuthWebRequest( String uri ) {
 		super( uri );
