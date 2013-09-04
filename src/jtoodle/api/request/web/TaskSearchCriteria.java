@@ -66,11 +66,17 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 	}
 
 	private static final String PARAM_GET_TASKS_END_DATE = "modbefore";
+
 	private static final String PARAM_GET_TASKS_START_DATE = "modafter";
+
 	private static final String PARAM_GET_TASKS_COMPLETED = "comp";
+
 	private static final String PARAM_GET_TASKS_ID = "id";
+
 	private static final String PARAM_GET_TASKS_PAGINATE_ROW_START = "start";
+
 	private static final String PARAM_GET_TASKS_PAGINATE_NUM_TASKS = "num";
+
 	public static final String PARAM_GET_TASKS_FIELD_LIST = "fields";
 
 	private static final Integer PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS = -1;
