@@ -14,7 +14,8 @@ import java.util.logging.Logger;
  */
 public class JToodleException extends Exception {
 
-	private static final Logger logger = Logger.getLogger( JToodleException.class.getName() );
+	private static final Logger logger = Logger.
+		getLogger( JToodleException.class.getName() );
 
 	public JToodleException( Integer errorCode, String errorDescription ) {
 		super( errorDescription );
@@ -27,11 +28,9 @@ public class JToodleException extends Exception {
 		return errorCode;
 	}
 
-public static JToodleException createJToodleException(
-		  @JsonProperty( "errorCode" ) Integer errorCode
-		, @JsonProperty( "errorDesc" ) String errorDescription
-	)
-	{
+	public static JToodleException createJToodleException(
+		@JsonProperty( "errorCode" ) Integer errorCode,
+		@JsonProperty( "errorDesc" ) String errorDescription ) {
 		logger.logp( Level.INFO,
 					 JToodleException.class.getName(),
 					 "createJToodleException",
