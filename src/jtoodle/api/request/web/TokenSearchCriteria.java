@@ -37,9 +37,13 @@ public class TokenSearchCriteria extends TaskOperations.OperationCriteria<Token>
 				.log( Level.SEVERE, null, ex );
 		}
 	}
+
 	private static final String PARAM_NAME_VERSION = "vers";
+
 	private static final String PARAM_NAME_DEVICE = "device";
+
 	private static final String PARAM_NAME_OS = "os";
+
 	public static final String PARAM_NAME_USER_ID = "userid";
 
 }
