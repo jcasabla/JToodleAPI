@@ -44,9 +44,10 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 	}
 
 	public enum CompletionCriteria {
-		  Uncompleted_Tasks_Only
-		, Completed_Tasks_Only
-		, All_Tasks;
+
+		Uncompleted_Tasks_Only,
+		Completed_Tasks_Only,
+		All_Tasks;
 
 		public int toodledoValue() {
 			int val;
@@ -61,6 +62,7 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 			}
 			return val;
 		}
+
 	}
 
 	private static final String PARAM_GET_TASKS_END_DATE = "modbefore";
@@ -82,7 +84,7 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 		.append( "note, star, priority, length, timer, added, note, parent, " )
 		.append( "meta, children, order, meta" )
 		.toString()
-		.replace( " " , "" );
+		.replace( " ", "" );
 
 	//private static final String PARAM_DEL_TASKS_TASK_ID_LIST = "tasks";
 }
