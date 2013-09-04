@@ -38,4 +38,5 @@ public enum Status {
 	Someday,
 	Canceled,
 	Reference
+
 }

@@ -6,15 +6,15 @@ package jtoodle.api.request.web;
 
 import java.io.IOException;
 import java.util.List;
-import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.bean.core.DeletionResult;
+import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.bean.util.JToodleException;
 
 /**
  *
  * @author Justo_Casablanca
  */
-public interface WebOperations <T extends AbstractJToodleBean> {
+public interface WebOperations<T extends AbstractJToodleBean> {
 
 	public static final String BASE_URI = "https://api.toodledo.com/2";
 

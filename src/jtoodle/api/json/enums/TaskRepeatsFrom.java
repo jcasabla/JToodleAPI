@@ -18,4 +18,5 @@ public enum TaskRepeatsFrom {
 
 	Repeat_From_Due_Date,
 	Repeat_From_Completion_Date
+
 }

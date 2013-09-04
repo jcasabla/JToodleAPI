@@ -27,19 +27,20 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 	}
 
 	public void setCompletionCriteria( CompletionCriteria completionCriteria ) {
-		setOption( PARAM_GET_TASKS_COMPLETED, ""+completionCriteria.toodledoValue() );
+		setOption( PARAM_GET_TASKS_COMPLETED,
+				   "" + completionCriteria.toodledoValue() );
 	}
 
 	public void setTaskId( Integer taskId ) {
-		setOption( PARAM_GET_TASKS_ID, ""+taskId );
+		setOption( PARAM_GET_TASKS_ID, "" + taskId );
 	}
 
 	public void setPaginationRowStart( Integer rowStart ) {
-		setOption( PARAM_GET_TASKS_PAGINATE_ROW_START, ""+rowStart );
+		setOption( PARAM_GET_TASKS_PAGINATE_ROW_START, "" + rowStart );
 	}
 
 	public void setPaginationNumTasks( Integer numTasks ) {
-		setOption( PARAM_GET_TASKS_PAGINATE_NUM_TASKS, ""+numTasks );
+		setOption( PARAM_GET_TASKS_PAGINATE_NUM_TASKS, "" + numTasks );
 	}
 
 	public enum CompletionCriteria {
@@ -50,11 +51,11 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 		public int toodledoValue() {
 			int val;
 			switch( this ) {
-				case All_Tasks : {
+				case All_Tasks: {
 					val = PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS;
 					break;
 				}
-				default : {
+				default: {
 					val = ordinal();
 				}
 			}
@@ -84,5 +85,4 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 		.replace( " " , "" );
 
 	//private static final String PARAM_DEL_TASKS_TASK_ID_LIST = "tasks";
-
 }

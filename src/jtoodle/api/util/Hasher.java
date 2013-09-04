@@ -14,7 +14,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public final class Hasher {
 
-	private Hasher() {}
+	private Hasher() {
+	}
 
 	public static String md5Hash( String in ) throws NoSuchAlgorithmException {
 		return( md5Hash( in, 32 ) );
@@ -45,4 +46,5 @@ public final class Hasher {
 
 		return ( hashText );
 	}
+
 }

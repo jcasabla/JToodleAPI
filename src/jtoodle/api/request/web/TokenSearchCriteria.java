@@ -31,8 +31,7 @@ public class TokenSearchCriteria extends TaskOperations.OperationCriteria<Token>
 		try {
 			setOption(
 				AuthenticationConstants.PARAM_NAME_SIGNATURE,
-				Hasher.md5Hash( userId + AuthenticationConstants.APP_TOKEN )
-			);
+				Hasher.md5Hash( userId + AuthenticationConstants.APP_TOKEN ) );
 		} catch( NoSuchAlgorithmException ex ) {
 			Logger.getLogger( TokenSearchCriteria.class.getName() ).log( Level.SEVERE, null, ex );
 		}

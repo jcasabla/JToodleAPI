@@ -9,8 +9,10 @@ package jtoodle.api.json.enums;
  * @author justo
  */
 public enum DateFormat {
+
 	MON_DD_YYYY,
 	M_D_YYYY,
 	DD_MM_YYYY,
 	YYYY_MM_DD
+
 }

@@ -26,4 +26,5 @@ public class APIWebRequest extends AbstractWebRequest {
 	}
 
 	private static final String PARAM_NAME_KEY = "key";
+
 }

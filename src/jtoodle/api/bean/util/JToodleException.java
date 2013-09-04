@@ -34,9 +34,10 @@ public static JToodleException createJToodleException(
 	{
 		logger.logp( Level.INFO,
 					 JToodleException.class.getName(),
-					"createJToodleException",
-					null,
-					new Object[] { errorCode, errorDescription } );
+					 "createJToodleException",
+					 null,
+					 new Object[] { errorCode, errorDescription } );
 		return( new JToodleException( errorCode, errorDescription ) );
 	}
+
 }

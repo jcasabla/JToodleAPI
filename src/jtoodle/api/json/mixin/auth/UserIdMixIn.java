@@ -4,8 +4,8 @@
  */
 package jtoodle.api.json.mixin.auth;
 
-import jtoodle.api.json.mixin.util.AbstractJToodleBeanMixIn;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jtoodle.api.json.mixin.util.AbstractJToodleBeanMixIn;
 
 /**
  *

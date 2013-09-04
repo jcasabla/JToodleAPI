@@ -41,7 +41,8 @@ import jtoodle.api.json.ser.TD_BooleanSerializer;
  */
 public final class ObjectMapperFactory {
 
-	private ObjectMapperFactory() {}
+	private ObjectMapperFactory() {
+	}
 
 	private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -75,7 +76,7 @@ public final class ObjectMapperFactory {
 				//.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
 				//.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
 				//.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
-		);
+				);
 
 	}
 

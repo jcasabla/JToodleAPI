@@ -20,15 +20,14 @@ public abstract class TaskNotebookBeanMixIn extends CoreBeanMixIn {
 	@JsonProperty( "added" )
 	private Date addedOn = null;
 
-	//@JsonProperty( "title" )
-	//public abstract String getTitle();
-	//public abstract void setTitle( String title );
-
 	@JsonProperty( "folder" )
 	public abstract Integer getFolderId();
 	public abstract void setFolderId( Integer folderId );
 
-	@JsonIgnore public abstract Date getModifiedOn();
-	@JsonIgnore public abstract Date getAddedOn();
+	@JsonIgnore
+	public abstract Date getModifiedOn();
+
+	@JsonIgnore
+	public abstract Date getAddedOn();
 
 }

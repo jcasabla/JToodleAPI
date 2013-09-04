@@ -9,31 +9,31 @@ package jtoodle.api.bean.core;
  * @author justo
  */
 public class Folder extends AbstractCoreBean {
-/*
- * JSON:[
- * {
- *		"id":"123",
- *		"name":"Shopping",
- *		"private":"0",
- *		"archived":"0",
- *		"ord":"1"
- * },
- * {
- *		"id":"456",
- *		"name":"Home Repairs",
- *		"private":"0",
- *		"archived":"0",
- *		"ord":"2"
- * },
- * {
- *		"id":"789",
- *		"name":"Vacation PLanning",
- *		"private":"0",
- *		"archived":"0",
- *		"ord":"3"
- * }
- * ]
- */
+	/*
+	 * JSON:[
+	 * {
+	 *		"id":"123",
+	 *		"name":"Shopping",
+	 *		"private":"0",
+	 *		"archived":"0",
+	 *		"ord":"1"
+	 * },
+	 * {
+	 *		"id":"456",
+	 *		"name":"Home Repairs",
+	 *		"private":"0",
+	 *		"archived":"0",
+	 *		"ord":"2"
+	 * },
+	 * {
+	 *		"id":"789",
+	 *		"name":"Vacation PLanning",
+	 *		"private":"0",
+	 *		"archived":"0",
+	 *		"ord":"3"
+	 * }
+	 * ]
+	 */
 
 	private String name = null;
 	private Boolean _private = null;

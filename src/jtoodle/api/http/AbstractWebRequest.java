@@ -59,7 +59,8 @@ public abstract class AbstractWebRequest {
 		HttpPost request = new HttpPost( uri );
 
 		try {
-			UrlEncodedFormEntity entity = new UrlEncodedFormEntity( formparams, "UTF-8" );
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity( formparams,
+																	"UTF-8" );
 			request.setEntity( entity );
 		} catch( UnsupportedEncodingException ex ) {
 			logger.log( Level.SEVERE, null, ex );

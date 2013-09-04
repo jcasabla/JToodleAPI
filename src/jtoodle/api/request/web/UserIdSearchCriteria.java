@@ -27,8 +27,7 @@ public class UserIdSearchCriteria extends TaskOperations.OperationCriteria<UserI
 		try {
 			setOption(
 				AuthenticationConstants.PARAM_NAME_SIGNATURE,
-				Hasher.md5Hash( email + AuthenticationConstants.APP_TOKEN )
-			);
+				Hasher.md5Hash( email + AuthenticationConstants.APP_TOKEN ) );
 		} catch( NoSuchAlgorithmException ex ) {
 			Logger.getLogger( UserIdSearchCriteria.class.getName() ).log( Level.SEVERE, null, ex );
 		}
@@ -39,7 +38,6 @@ public class UserIdSearchCriteria extends TaskOperations.OperationCriteria<UserI
 	}
 
 	private static final String PARAM_NAME_EMAIL = "email";
-
 	private static final String PARAM_NAME_PASSWORD = "pass";
 
 }

@@ -12,7 +12,8 @@ import java.util.Collection;
  */
 public final class NullSafe {
 
-	public NullSafe() {}
+	public NullSafe() {
+	}
 
 	public static boolean equals( Object o1, Object o2 ) {
 		if( o1 == o2 ) {
@@ -38,4 +39,5 @@ public final class NullSafe {
 	public static boolean isNullOrEmpty( Collection c ) {
 		return( ( c == null ) || c.isEmpty() );
 	}
+
 }

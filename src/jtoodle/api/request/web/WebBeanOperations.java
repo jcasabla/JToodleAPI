@@ -4,7 +4,6 @@
  */
 package jtoodle.api.request.web;
 
-import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,19 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import jtoodle.api.bean.util.AbstractJToodleBean;
-import jtoodle.api.json.bean.BeanParser;
 import jtoodle.api.bean.core.DeletionResult;
+import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.bean.util.JToodleException;
-import static jtoodle.api.request.web.WebOperations.BASE_URI;
 import jtoodle.api.http.AbstractWebRequest;
+import jtoodle.api.http.WebRequestFactory;
+import jtoodle.api.json.bean.BeanParser;
 import jtoodle.api.util.NullSafe;
+
+import static jtoodle.api.request.web.WebOperations.BASE_URI;
 
 /**
  *
  * @author Justo_Casablanca
  */
-public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
+public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 
 	private final String[] URIs = new String[OperationType.values().length];
 
@@ -37,7 +38,9 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 			null : new StringBuilder().append( BASE_URI ).append( uri ).toString();
 	}
 
-	private final List<OperationCriteria<T>> CRITERIA = new ArrayList<>( OperationType.values().length );
+	private final List<OperationCriteria<T>> CRITERIA =
+			new ArrayList<>( OperationType.values().length );
+
 	{
 		CRITERIA.add( null );
 		CRITERIA.add( null );
@@ -73,7 +76,8 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 	}
 
 	public T searchSingle() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( getURI( OperationType.RETRIEVE ) );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
+				getURI( OperationType.RETRIEVE ) );
 		setRequestParameters( OperationType.RETRIEVE, wr );
 
 		String json = wr.doRequestResponse();
@@ -84,7 +88,8 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 	//@Override
 	public List<T> search() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( getURI( OperationType.RETRIEVE ) );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest(
+				getURI( OperationType.RETRIEVE ) );
 		setRequestParameters( OperationType.RETRIEVE, wr );
 
 		String json = wr.doRequestResponse();
@@ -95,28 +100,33 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 	//@Override
 	public DeletionResult deleteSingle() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[OperationType.DELETE.ordinal()] );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest( 
+				URIs[OperationType.DELETE.ordinal()] );
 		setRequestParameters( OperationType.DELETE, wr );
 
 		String json = wr.doRequestResponse();
-		DeletionResult beanOut = BeanParser.parseBean( json, DeletionResult.class );
+		DeletionResult beanOut = BeanParser.parseBean( json,
+													   DeletionResult.class );
 
 		return( beanOut );
 	}
 
 	public List<DeletionResult> delete() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[OperationType.DELETE.ordinal()] );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest( 
+				URIs[OperationType.DELETE.ordinal()] );
 		setRequestParameters( OperationType.DELETE, wr );
 
 		String json = wr.doRequestResponse();
-		List<DeletionResult> beanOut = BeanParser.parseBeanList( json, DeletionResult.class );
+		List<DeletionResult> beanOut = BeanParser.parseBeanList( json,
+																 DeletionResult.class );
 
 		return( beanOut );
 	}
 
 	//@Override
 	public List<T> create() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[OperationType.ADD.ordinal()] );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest( 
+				URIs[OperationType.ADD.ordinal()] );
 		setRequestParameters( OperationType.ADD, wr );
 
 		String json = wr.doRequestResponse();
@@ -127,7 +137,8 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 	//@Override
 	public List<T> update() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( URIs[OperationType.EDIT.ordinal()] );
+		AbstractWebRequest wr = WebRequestFactory.createWebRequest( 
+				URIs[OperationType.EDIT.ordinal()] );
 		setRequestParameters( OperationType.EDIT, wr );
 
 		String json = wr.doRequestResponse();
@@ -137,10 +148,12 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 	}
 
 	public static enum OperationType {
+
 		ADD,
 		RETRIEVE,
 		EDIT,
 		DELETE
+
 	}
 
 	public static class OperationCriteria<T> {
@@ -167,7 +180,7 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 
 		public void setOption( String optionName, Date optionValue ) {
 			if( optionValue != null ) {
-				paramValues.put( optionName, ""+optionValue.getTime() );
+				paramValues.put( optionName, "" + optionValue.getTime() );
 			}
 		}
 
@@ -178,5 +191,7 @@ public abstract class WebBeanOperations <T extends AbstractJToodleBean> {
 		public OperationType getOperationType() {
 			return operationType;
 		}
+
 	}
+
 }

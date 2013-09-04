@@ -18,15 +18,16 @@ import jtoodle.api.bean.util.AbstractJToodleBean;
  */
 public class BeanWriter {
 
-	private BeanWriter() {}
+	private BeanWriter() {
+	}
 
 	public static <T extends AbstractJToodleBean> String jsonString( List<T> beans )
-	throws JsonProcessingException {
+			throws JsonProcessingException {
 		return( ObjectMapperFactory.getInstance().writeValueAsString( beans ) );
 	}
 
 	public static <T extends AbstractJToodleBean> String jsonString( T bean )
-	throws JsonProcessingException {
+			throws JsonProcessingException {
 		return( ObjectMapperFactory.getInstance().writeValueAsString( bean ) );
 	}
 
@@ -34,12 +35,12 @@ public class BeanWriter {
 		StringBuilder idSB = new StringBuilder();
 		idSB.append( "[" );
 
-		for( int i=0; i < idBeans.size(); i++ ) {
+		for( int i = 0; i < idBeans.size(); i++ ) {
 			if( i > 0 ) {
 				idSB.append( "," );
 			}
 			idSB.append( "\"" );
-			idSB.append( idBeans.get( i).getId() );
+			idSB.append( idBeans.get( i ).getId() );
 			idSB.append( "\"" );
 		}
 
@@ -57,4 +58,5 @@ public class BeanWriter {
 		ObjectWriter ow = ObjectMapperFactory.getInstance().writerWithDefaultPrettyPrinter();
 		ow.writeValue( file, obj );
 	}
+
 }

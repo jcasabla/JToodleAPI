@@ -11,16 +11,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.bean.auth.Token;
 import jtoodle.api.bean.auth.UserId;
+import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.intf.AuthenticationConstants;
 import jtoodle.api.request.web.TokenOperations;
 import jtoodle.api.request.web.TokenSearchCriteria;
 import jtoodle.api.request.web.UserIdOperations;
 import jtoodle.api.request.web.UserIdSearchCriteria;
-import jtoodle.api.util.NullSafe;
 import jtoodle.api.util.Hasher;
+import jtoodle.api.util.NullSafe;
 
 /**
  *
@@ -31,12 +31,11 @@ public class AuthCache implements AuthenticationConstants {
 	private static final Logger logger = Logger.getLogger( AuthCache.class.getName() );
 
 	private static final long MAX_TOKEN_AGE =
-		4 // hours
-		* 60 // minutes/hour
-		* 60 // seconds/minute
-		* 1000 // millis/second
-		;
-
+			4 // hours
+			* 60 // minutes/hour
+			* 60 // seconds/minute
+			* 1000 // millis/second
+			;
 	private static final String KEY_EMAIL = "email";
 	private static final String KEY_PASSWORD = "hashed_password";
 	private static final String KEY_USER_ID = "user_id";
@@ -44,9 +43,8 @@ public class AuthCache implements AuthenticationConstants {
 	private static final String KEY_API_KEY = "api_key";
 	private static final String KEY_TOKEN_TIMESTAMP_MILLIS = "token_timestamp_millis";
 	private static final String KEY_TOKEN_TIMESTAMP_TEXT = "token_timestamp_text";
-
-	private static final Preferences _prefs = Preferences.userRoot().node( "/jtoodle/api/auth" );
-
+	private static final Preferences _prefs = Preferences.userRoot().node( 
+			"/jtoodle/api/auth" );
 	private static String _password = null;
 
 	private static void save() {
@@ -122,11 +120,12 @@ public class AuthCache implements AuthenticationConstants {
 		String returnValue = _prefs.get( KEY_EMAIL, null );
 		logger.exiting( AuthCache.class.getName(), "getEmail()", returnValue );
 
-		return( returnValue );
+		return ( returnValue );
 	}
 
 	private static void setPassword( String password ) {
-		logger.entering( AuthCache.class.getName(), "setPassword(String)", password );
+		logger.entering( AuthCache.class.getName(), "setPassword(String)",
+						 password );
 		_password = password;
 
 		try {
@@ -214,7 +213,7 @@ public class AuthCache implements AuthenticationConstants {
 
 		logger.exiting( AuthCache.class.getName(), "getUserId()", userId );
 
-		return( userId );
+		return ( userId );
 	}
 
 	private static void setToken( String token ) {
@@ -293,10 +292,10 @@ public class AuthCache implements AuthenticationConstants {
 				String token = getToken();
 
 				apiKey = Hasher.md5Hash( new StringBuilder()
-					.append( getHashedPassword() )
-					.append( AuthenticationConstants.APP_TOKEN )
-					.append( token )
-					.toString() );
+						.append( getHashedPassword() )
+						.append( AuthenticationConstants.APP_TOKEN )
+						.append( token )
+						.toString() );
 				setApiKey( apiKey );
 			} catch( NoSuchAlgorithmException ex ) {
 				logger.log( Level.SEVERE, null, ex );
@@ -315,11 +314,13 @@ public class AuthCache implements AuthenticationConstants {
 	}
 
 	private static long getTokenTimestampMillis() {
-		return( _prefs.getLong( KEY_TOKEN_TIMESTAMP_MILLIS, System.currentTimeMillis() ) );
+		return ( _prefs.getLong( KEY_TOKEN_TIMESTAMP_MILLIS,
+								 System.currentTimeMillis() ) );
 	}
 
 	private static boolean tokenIsStale() {
 		long tokenAge = System.currentTimeMillis() - getTokenTimestampMillis();
 		return( tokenAge >= MAX_TOKEN_AGE );
 	}
+
 }

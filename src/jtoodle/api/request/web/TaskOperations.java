@@ -4,15 +4,15 @@
  */
 package jtoodle.api.request.web;
 
-import jtoodle.api.http.WebRequestFactory;
 import java.io.IOException;
 import java.util.List;
-import jtoodle.api.json.bean.BeanParser;
-import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.bean.core.Task;
 import jtoodle.api.bean.core.TaskQueryResult;
-import static jtoodle.api.request.web.WebBeanOperations.OperationType;
+import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.http.AbstractWebRequest;
+import jtoodle.api.http.WebRequestFactory;
+import jtoodle.api.json.bean.BeanParser;
+import jtoodle.api.request.web.WebBeanOperations.OperationType;
 
 /**
  *
@@ -23,7 +23,7 @@ public class TaskOperations extends WebBeanOperations<Task> {
 	public TaskOperations() {
 		super();
 
-		registerURI( OperationType.ADD,  "/tasks/add.php" );
+		registerURI( OperationType.ADD, "/tasks/add.php" );
 		registerURI( OperationType.RETRIEVE, "/tasks/get.php" );
 		registerURI( OperationType.EDIT, "/tasks/edit.php" );
 		registerURI( OperationType.DELETE, "/tasks/delete.php" );
@@ -36,7 +36,8 @@ public class TaskOperations extends WebBeanOperations<Task> {
 
 	@Override
 	public List<Task> search() throws IOException, JToodleException {
-		AbstractWebRequest wr = WebRequestFactory.createWebRequest( getURI( OperationType.RETRIEVE ) );
+		AbstractWebRequest wr = WebRequestFactory.
+				createWebRequest( getURI( OperationType.RETRIEVE ) );
 		setRequestParameters( OperationType.RETRIEVE, wr );
 
 		String json = wr.doRequestResponse();
