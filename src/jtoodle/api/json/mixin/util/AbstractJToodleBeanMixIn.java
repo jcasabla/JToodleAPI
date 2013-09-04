@@ -9,5 +9,4 @@ package jtoodle.api.json.mixin.util;
  * @author justo
  */
 public interface AbstractJToodleBeanMixIn {
-
 }
