@@ -36,8 +36,11 @@ public class Folder extends AbstractCoreBean {
 	 */
 
 	private String name = null;
+
 	private Boolean _private = null;
+
 	private Boolean archived = null;
+
 	private Integer order = null;
 
 	public String getName() {
