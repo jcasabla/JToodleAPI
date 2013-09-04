@@ -15,6 +15,7 @@ public interface UserIdMixIn extends AbstractJToodleBeanMixIn {
 
 	@JsonProperty( "userid" )
 	public abstract String getUserId();
+
 	public abstract void setUserId( String userId );
 
 }
