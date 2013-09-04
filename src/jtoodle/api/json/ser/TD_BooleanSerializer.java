@@ -11,13 +11,16 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 /**
- * 
+ *
  * @author justo
  */
 public class TD_BooleanSerializer extends JsonSerializer<Boolean> {
 
 	@Override
-	public void serialize( Boolean value, JsonGenerator jgen, SerializerProvider provider ) throws IOException, JsonProcessingException {
+	public void serialize( Boolean value,
+						   JsonGenerator jgen,
+						   SerializerProvider provider )
+		throws IOException, JsonProcessingException {
 		jgen.writeNumber( value ? 1 : 0 );
 	}
 
