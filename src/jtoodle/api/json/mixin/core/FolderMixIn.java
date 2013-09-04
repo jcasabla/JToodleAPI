@@ -14,6 +14,7 @@ public abstract class FolderMixIn extends CoreBeanMixIn {
 
 	@JsonProperty( "ord" )
 	public abstract Integer getOrder();
+
 	public abstract void setOrder( Integer order );
 
 }
