@@ -49,7 +49,8 @@ public abstract class AbstractWebRequest {
 					"setParameter(parameterName={0},parameterValue={1}",
 					new String[] { parameterName, parameterValue } );
 
-		formparams.add( new BasicNameValuePair( parameterName, parameterValue ) );
+		formparams
+			.add( new BasicNameValuePair( parameterName, parameterValue ) );
 	}
 
 	public final String doRequestResponse() throws IOException {
@@ -83,7 +84,8 @@ public abstract class AbstractWebRequest {
 		byte[] byteResponse = client.execute( request, handler );
 		String stringResponse = new String( byteResponse );
 
-		logger.exiting( getClass().getName(), "doRequestResponse()", stringResponse );
+		logger.exiting( getClass().getName(), "doRequestResponse()",
+						stringResponse );
 
 		return stringResponse;
 	}
