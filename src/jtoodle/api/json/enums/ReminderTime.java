@@ -52,7 +52,9 @@ public enum ReminderTime {
 	}
 
 	private static final int MINS_PER_HOUR = 60;
+
 	private static final int MINS_PER_DAY = MINS_PER_HOUR * 24;
+
 	private static final int MINS_PER_WEEK = MINS_PER_DAY * 7;
 
 	public Long toMinutes() {
