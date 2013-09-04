@@ -23,7 +23,7 @@ public class UserIdOperations extends WebBeanOperations<UserId> {
 
 	@Override
 	protected Class<UserId> getBeanClass() {
-		return( UserId.class );
+		return UserId.class;
 	}
 
 }

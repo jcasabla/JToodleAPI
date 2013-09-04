@@ -23,7 +23,7 @@ public class TokenOperations extends WebBeanOperations<Token> {
 
 	@Override
 	protected Class<Token> getBeanClass() {
-		return( Token.class );
+		return Token.class;
 	}
 
 }

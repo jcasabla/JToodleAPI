@@ -20,7 +20,7 @@ public class TD_ReminderTimeDeserializer extends JsonDeserializer<ReminderTime> 
 	@Override
 	public ReminderTime deserialize( JsonParser jp, DeserializationContext dc )
 			throws IOException, JsonProcessingException {
-		return ( ReminderTime.toReminderTime( Long.parseLong( jp.getText() ) ) );
+		return ReminderTime.toReminderTime( Long.parseLong( jp.getText() ) );
 	}
 
 }

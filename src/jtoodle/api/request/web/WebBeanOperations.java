@@ -30,7 +30,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	private final String[] URIs = new String[OperationType.values().length];
 
 	protected String getURI( OperationType op ) {
-		return ( URIs[op.ordinal()] );
+		return URIs[op.ordinal()];
 	}
 
 	protected void registerURI( OperationType op, String uri ) {
@@ -49,7 +49,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 	}
 
 	protected OperationCriteria<T> getOperationCriteria( OperationType op ) {
-		return( CRITERIA.get( op.ordinal() ) );
+		return CRITERIA.get( op.ordinal() );
 	}
 
 	public void setOperationCriteria( OperationCriteria<T> criteria ) {
@@ -83,7 +83,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		String json = wr.doRequestResponse();
 		T singleBean = BeanParser.parseBean( json, getBeanClass() );
 
-		return( singleBean );
+		return singleBean;
 	}
 
 	//@Override
@@ -95,7 +95,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		String json = wr.doRequestResponse();
 		List<T> beans = BeanParser.parseBeanList( json, getBeanClass() );
 
-		return( beans );
+		return beans;
 	}
 
 	//@Override
@@ -108,7 +108,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		DeletionResult beanOut = BeanParser.parseBean( json,
 													   DeletionResult.class );
 
-		return( beanOut );
+		return beanOut;
 	}
 
 	public List<DeletionResult> delete() throws IOException, JToodleException {
@@ -120,7 +120,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		List<DeletionResult> beanOut = BeanParser.parseBeanList( json,
 																 DeletionResult.class );
 
-		return( beanOut );
+		return beanOut;
 	}
 
 	//@Override
@@ -132,7 +132,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		String json = wr.doRequestResponse();
 		List<T> beanOut = BeanParser.parseBeanList( json, getBeanClass() );
 
-		return( beanOut );
+		return beanOut;
 	}
 
 	//@Override
@@ -144,7 +144,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		String json = wr.doRequestResponse();
 		List<T> beanOut = BeanParser.parseBeanList( json, getBeanClass() );
 
-		return( beanOut );
+		return beanOut;
 	}
 
 	public static enum OperationType {
@@ -171,7 +171,7 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 		private Map<String, String> paramValues = new HashMap<>();
 
 		public Map<String, String> getOptions() {
-			return ( paramValues );
+			return paramValues;
 		}
 
 		public void setOption( String optionName, String optionValue ) {

@@ -120,7 +120,7 @@ public class AuthCache implements AuthenticationConstants {
 		String returnValue = _prefs.get( KEY_EMAIL, null );
 		logger.exiting( AuthCache.class.getName(), "getEmail()", returnValue );
 
-		return ( returnValue );
+		return returnValue;
 	}
 
 	private static void setPassword( String password ) {
@@ -213,7 +213,7 @@ public class AuthCache implements AuthenticationConstants {
 
 		logger.exiting( AuthCache.class.getName(), "getUserId()", userId );
 
-		return ( userId );
+		return userId;
 	}
 
 	private static void setToken( String token ) {

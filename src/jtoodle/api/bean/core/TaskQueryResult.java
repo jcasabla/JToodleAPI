@@ -24,7 +24,7 @@ public class TaskQueryResult extends AbstractJToodleBean {
 
 	public static TaskQueryResult createTaskQueryResult(
 			Integer queryTaskCount, Integer totalTaskCount ) {
-		return ( new TaskQueryResult( queryTaskCount, totalTaskCount ) );
+		return new TaskQueryResult( queryTaskCount, totalTaskCount );
 	}
 
 	public Integer getQueryTaskCount() {

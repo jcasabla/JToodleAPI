@@ -24,7 +24,7 @@ public class FolderOperations extends WebBeanOperations<Folder> {
 
 	@Override
 	protected Class<Folder> getBeanClass() {
-		return( Folder.class );
+		return Folder.class;
 	}
 
 }

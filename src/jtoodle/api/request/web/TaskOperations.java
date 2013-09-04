@@ -31,7 +31,7 @@ public class TaskOperations extends WebBeanOperations<Task> {
 
 	@Override
 	protected Class<Task> getBeanClass() {
-		return( Task.class );
+		return Task.class;
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class TaskOperations extends WebBeanOperations<Task> {
 		String json = wr.doRequestResponse();
 		TaskQueryResult result = BeanParser.parseTaskQueryResults( json );
 
-		return( result.getTasks() );
+		return result.getTasks();
 	}
 
 }

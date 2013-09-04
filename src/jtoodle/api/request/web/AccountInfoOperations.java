@@ -23,7 +23,7 @@ public class AccountInfoOperations extends WebBeanOperations<AccountInfo> {
 
 	@Override
 	protected Class<AccountInfo> getBeanClass() {
-		return( AccountInfo.class );
+		return AccountInfo.class;
 	}
 
 }

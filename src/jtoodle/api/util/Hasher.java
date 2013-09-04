@@ -18,7 +18,7 @@ public final class Hasher {
 	}
 
 	public static String md5Hash( String in ) throws NoSuchAlgorithmException {
-		return( md5Hash( in, 32 ) );
+		return md5Hash( in, 32 );
 	}
 
 	private static String md5Hash( String in, int padToLen ) throws NoSuchAlgorithmException {
@@ -44,7 +44,7 @@ public final class Hasher {
 			hashText = padding.toString();
 		}
 
-		return ( hashText );
+		return hashText;
 	}
 
 }

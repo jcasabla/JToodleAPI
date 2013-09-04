@@ -59,7 +59,7 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 					val = ordinal();
 				}
 			}
-			return( val );
+			return val;
 		}
 	}
 
