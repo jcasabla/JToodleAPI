@@ -29,7 +29,8 @@ public class UserIdSearchCriteria extends TaskOperations.OperationCriteria<UserI
 				AuthenticationConstants.PARAM_NAME_SIGNATURE,
 				Hasher.md5Hash( email + AuthenticationConstants.APP_TOKEN ) );
 		} catch( NoSuchAlgorithmException ex ) {
-			Logger.getLogger( UserIdSearchCriteria.class.getName() ).log( Level.SEVERE, null, ex );
+			Logger.getLogger( UserIdSearchCriteria.class.getName() )
+				.log( Level.SEVERE, null, ex );
 		}
 	}
 
