@@ -21,8 +21,8 @@ public class BeanWriter {
 	private BeanWriter() {
 	}
 
-	public static <T extends AbstractJToodleBean>
-		String jsonString( List<T> beans )
+	public static <T extends AbstractJToodleBean> String jsonString( 
+		List<T> beans )
 		throws JsonProcessingException {
 		return ObjectMapperFactory.getInstance().writeValueAsString( beans );
 	}
