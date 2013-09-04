@@ -14,7 +14,9 @@ import jtoodle.api.bean.util.AbstractJToodleBean;
 public class TaskQueryResult extends AbstractJToodleBean {
 
 	private Integer queryTaskCount = null;
+
 	private Integer totalTaskCount = null;
+
 	private List<Task> tasks = null;
 
 	protected TaskQueryResult( Integer queryTaskCount, Integer totalTaskCount ) {
