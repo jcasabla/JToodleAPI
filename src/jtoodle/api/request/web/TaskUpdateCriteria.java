@@ -28,6 +28,7 @@ public class TaskUpdateCriteria extends TaskOperations.OperationCriteria<Task> {
 	}
 
 	private static final String PARAM_EDIT_TASKS_TASK_LIST = "tasks";
+
 	private static final String PARAM_EDIT_RESCHEDULE = "reschedule";
 
 }
