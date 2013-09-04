@@ -62,65 +62,121 @@ public abstract class AccountInfoMixIn implements AbstractJToodleBeanMixIn {
 	 * lastedit_notebook : A timestamp that indicates the last time that any notebook was added or edited on this account. You can quickly check this field to determine if you need to download updates.
 	 * lastdelete_notebook : A timestamp that indicates the last time that any notebook was deleted from this account. You can quickly check this field to determine if you need to identify and remove notebooks from your application.
 	 */
-
 	@JsonProperty( "userid" )
 	private String userId = null;
+
 	@JsonProperty( "alias" )
 	private String alias = null;
+
 	@JsonProperty( "pro" )
 	private Boolean pro = null;
+
 	@JsonProperty( "dateformat" )
 	private DateFormat dateFormat = null;
+
 	@JsonProperty( "timezone" )
 	private Integer timeZone = null;
+
 	@JsonProperty( "hidemonths" )
 	private Integer hiddenTasksMinDueMonths = null;
+
 	@JsonProperty( "hotlistpriority" )
 	private Priority hotListMinTaskPriority = null;
+
 	@JsonProperty( "hotlistduedate" )
 	private Integer hotListMaxDueDays = null;
+
 	@JsonProperty( "hotliststar" )
 	private Boolean hotListIncludesStarredTasks = null;
+
 	@JsonProperty( "hotliststatus" )
 	private Boolean hotListIncludesNextActionStatus = null;
+
 	@JsonProperty( "showtabnums" )
 	private Boolean showSectionTaskCounts = null;
+
 	@JsonProperty( "lastedit_task" )
 	private Date lastTaskEditedOn = null;
+
 	@JsonProperty( "lastdelete_task" )
 	private Date lastTaskDeletedOn = null;
+
 	@JsonProperty( "lastedit_folder" )
 	private Date lastFolderEditedOn = null;
+
 	@JsonProperty( "lastedit_context" )
 	private Date lastContextEditedOn = null;
+
 	@JsonProperty( "lastedit_goal" )
 	private Date lastGoalEditedOn = null;
+
 	@JsonProperty( "lastedit_location" )
 	private Date lastLocationEditedOn = null;
+
 	@JsonProperty( "lastedit_notebook" )
 	private Date lastNotebookEditedOn = null;
+
 	@JsonProperty( "lastdelete_notebook" )
 	private Date lastNotebookDeletedOn = null;
 
-	@JsonIgnore	public abstract String getUserId();
-	@JsonIgnore	public abstract String getAlias();
-	@JsonIgnore	public abstract Boolean getPro();
-	@JsonIgnore	public abstract Boolean isPro();
-	@JsonIgnore	public abstract DateFormat getDateFormat();
-	@JsonIgnore	public abstract Integer getTimeZone();
-	@JsonIgnore	public abstract Integer getHiddenTasksMinDueMonths();
-	@JsonIgnore	public abstract Priority getHotListMinTaskPriority();
-	@JsonIgnore	public abstract Integer getHotListMaxDueDays();
-	@JsonIgnore	public abstract Boolean getHotListIncludesStarredTasks();
-	@JsonIgnore	public abstract Boolean getHotListIncludesNextActionStatus();
-	@JsonIgnore	public abstract Boolean getShowSectionTaskCounts();
-	@JsonIgnore	public abstract Date getLastTaskEditedOn();
-	@JsonIgnore	public abstract Date getLastTaskDeletedOn();
-	@JsonIgnore	public abstract Date getLastFolderEditedOn();
-	@JsonIgnore	public abstract Date getLastContextEditedOn();
-	@JsonIgnore	public abstract Date getLastGoalEditedOn();
-	@JsonIgnore	public abstract Date getLastLocationEditedOn();
-	@JsonIgnore	public abstract Date getLastNotebookEditedOn();
-	@JsonIgnore	public abstract Date getLastNotebookDeletedOn();
+	@JsonIgnore
+	public abstract String getUserId();
+
+	@JsonIgnore
+	public abstract String getAlias();
+
+	@JsonIgnore
+	public abstract Boolean getPro();
+
+	@JsonIgnore
+	public abstract Boolean isPro();
+
+	@JsonIgnore
+	public abstract DateFormat getDateFormat();
+
+	@JsonIgnore
+	public abstract Integer getTimeZone();
+
+	@JsonIgnore
+	public abstract Integer getHiddenTasksMinDueMonths();
+
+	@JsonIgnore
+	public abstract Priority getHotListMinTaskPriority();
+
+	@JsonIgnore
+	public abstract Integer getHotListMaxDueDays();
+
+	@JsonIgnore
+	public abstract Boolean getHotListIncludesStarredTasks();
+
+	@JsonIgnore
+	public abstract Boolean getHotListIncludesNextActionStatus();
+
+	@JsonIgnore
+	public abstract Boolean getShowSectionTaskCounts();
+
+	@JsonIgnore
+	public abstract Date getLastTaskEditedOn();
+
+	@JsonIgnore
+	public abstract Date getLastTaskDeletedOn();
+
+	@JsonIgnore
+	public abstract Date getLastFolderEditedOn();
+
+	@JsonIgnore
+	public abstract Date getLastContextEditedOn();
+
+	@JsonIgnore
+	public abstract Date getLastGoalEditedOn();
+
+	@JsonIgnore
+	public abstract Date getLastLocationEditedOn();
+
+	@JsonIgnore
+	public abstract Date getLastNotebookEditedOn();
+
+	@JsonIgnore
+	public abstract Date getLastNotebookDeletedOn();
 
 }
