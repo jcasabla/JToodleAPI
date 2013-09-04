@@ -60,25 +60,42 @@ public class AccountInfo extends AbstractJToodleBean {
 	 * lastedit_notebook : A timestamp that indicates the last time that any notebook was added or edited on this account. You can quickly check this field to determine if you need to download updates.
 	 * lastdelete_notebook : A timestamp that indicates the last time that any notebook was deleted from this account. You can quickly check this field to determine if you need to identify and remove notebooks from your application.
 	 */
-
 	private String userId = null;
+
 	private String alias = null;
+
 	private Boolean pro = null;
+
 	private DateFormat dateFormat = null;
+
 	private Integer timeZone = null;
+
 	private Integer hiddenTasksMinDueMonths = null;
+
 	private Priority hotListMinTaskPriority = null;
+
 	private Integer hotListMaxDueDays = null;
+
 	private Boolean hotListIncludesStarredTasks = null;
+
 	private Boolean hotListIncludesNextActionStatus = null;
+
 	private Boolean showSectionTaskCounts = null;
+
 	private Date lastTaskEditedOn = null;
+
 	private Date lastTaskDeletedOn = null;
+
 	private Date lastFolderEditedOn = null;
+
 	private Date lastContextEditedOn = null;
+
 	private Date lastGoalEditedOn = null;
+
 	private Date lastLocationEditedOn = null;
+
 	private Date lastNotebookEditedOn = null;
+
 	private Date lastNotebookDeletedOn = null;
 
 	public String getUserId() {
