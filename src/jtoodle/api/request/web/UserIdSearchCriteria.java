@@ -39,6 +39,7 @@ public class UserIdSearchCriteria extends TaskOperations.OperationCriteria<UserI
 	}
 
 	private static final String PARAM_NAME_EMAIL = "email";
+
 	private static final String PARAM_NAME_PASSWORD = "pass";
 
 }
