@@ -13,10 +13,8 @@ import jtoodle.api.auth.AuthCache;
 public class WebRequestFactory {
 
 	public static AbstractWebRequest createWebRequest( String uri ) {
-		return(
-			AuthCache.isAuthenticated() ?
-				new APIWebRequest( uri ) :
-				new AuthWebRequest( uri )
-		);
+		return AuthCache.isAuthenticated() ?
+					new APIWebRequest( uri ) :
+					new AuthWebRequest( uri );
 	}
 }

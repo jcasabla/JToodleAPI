@@ -17,7 +17,7 @@ public abstract class AbstractCoreBean extends AbstractJToodleBean
 
 	@Override
 	public Integer getId() {
-		return( id );
+		return id;
 	}
 
 }

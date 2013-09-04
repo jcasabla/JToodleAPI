@@ -29,7 +29,7 @@ public class AuthExceptionHandler {
 			}
 		}
 
-		return( val );
+		return val;
 	}
 
 }

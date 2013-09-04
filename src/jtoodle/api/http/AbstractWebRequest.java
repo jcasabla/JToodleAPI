@@ -76,7 +76,7 @@ public abstract class AbstractWebRequest {
 					retVal = EntityUtils.toByteArray( entity );
 				}
 
-				return( retVal );
+				return retVal;
 			}
 		};
 
@@ -85,7 +85,7 @@ public abstract class AbstractWebRequest {
 
 		logger.exiting( getClass().getName(), "doRequestResponse()", stringResponse );
 
-		return ( stringResponse );
+		return stringResponse;
 	}
 
 }

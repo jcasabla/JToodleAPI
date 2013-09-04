@@ -26,16 +26,19 @@ public class BeanParser {
 															   Class<T> clazz )
 			throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
-		return( ObjectMapperFactory.getInstance().readValue( js, clazz ) );
+		return ObjectMapperFactory.getInstance().readValue( js, clazz );
 	}
 
 	public static <T extends AbstractJToodleBean> List<T> parseBeanList( 
 			String js, Class<T> clazz )
 			throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
-		return ( ObjectMapperFactory.getInstance().readValue( js,
-															  ObjectMapperFactory.getInstance().getTypeFactory().constructCollectionType( 
-				List.class, clazz ) ) );
+		return ObjectMapperFactory.getInstance()
+					.readValue( js,
+								ObjectMapperFactory.getInstance().
+									getTypeFactory().constructCollectionType( 
+										List.class,
+										clazz ) );
 	}
 
 	private static void throwJToodleExceptionIfError( String js ) throws
@@ -73,7 +76,7 @@ public class BeanParser {
 			results.setTasks( tasks );
 		}
 
-		return( results );
+		return results;
 	}
 
 }

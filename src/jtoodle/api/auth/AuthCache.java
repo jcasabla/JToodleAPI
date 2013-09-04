@@ -101,7 +101,7 @@ public class AuthCache implements AuthenticationConstants {
 
 		logger.exiting( AuthCache.class.getName(), "isAuthenticated()" );
 
-		return( isLoggedIn );
+		return isLoggedIn;
 	}
 
 	private static void setEmail( String email ) {
@@ -147,7 +147,7 @@ public class AuthCache implements AuthenticationConstants {
 		String returnValue = _prefs.get( KEY_PASSWORD, null );
 		logger.exiting( AuthCache.class.getName(), "getHashedPassword()", returnValue );
 
-		return( returnValue );
+		return returnValue;
 	}
 
 	private static void storeHashedPassword( String clearPassword ) {
@@ -260,7 +260,7 @@ public class AuthCache implements AuthenticationConstants {
 
 		logger.exiting( AuthCache.class.getName(), "getToken()", token );
 
-		return( token );
+		return token;
 	}
 
 	private static void setApiKey( String apiKey ) {
@@ -304,7 +304,7 @@ public class AuthCache implements AuthenticationConstants {
 
 		logger.entering( AuthCache.class.getName(), "getApiKey()", apiKey );
 
-		return( apiKey );
+		return apiKey;
 	}
 
 	private static void markTokenTimestampMillis() {
@@ -314,13 +314,13 @@ public class AuthCache implements AuthenticationConstants {
 	}
 
 	private static long getTokenTimestampMillis() {
-		return ( _prefs.getLong( KEY_TOKEN_TIMESTAMP_MILLIS,
-								 System.currentTimeMillis() ) );
+		return _prefs.getLong( KEY_TOKEN_TIMESTAMP_MILLIS,
+							   System.currentTimeMillis() );
 	}
 
 	private static boolean tokenIsStale() {
 		long tokenAge = System.currentTimeMillis() - getTokenTimestampMillis();
-		return( tokenAge >= MAX_TOKEN_AGE );
+		return ( tokenAge >= MAX_TOKEN_AGE );
 	}
 
 }

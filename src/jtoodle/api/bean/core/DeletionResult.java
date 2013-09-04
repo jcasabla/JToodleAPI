@@ -14,7 +14,7 @@ public class DeletionResult extends AbstractCoreBean {
 
 	@Override
 	public Integer getId() {
-		return( ( deleted == null ) ? super.getId() : deleted );
+		return ( ( deleted == null ) ? super.getId() : deleted );
 	}
 
 }

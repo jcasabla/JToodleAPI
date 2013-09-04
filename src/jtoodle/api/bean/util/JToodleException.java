@@ -24,7 +24,7 @@ public class JToodleException extends Exception {
 	private Integer errorCode;
 
 	public Integer getErrorCode() {
-		return( errorCode );
+		return errorCode;
 	}
 
 public static JToodleException createJToodleException(
@@ -37,7 +37,7 @@ public static JToodleException createJToodleException(
 					 "createJToodleException",
 					 null,
 					 new Object[] { errorCode, errorDescription } );
-		return( new JToodleException( errorCode, errorDescription ) );
+		return new JToodleException( errorCode, errorDescription );
 	}
 
 }
