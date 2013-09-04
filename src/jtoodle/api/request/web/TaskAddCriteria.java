@@ -25,6 +25,7 @@ public class TaskAddCriteria extends TaskOperations.OperationCriteria<Task> {
 		setOption( PARAM_ADD_TASKS_TASK_LIST,
 				   BeanWriter.jsonString( tasksToAdd ) );
 	}
+
 	private static final String PARAM_ADD_TASKS_TASK_LIST = "tasks";
 
 }
