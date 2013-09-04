@@ -22,6 +22,7 @@ public abstract class TaskNotebookBeanMixIn extends CoreBeanMixIn {
 
 	@JsonProperty( "folder" )
 	public abstract Integer getFolderId();
+
 	public abstract void setFolderId( Integer folderId );
 
 	@JsonIgnore
