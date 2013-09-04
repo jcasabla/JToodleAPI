@@ -61,30 +61,30 @@ public final class ObjectMapperFactory {
 
 		mapper.registerModule(
 				new SimpleModule( "TD_DeserializationModule",
-									Version.unknownVersion() )
+								  Version.unknownVersion() )
 				.addDeserializer( Boolean.class, new TD_BooleanDeserializer() )
 				.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
 				.addDeserializer( DateFormat.class,
-							new TD_EnumDeserializer<>( DateFormat.class ) )
+								  new TD_EnumDeserializer<>( DateFormat.class ) )
 				.addDeserializer( Priority.class,
-							new TD_EnumDeserializer<>( Priority.class ) )
+								  new TD_EnumDeserializer<>( Priority.class ) )
 				.addDeserializer( Status.class,
-							new TD_EnumDeserializer<>( Status.class ) )
+								  new TD_EnumDeserializer<>( Status.class ) )
 				.addDeserializer( DueDateModifier.class,
-							new TD_EnumDeserializer<>( DueDateModifier.class ) )
+								  new TD_EnumDeserializer<>( DueDateModifier.class ) )
 				.addDeserializer( ReminderTime.class,
 								  new TD_ReminderTimeDeserializer() ) );
 
 		mapper.registerModule(
 				new SimpleModule( "TD_SerializationModule",
-									Version.unknownVersion() )
+								  Version.unknownVersion() )
 				.addSerializer( Boolean.class, new TD_BooleanSerializer() ) );
-				//.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
-				//.addDeserializer( DateFormat.class, new TD_EnumDeserializer<>( DateFormat.class ) )
-				//.addDeserializer( Priority.class, new TD_EnumDeserializer<>( Priority.class ) )
-				//.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
-				//.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
-				//.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
+		//.addDeserializer( Date.class, new TD_UnixDateDeserializer() )
+		//.addDeserializer( DateFormat.class, new TD_EnumDeserializer<>( DateFormat.class ) )
+		//.addDeserializer( Priority.class, new TD_EnumDeserializer<>( Priority.class ) )
+		//.addDeserializer( Status.class, new TD_EnumDeserializer<>( Status.class ) )
+		//.addDeserializer( DueDateModifier.class, new TD_EnumDeserializer<>( DueDateModifier.class ) )
+		//.addDeserializer( ReminderTime.class, new TD_ReminderTimeDeserializer() )
 	}
 
 	public static ObjectMapper getInstance() {

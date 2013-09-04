@@ -5,6 +5,7 @@
 package jtoodle.api.json.bean;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionType;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,11 +36,9 @@ public class BeanParser {
 			throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
 		ObjectMapper om = ObjectMapperFactory.getInstance();
-		return om.readValue(
-				js,
-				om.getTypeFactory().constructCollectionType(
-					List.class,
-					clazz ) );
+		CollectionType ct = om.getTypeFactory()
+				.constructCollectionType( List.class, clazz );
+		return om.readValue( js, ct );
 	}
 
 	private static void throwJToodleExceptionIfError( String js )
@@ -59,11 +58,9 @@ public class BeanParser {
 		List<Task> tasks = new ArrayList<>();
 
 		ObjectMapper om = ObjectMapperFactory.getInstance();
-		List<LinkedHashMap> values = om.readValue(
-				js,
-				om.getTypeFactory().constructCollectionType(
-					List.class,
-					LinkedHashMap.class ) );
+		CollectionType ct = om.getTypeFactory()
+				.constructCollectionType( List.class, LinkedHashMap.class );
+		List<LinkedHashMap> values = om.readValue( js, ct );
 
 		for( LinkedHashMap map : values ) {
 			if( map.containsKey( "num" ) ) {
