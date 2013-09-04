@@ -84,13 +84,34 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 	//private static final Integer PARAM_VALUE_ONLY_COMPLETED_TASKS = 1;
 
 	public static final String PARAM_VALUE_ALL_OPTIONAL_FIELDS =
-		new StringBuilder()
-		.append( "folder, context, goal, location, tag, startdate, duedate, " )
-		.append( "duedatemod, starttime, duetime, remind, repeat, status, " )
-		.append( "note, star, priority, length, timer, added, note, parent, " )
-		.append( "meta, children, order, meta" )
-		.toString()
-		.replace( " ", "" );
+			new StringBuilder()
+			.append( "folder, " )
+			.append( "context, " )
+			.append( "goal, " )
+			.append( "location, " )
+			.append( "tag, " )
+			.append( "startdate, " )
+			.append( "duedate, " )
+			.append( "duedatemod, " )
+			.append( "starttime, " )
+			.append( "duetime, " )
+			.append( "remind, " )
+			.append( "repeat, " )
+			.append( "status, " )
+			.append( "note, " )
+			.append( "star, " )
+			.append( "priority, " )
+			.append( "length, " )
+			.append( "timer, " )
+			.append( "added, " )
+			.append( "note, " )
+			.append( "parent, " )
+			.append( "meta, " )
+			.append( "children, " )
+			.append( "order, " )
+			.append( "meta" )
+			.toString()
+			.replace( " ", "" );
 
 	//private static final String PARAM_DEL_TASKS_TASK_ID_LIST = "tasks";
 }

@@ -4,6 +4,7 @@
  */
 package jtoodle.api.json.bean;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -33,12 +34,12 @@ public class BeanParser {
 			String js, Class<T> clazz )
 			throws IOException, JToodleException {
 		throwJToodleExceptionIfError( js );
-		return ObjectMapperFactory.getInstance()
-				.readValue( js,
-							ObjectMapperFactory.getInstance().
-								getTypeFactory().constructCollectionType(
-									List.class,
-									clazz ) );
+		ObjectMapper om = ObjectMapperFactory.getInstance();
+		return om.readValue(
+				js,
+				om.getTypeFactory().constructCollectionType(
+					List.class,
+					clazz ) );
 	}
 
 	private static void throwJToodleExceptionIfError( String js )
@@ -57,20 +58,18 @@ public class BeanParser {
 		TaskQueryResult results = null;
 		List<Task> tasks = new ArrayList<>();
 
-		List<LinkedHashMap> values = ObjectMapperFactory.getInstance()
-				.readValue(
-					js,
-					ObjectMapperFactory.getInstance().getTypeFactory().
-						constructCollectionType( List.class,
-												 LinkedHashMap.class ) );
+		ObjectMapper om = ObjectMapperFactory.getInstance();
+		List<LinkedHashMap> values = om.readValue(
+				js,
+				om.getTypeFactory().constructCollectionType(
+					List.class,
+					LinkedHashMap.class ) );
 
 		for( LinkedHashMap map : values ) {
 			if( map.containsKey( "num" ) ) {
-				results = ObjectMapperFactory.getInstance().convertValue( map,
-																		  TaskQueryResult.class );
+				results = om.convertValue( map, TaskQueryResult.class );
 			} else if( map.containsKey( "id" ) ) {
-				tasks.add( ObjectMapperFactory.getInstance().convertValue( map,
-																		   Task.class ) );
+				tasks.add( om.convertValue( map, Task.class ) );
 			}
 		}
 
