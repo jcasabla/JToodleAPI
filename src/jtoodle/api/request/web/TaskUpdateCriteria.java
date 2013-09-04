@@ -23,7 +23,8 @@ public class TaskUpdateCriteria extends TaskOperations.OperationCriteria<Task> {
 	}
 
 	public void setTasks( List<Task> tasksToEdit ) throws JsonProcessingException {
-		setOption( PARAM_EDIT_TASKS_TASK_LIST, BeanWriter.jsonString( tasksToEdit ) );
+		setOption( PARAM_EDIT_TASKS_TASK_LIST,
+				   BeanWriter.jsonString( tasksToEdit ) );
 	}
 
 	private static final String PARAM_EDIT_TASKS_TASK_LIST = "tasks";
