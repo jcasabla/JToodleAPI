@@ -16,10 +16,8 @@ public abstract class JToodleExceptionMixIn {
 
 	@JsonCreator
 	public static JToodleException createJToodleException(
-		  @JsonProperty( "errorCode" ) Integer errorCode
-		, @JsonProperty( "errorDesc" ) String errorDescription
-	)
-	{
+		@JsonProperty( "errorCode" ) Integer errorCode,
+		@JsonProperty( "errorDesc" ) String errorDescription ) {
 		return null;
 	}
 
