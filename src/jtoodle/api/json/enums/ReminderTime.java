@@ -27,45 +27,41 @@ public enum ReminderTime {
 	 * non zero value.
 	 */
 
-	 No_Reminder,
+	No_Reminder,
+	Reminder_1_Minute,
+	Reminder_15_Minutes,
+	Reminder_30_Minutes,
+	Reminder_45_Minutes,
+	Reminder_90_Minutes,
+	Reminder_1_Hour,
+	Reminder_2_Hours,
+	Reminder_3_Hours,
+	Reminder_4_Hours,
+	Reminder_1_Day,
+	Reminder_2_Days,
+	Reminder_3_Days,
+	Reminder_4_Days,
+	Reminder_5_Days,
+	Reminder_6_Days,
+	Reminder_30_Days,
+	Reminder_1_Week,
+	Reminder_2_Weeks;
 
-	 Reminder_1_Minute,
-	 Reminder_15_Minutes,
-	 Reminder_30_Minutes,
-	 Reminder_45_Minutes,
-	 Reminder_90_Minutes,
+	public boolean isNonProOption() {
+		return ( this == No_Reminder ) || ( this == Reminder_1_Hour );
+	}
 
-	 Reminder_1_Hour,
-	 Reminder_2_Hours,
-	 Reminder_3_Hours,
-	 Reminder_4_Hours,
+	private static final int MINS_PER_HOUR = 60;
+	private static final int MINS_PER_DAY = MINS_PER_HOUR * 24;
+	private static final int MINS_PER_WEEK = MINS_PER_DAY * 7;
 
-	 Reminder_1_Day,
-	 Reminder_2_Days,
-	 Reminder_3_Days,
-	 Reminder_4_Days,
-	 Reminder_5_Days,
-	 Reminder_6_Days,
-	 Reminder_30_Days,
+	public Long toMinutes() {
+		Long mins = 0l;
 
-	 Reminder_1_Week,
-	 Reminder_2_Weeks;
-
-	 public boolean isNonProOption() {
-		 return ( this == No_Reminder ) || ( this == Reminder_1_Hour );
-	 }
-
-	 private static final int MINS_PER_HOUR = 60;
-	 private static final int MINS_PER_DAY = MINS_PER_HOUR * 24;
-	 private static final int MINS_PER_WEEK = MINS_PER_DAY * 7;
-
-	 public Long toMinutes() {
-		 Long mins = 0l;
-
-		 if( this != No_Reminder ) {
-			 String[] s1 = toString().split( "_" );
-			 String s2 = s1[1];
-			 mins = Long.parseLong( s2 );
+		if( this != No_Reminder ) {
+			String[] s1 = toString().split( "_" );
+			String s2 = s1[1];
+			mins = Long.parseLong( s2 );
 
 			String timeUnit = s1[2];
 			switch( timeUnit ) {
@@ -85,22 +81,22 @@ public enum ReminderTime {
 					break;
 				}
 			}
-		 }
+		}
 
-		 return mins;
-	 }
+		return mins;
+	}
 
-	 public static ReminderTime toReminderTime( Long minutes ) {
-		 ReminderTime rt = null;
+	public static ReminderTime toReminderTime( Long minutes ) {
+		ReminderTime rt = null;
 
-		 for( ReminderTime o : ReminderTime.values() ) {
-			 if( o.toMinutes() == minutes ) {
-				 rt = o;
-				 break;
-			 }
-		 }
+		for( ReminderTime o : ReminderTime.values() ) {
+			if( o.toMinutes() == minutes ) {
+				rt = o;
+				break;
+			}
+		}
 
-		 return rt;
-	 }
+		return rt;
+	}
 
 }
