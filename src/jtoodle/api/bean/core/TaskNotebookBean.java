@@ -12,10 +12,13 @@ import java.util.Date;
  */
 public abstract class TaskNotebookBean extends AbstractCoreBean {
 
-	private String title = null;					// title
-	private Integer folderId = null;				// folder
-	private Date modifiedOn = null;					// modified
-	private Date addedOn = null;					// added
+	private String title = null;		// title
+
+	private Integer folderId = null;	// folder
+
+	private Date modifiedOn = null;		// modified
+
+	private Date addedOn = null;		// added
 
 	public String getTitle() {
 		return title;
