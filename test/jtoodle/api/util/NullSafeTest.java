@@ -4,7 +4,10 @@
  */
 package jtoodle.api.util;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,7 +46,8 @@ public class NullSafeTest {
 	 */
 	@Test
 	public void testEquals() {
-		System.out.println( "equals" );
+		System.out.println();
+		System.out.println( "equals(Object,Object)" );
 
 		testEquals( null, null, true );
 
@@ -60,8 +64,8 @@ public class NullSafeTest {
 
 	private void testEquals( Object o1, Object o2, boolean expResult ) {
 		System.out.println( "equals - " +
-							"o1=" + o1 + ", " +
-							"o2=" + o2 + ", " +
+							"o1=[" + o1 + "], " +
+							"o2=[" + o2 + "], " +
 							"expResult=" + expResult );								
 		boolean result = NullSafe.equals( o1, o2 );
 		assertEquals( expResult, result );
@@ -72,13 +76,14 @@ public class NullSafeTest {
 	 */
 	@Test
 	public void testIsNullOrEmpty_String() {
-		System.out.println( "isNullOrEmpty" );
+		System.out.println();
+		System.out.println( "isNullOrEmpty(String)" );
 
 		testIsNullOrEmpty_String( null, true );
 		testIsNullOrEmpty_String( "", true );
 		testIsNullOrEmpty_String( " ", true );
-		testIsNullOrEmpty_String( " ".trim(), true );
-		testIsNullOrEmpty_String( "-!@#$".trim(), false );
+		testIsNullOrEmpty_String( "-!@#$", false );
+		testIsNullOrEmpty_String( " ab cd ", false );
 	}
 	
 	private void testIsNullOrEmpty_String( String s, boolean expResult ) {
@@ -92,15 +97,28 @@ public class NullSafeTest {
 	/**
 	 * Test of isNullOrEmpty method, of class NullSafe.
 	 */
-	//@Test
+	@Test
 	public void testIsNullOrEmpty_Collection() {
-		System.out.println( "isNullOrEmpty" );
-		Collection c = null;
-		boolean expResult = false;
-		boolean result = NullSafe.isNullOrEmpty( c );
-		assertEquals( expResult, result );
-		// TODO review the generated test code and remove the default call to fail.
-		fail( "The test case is a prototype." );
+		System.out.println();
+		System.out.println( "isNullOrEmpty(Collection)" );
+
+		testIsNullOrEmpty_Collection( null, true );
+		testIsNullOrEmpty_Collection( Collections.emptyList(), true );
+
+		List l = new ArrayList();
+
+		l.add( Boolean.FALSE );
+		testIsNullOrEmpty_Collection( l, false );		
+
+		l.clear();
+		testIsNullOrEmpty_Collection( l, true );		
 	}
 	
+	private void testIsNullOrEmpty_Collection( Collection c, boolean expResult ) {
+		System.out.println( "isNullOrEmpty - " +
+							"c=[" + c + "], " +
+							"expResult=" + expResult );
+		boolean result = NullSafe.isNullOrEmpty( c );
+		assertEquals( expResult, result );
+	}
 }
