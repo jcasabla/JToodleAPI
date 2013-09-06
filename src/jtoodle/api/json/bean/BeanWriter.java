@@ -16,7 +16,7 @@ import jtoodle.api.bean.util.AbstractJToodleBean;
  *
  * @author justo
  */
-public class BeanWriter {
+public final class BeanWriter {
 
 	private BeanWriter() {
 	}
