@@ -20,6 +20,7 @@ public class TaskQueryResult extends AbstractJToodleBean {
 	private List<Task> tasks = null;
 
 	protected TaskQueryResult( Integer queryTaskCount, Integer totalTaskCount ) {
+		super();
 		this.queryTaskCount = queryTaskCount;
 		this.totalTaskCount = totalTaskCount;
 	}
