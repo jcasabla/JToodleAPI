@@ -26,7 +26,7 @@ import jtoodle.api.util.NullSafe;
  *
  * @author justo
  */
-public class AuthCache {
+public final class AuthCache {
 
 	private static final Logger logger =
 			Logger.getLogger( AuthCache.class.getName() );
@@ -56,6 +56,9 @@ public class AuthCache {
 			.node( "/jtoodle/api/auth" );
 
 	private static String _password = null;
+
+	private AuthCache() {
+	}
 
 	private static void save() {
 		logger.entering( AuthCache.class.getName(), "save()" );
