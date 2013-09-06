@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import jtoodle.api.bean.core.DeletionResult;
 import jtoodle.api.bean.util.AbstractJToodleBean;
@@ -18,6 +19,7 @@ import jtoodle.api.http.AbstractWebRequest;
 import jtoodle.api.http.WebRequestFactory;
 import jtoodle.api.json.bean.BeanParser;
 import jtoodle.api.util.NullSafe;
+import jtoodle.api.util.UnixDate;
 
 import static jtoodle.api.request.web.WebOperations.BASE_URI;
 
@@ -64,14 +66,10 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 
 		if( criteria != null ) {
 			Map<String, String> options = criteria.getOptions();
-			Set<String> keySet = options.keySet();
+			Set<Entry<String,String>> entrySet = options.entrySet();
 
-			for( String key : keySet ) {
-				String value = options.get( key );
-
-				if( !NullSafe.isNullOrEmpty( value ) ) {
-					wr.setParameter( key, value );
-				}
+			for( Entry<String,String> entry : entrySet ) {
+				wr.setParameter( entry.getKey(), entry.getValue() );
 			}
 		}
 	}
@@ -181,7 +179,8 @@ public abstract class WebBeanOperations<T extends AbstractJToodleBean> {
 
 		public void setOption( String optionName, Date optionValue ) {
 			if( optionValue != null ) {
-				paramValues.put( optionName, "" + optionValue.getTime() );
+				paramValues.put( optionName,
+								 "" + UnixDate.fromJavaDate( optionValue ) );
 			}
 		}
 
