@@ -18,9 +18,12 @@ import javax.swing.table.TableColumn;
  *
  * @author localadmin
  */
-public class JTableUtil {
+public final class JTableUtil {
 
 	private static final Logger logger = Logger.getLogger( JTableUtil.class.getName() );
+
+	private JTableUtil() {
+	}
 
 	private static void logEntry( String methodName ) {
 		logger.logp( Level.FINEST, JTableUtil.class.getName(), methodName, "[method entry]" );
