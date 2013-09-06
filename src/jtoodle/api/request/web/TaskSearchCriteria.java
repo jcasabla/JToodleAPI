@@ -28,19 +28,21 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 
 	public void setCompletionCriteria( CompletionCriteria completionCriteria ) {
 		setOption( PARAM_GET_TASKS_COMPLETED,
-				   "" + completionCriteria.toodledoValue() );
+				   new StringBuilder()
+						.append( completionCriteria.toodledoValue() )
+						.toString() );
 	}
 
 	public void setTaskId( Integer taskId ) {
-		setOption( PARAM_GET_TASKS_ID, "" + taskId );
+		setOption( PARAM_GET_TASKS_ID, taskId.toString() );
 	}
 
 	public void setPaginationRowStart( Integer rowStart ) {
-		setOption( PARAM_GET_TASKS_PAGINATE_ROW_START, "" + rowStart );
+		setOption( PARAM_GET_TASKS_PAGINATE_ROW_START, rowStart.toString() );
 	}
 
 	public void setPaginationNumTasks( Integer numTasks ) {
-		setOption( PARAM_GET_TASKS_PAGINATE_NUM_TASKS, "" + numTasks );
+		setOption( PARAM_GET_TASKS_PAGINATE_NUM_TASKS, numTasks.toString() );
 	}
 
 	public enum CompletionCriteria {
