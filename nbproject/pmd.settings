@@ -1,0 +1,6 @@
+JUnit4TestShouldUseTestAnnotation
+MethodArgumentCouldBeFinal
+LongVariable
+LocalVariableCouldBeFinal
+BeanMembersShouldSerialize
+ImmutableField
