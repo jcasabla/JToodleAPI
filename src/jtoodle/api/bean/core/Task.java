@@ -10,6 +10,7 @@ import jtoodle.api.json.enums.Priority;
 import jtoodle.api.json.enums.ReminderTime;
 import jtoodle.api.json.enums.Status;
 import jtoodle.api.json.enums.TaskRepeatsFrom;
+import jtoodle.api.util.NullSafe;
 
 /**
  *
@@ -177,11 +178,11 @@ public class Task extends TaskNotebookBean {
 	}
 
 	public Date getDueDate() {
-		return dueDate;
+		return NullSafe.clone( dueDate );
 	}
 
 	public void setDueDate( Date dueDate ) {
-		this.dueDate = dueDate;
+		this.dueDate = NullSafe.clone( dueDate );
 	}
 
 	public DueDateModifier getDueDateModifier() {
@@ -193,27 +194,27 @@ public class Task extends TaskNotebookBean {
 	}
 
 	public Date getStartDate() {
-		return startDate;
+		return NullSafe.clone( startDate );
 	}
 
 	public void setStartDate( Date startDate ) {
-		this.startDate = startDate;
+		this.startDate = NullSafe.clone( startDate );
 	}
 
 	public Date getDueTime() {
-		return dueTime;
+		return NullSafe.clone( dueTime );
 	}
 
 	public void setDueTime( Date dueTime ) {
-		this.dueTime = dueTime;
+		this.dueTime = NullSafe.clone( dueTime );
 	}
 
 	public Date getStartTime() {
-		return startTime;
+		return NullSafe.clone( startTime );
 	}
 
 	public void setStartTime( Date startTime ) {
-		this.startTime = startTime;
+		this.startTime = NullSafe.clone( startTime );
 	}
 
 	public ReminderTime getReminderMinutes() {
@@ -273,11 +274,11 @@ public class Task extends TaskNotebookBean {
 	}
 
 	public Date getCompletedOn() {
-		return completedOn;
+		return NullSafe.clone( completedOn );
 	}
 
 	public void setCompletedOn( Date completedOn ) {
-		this.completedOn = completedOn;
+		this.completedOn = NullSafe.clone( completedOn );
 	}
 
 	public Long getTimerSecondsElapsed() {
@@ -289,11 +290,11 @@ public class Task extends TaskNotebookBean {
 	}
 
 	public Date getTimerStartedOn() {
-		return timerStartedOn;
+		return NullSafe.clone( timerStartedOn );
 	}
 
 	public void setTimerStartedOn( Date timerStartedOn ) {
-		this.timerStartedOn = timerStartedOn;
+		this.timerStartedOn = NullSafe.clone( timerStartedOn );
 	}
 
 	public String getNote() {
