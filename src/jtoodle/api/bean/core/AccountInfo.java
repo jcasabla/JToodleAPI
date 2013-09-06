@@ -8,6 +8,7 @@ import java.util.Date;
 import jtoodle.api.bean.util.AbstractJToodleBean;
 import jtoodle.api.json.enums.DateFormat;
 import jtoodle.api.json.enums.Priority;
+import jtoodle.api.util.NullSafe;
 
 /**
  *
@@ -159,35 +160,35 @@ public class AccountInfo extends AbstractJToodleBean {
 	}
 
 	public Date getLastTaskEditedOn() {
-		return lastTaskEditedOn;
+		return NullSafe.clone( lastTaskEditedOn );
 	}
 
 	public Date getLastTaskDeletedOn() {
-		return lastTaskDeletedOn;
+		return NullSafe.clone( lastTaskDeletedOn );
 	}
 
 	public Date getLastFolderEditedOn() {
-		return lastFolderEditedOn;
+		return NullSafe.clone( lastFolderEditedOn );
 	}
 
 	public Date getLastContextEditedOn() {
-		return lastContextEditedOn;
+		return NullSafe.clone( lastContextEditedOn );
 	}
 
 	public Date getLastGoalEditedOn() {
-		return lastGoalEditedOn;
+		return NullSafe.clone( lastGoalEditedOn );
 	}
 
 	public Date getLastLocationEditedOn() {
-		return lastLocationEditedOn;
+		return NullSafe.clone( lastLocationEditedOn );
 	}
 
 	public Date getLastNotebookEditedOn() {
-		return lastNotebookEditedOn;
+		return NullSafe.clone( lastNotebookEditedOn );
 	}
 
 	public Date getLastNotebookDeletedOn() {
-		return lastNotebookDeletedOn;
+		return NullSafe.clone( lastNotebookDeletedOn );
 	}
 
 }
