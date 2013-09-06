@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -22,24 +18,21 @@ import static org.junit.Assert.*;
  */
 public class NullSafeTest {
 	
-	public NullSafeTest() {
-	}
+	//@BeforeClass
+	//public static void setUpClass() {
+	//}
 	
-	@BeforeClass
-	public static void setUpClass() {
-	}
+	//@AfterClass
+	//public static void tearDownClass() {
+	//}
 	
-	@AfterClass
-	public static void tearDownClass() {
-	}
+	//@Before
+	//public void setUp() {
+	//}
 	
-	@Before
-	public void setUp() {
-	}
-	
-	@After
-	public void tearDown() {
-	}
+	//@After
+	//public void tearDown() {
+	//}
 
 	/**
 	 * Test of equals method, of class NullSafe.
