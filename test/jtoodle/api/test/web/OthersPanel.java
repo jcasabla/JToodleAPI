@@ -17,8 +17,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import jtoodle.api.auth.AuthExceptionHandler;
 import jtoodle.api.bean.core.AbstractCoreBean;
-import jtoodle.api.bean.core.Folder;
 import jtoodle.api.bean.core.DeletionResult;
+import jtoodle.api.bean.core.Folder;
 import jtoodle.api.bean.util.JToodleException;
 import jtoodle.api.json.bean.BeanWriter;
 import jtoodle.api.request.web.FolderAddCriteria;
@@ -214,8 +214,10 @@ public class OthersPanel extends javax.swing.JPanel {
 				}
 			}
 
-			for( Object o : beanList ) {
-				beanResultsComboBox.addItem( o );
+			if( ! NullSafe.isNullOrEmpty( beanList ) ) {
+				for( Object o : beanList ) {
+					beanResultsComboBox.addItem( o );
+				}
 			}
 
 			beanResultsComboBoxActionPerformed( null );
