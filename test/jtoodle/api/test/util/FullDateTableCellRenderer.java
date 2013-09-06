@@ -33,7 +33,9 @@ public class FullDateTableCellRenderer extends DefaultTableCellRenderer {
 		Object value2 = value;
 
 		if( ( value != null) && ( value instanceof Date ) ) {
-			value2 = sdf.format( (Date) value );
+			synchronized( FullDateTableCellRenderer.class ) {
+				value2 = sdf.format( (Date) value );
+			}
 		}
 
 		return( super.getTableCellRendererComponent(table, value2, isSelected, hasFocus, row, column));
