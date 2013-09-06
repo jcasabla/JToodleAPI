@@ -5,6 +5,7 @@
 package jtoodle.api.bean.core;
 
 import java.util.Date;
+import jtoodle.api.util.NullSafe;
 
 /**
  *
@@ -37,11 +38,11 @@ public abstract class TaskNotebookBean extends AbstractCoreBean {
 	}
 
 	public Date getModifiedOn() {
-		return modifiedOn;
+		return NullSafe.clone( modifiedOn );
 	}
 
 	public Date getAddedOn() {
-		return addedOn;
+		return NullSafe.clone( addedOn );
 	}
 
 }
