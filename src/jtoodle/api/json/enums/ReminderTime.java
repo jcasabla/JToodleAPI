@@ -92,7 +92,7 @@ public enum ReminderTime {
 		ReminderTime rt = null;
 
 		for( ReminderTime o : ReminderTime.values() ) {
-			if( o.toMinutes() == minutes ) {
+			if( o.toMinutes().equals( minutes ) ) {
 				rt = o;
 				break;
 			}
