@@ -27,7 +27,7 @@ public class AuthenticationPanel extends javax.swing.JPanel {
 		initComponents2();
 	}
 
-	public void login() {
+	public final void login() {
 		JXLoginPane.showLoginDialog( this, new LoginService() {
 			@Override
 			public boolean authenticate( String name, char[] password, String server ) {
@@ -36,17 +36,17 @@ public class AuthenticationPanel extends javax.swing.JPanel {
 				try {
 					AuthCache.login( name, new String( password ) );
 
-					return( true );
+					return true ;
 				} catch( JToodleException jte ) {
 					setAuthTextFields( jte );
 
 					logger.log( Level.SEVERE, null, jte );
-					return( false );
+					return false ;
 				} catch( Exception ex ) {
 					setAuthTextFields( ex );
 
 					logger.log( Level.SEVERE, null, ex );
-					return( false );
+					return false ;
 				} finally {
 					setAuthTextFields();
 				}
@@ -63,7 +63,7 @@ public class AuthenticationPanel extends javax.swing.JPanel {
 		}
 	}
 
-	private void initComponents2() {
+	private final void initComponents2() {
 		setAuthTextFields();
 		if( ! AuthCache.isAuthenticated() ) {
 			login();
@@ -94,7 +94,7 @@ public class AuthenticationPanel extends javax.swing.JPanel {
 
 	private void setAuthTextFields( JToodleException jte ) {
 		errorTypeTextField.setText( jte.getClass().getName() );
-		errorCodeTextField.setText( "" + jte.getErrorCode() );
+		errorCodeTextField.setText( jte.getErrorCode().toString() );
 		errorDescTextArea.setText( jte.getMessage() );
 	}
 
