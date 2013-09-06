@@ -12,7 +12,10 @@ import jtoodle.api.bean.util.JToodleException;
  *
  * @author Justo_Casablanca
  */
-public class AuthExceptionHandler {
+public final class AuthExceptionHandler {
+
+	private AuthExceptionHandler() {
+	}
 
 	public static boolean handledInvalidKey( Component c, Exception ex ) {
 		boolean val = false;
