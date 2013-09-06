@@ -16,7 +16,10 @@ import jtoodle.api.json.bean.ObjectMapperFactory;
  *
  * @author Justo_Casablanca
  */
-public class FolderTreeNodeTest {
+public final class FolderTreeNodeTest {
+
+	private FolderTreeNodeTest() {
+	}
 
 	private static final Logger logger = Logger.getLogger( FolderTreeNodeTest.class.getName() );
 
