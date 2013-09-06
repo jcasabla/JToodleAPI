@@ -28,7 +28,7 @@ public class AuthenticationPanel extends javax.swing.JPanel {
 	}
 
 	public void login() {
-		JXLoginPane.Status status = JXLoginPane.showLoginDialog( this, new LoginService() {
+		JXLoginPane.showLoginDialog( this, new LoginService() {
 			@Override
 			public boolean authenticate( String name, char[] password, String server ) {
 				clearAuthTextFields();
