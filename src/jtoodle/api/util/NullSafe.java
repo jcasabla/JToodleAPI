@@ -5,6 +5,7 @@
 package jtoodle.api.util;
 
 import java.util.Collection;
+import java.util.Date;
 
 /**
  *
@@ -40,4 +41,7 @@ public final class NullSafe {
 		return ( c == null ) || c.isEmpty();
 	}
 
+	public static Date clone( Date date ) {
+		return date == null ? null :  (Date) date.clone();
+	}
 }
