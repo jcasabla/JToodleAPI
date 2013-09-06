@@ -19,6 +19,7 @@ public class TD_EnumDeserializer<E extends Enum<E>> extends JsonDeserializer<E> 
 	private Class<E> enumClazz = null;
 
 	public TD_EnumDeserializer( Class<E> enumClazz ) {
+		super();
 		this.enumClazz = enumClazz;
 	}
 
