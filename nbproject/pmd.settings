@@ -1,6 +1,7 @@
 JUnit4TestShouldUseTestAnnotation
-MethodArgumentCouldBeFinal
 LongVariable
-LocalVariableCouldBeFinal
+MethodArgumentCouldBeFinal
+UncommentedEmptyConstructor
 BeanMembersShouldSerialize
+LocalVariableCouldBeFinal
 ImmutableField
