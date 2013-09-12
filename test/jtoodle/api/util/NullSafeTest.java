@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,7 +19,10 @@ import static org.junit.Assert.*;
  * @author justo_casablanca
  */
 public class NullSafeTest {
-	
+
+	private static final Logger logger =
+			Logger.getLogger( NullSafeTest.class.getName() );
+
 	//@BeforeClass
 	//public static void setUpClass() {
 	//}
@@ -39,8 +44,8 @@ public class NullSafeTest {
 	 */
 	@Test
 	public void testEquals() {
-		System.out.println();
-		System.out.println( "equals(Object,Object)" );
+		logger.log( Level.INFO, "" );
+		logger.log( Level.INFO, "equals(Object,Object)" );
 
 		testEquals( null, null, true );
 
@@ -56,10 +61,10 @@ public class NullSafeTest {
 	}
 
 	private void testEquals( Object o1, Object o2, boolean expResult ) {
-		System.out.println( "equals - " +
-							"o1=[" + o1 + "], " +
-							"o2=[" + o2 + "], " +
-							"expResult=" + expResult );								
+		logger.log( Level.INFO,
+					"equals - o1=[{0}], o2=[{1}], expResult=[{2}]",
+					new Object[] { o1, o2, expResult } );
+							
 		boolean result = NullSafe.equals( o1, o2 );
 		assertEquals( expResult, result );
 	}
@@ -69,8 +74,8 @@ public class NullSafeTest {
 	 */
 	@Test
 	public void testIsNullOrEmpty_String() {
-		System.out.println();
-		System.out.println( "isNullOrEmpty(String)" );
+		logger.log( Level.INFO, "" );
+		logger.log( Level.INFO, "isNullOrEmpty(String)" );
 
 		testIsNullOrEmpty_String( null, true );
 		testIsNullOrEmpty_String( "", true );
@@ -80,9 +85,10 @@ public class NullSafeTest {
 	}
 	
 	private void testIsNullOrEmpty_String( String s, boolean expResult ) {
-		System.out.println( "isNullOrEmpty - " +
-							"s=[" + s + "], " +
-							"expResult=" + expResult );
+		logger.log( Level.INFO,
+					"isNullOrEmpty - s=[{0}], expResult=[{1}]",
+					new Object[] { s, expResult } );
+
 		boolean result = NullSafe.isNullOrEmpty( s );
 		assertEquals( expResult, result );
 	}
@@ -92,8 +98,8 @@ public class NullSafeTest {
 	 */
 	@Test
 	public void testIsNullOrEmpty_Collection() {
-		System.out.println();
-		System.out.println( "isNullOrEmpty(Collection)" );
+		logger.log( Level.INFO, "" );
+		logger.log( Level.INFO, "isNullOrEmpty(Collection)" );
 
 		testIsNullOrEmpty_Collection( null, true );
 		testIsNullOrEmpty_Collection( Collections.emptyList(), true );
@@ -108,9 +114,10 @@ public class NullSafeTest {
 	}
 	
 	private void testIsNullOrEmpty_Collection( Collection c, boolean expResult ) {
-		System.out.println( "isNullOrEmpty - " +
-							"c=[" + c + "], " +
-							"expResult=" + expResult );
+		logger.log( Level.INFO,
+					"isNullOrEmpty - c=[{0}], expResult=[{1}]",
+					new Object[] { c, expResult } );
+
 		boolean result = NullSafe.isNullOrEmpty( c );
 		assertEquals( expResult, result );
 	}
