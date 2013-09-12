@@ -16,32 +16,33 @@ public final class NullSafe {
 	private NullSafe() {
 	}
 
-	public static boolean equals( Object o1, Object o2 ) {
-		if( o1 == o2 ) {
-			// scenario 1: both are not null and are the same instance
-			// scenario 2: both are null
-			return true;
-		} else if( o1 == null ) {
-			// scenario 3: o1 is null, o2 is not null
-			return false;
-		} else if( o2 == null ) {
-			// scenario 4: o1 is not null, o2 is null
-			return false;
+	public static boolean equals( Object obj1, Object obj2 ) {
+		boolean retVal;
+
+		if( ( obj1 == null ) && ( obj2 == null ) ) {
+			// obvious
+			retVal = true;
+		} else if( obj1 == null ) {
+			// obj2 != null, so the two can never be equal
+			retVal = false;
+		} else {
+			// since obj1 != null, the call to .equals() should never
+			// throw NPE
+			retVal = obj1.equals( obj2 );
 		}
 
-		// scenario 5: both o1 and o2 are not null
-		return o1.equals( o2 );
+		return retVal;
 	}
 
-	public static boolean isNullOrEmpty( String s ) {
-		return ( s == null ) || s.trim().isEmpty();
+	public static boolean isNullOrEmpty( String aString ) {
+		return ( aString == null ) || aString.trim().isEmpty();
 	}
 
-	public static boolean isNullOrEmpty( Collection c ) {
-		return ( c == null ) || c.isEmpty();
+	public static boolean isNullOrEmpty( Collection aCollection ) {
+		return ( aCollection == null ) || aCollection.isEmpty();
 	}
 
-	public static Date clone( Date date ) {
-		return date == null ? null :  (Date) date.clone();
+	public static Date clone( Date aDate ) {
+		return aDate == null ? null :  (Date) aDate.clone();
 	}
 }
