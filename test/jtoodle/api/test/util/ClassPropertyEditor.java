@@ -14,11 +14,13 @@ public class ClassPropertyEditor extends PropertyEditorSupport {
 
 	@Override
 	public String getAsText() {
+		String s = null;
 		Class c = (Class) getValue();
-		if( c == null ) {
-			return null;
+
+		if( c != null ) {
+			s = c.getName();
 		}
-		return c.getName();
+		return s;
 	}
 
 	@Override
