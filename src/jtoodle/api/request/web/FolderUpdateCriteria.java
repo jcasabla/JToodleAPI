@@ -28,15 +28,13 @@ public class FolderUpdateCriteria extends FolderOperations.OperationCriteria<Fol
 		while( fieldNames.hasNext() ) {
 			String fName = fieldNames.next();
 
-			switch( fName ) {
-				case "ord":
-					break;
-				default: {
-					JsonNode fValue = rootNode.findValue( fName );
+			if( "ord".equals( fName ) ) {
+				break;
+			} else {
+				JsonNode fValue = rootNode.findValue( fName );
 
-					if( !fValue.isNull() ) {
-						setOption( fName, fValue.asText() );
-					}
+				if( !fValue.isNull() ) {
+					setOption( fName, fValue.asText() );
 				}
 			}
 		}
