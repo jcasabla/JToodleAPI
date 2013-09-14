@@ -53,14 +53,10 @@ public class TaskSearchCriteria extends TaskOperations.OperationCriteria<Task> {
 
 		public int toodledoValue() {
 			int val;
-			switch( this ) {
-				case All_Tasks: {
-					val = PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS;
-					break;
-				}
-				default: {
-					val = ordinal();
-				}
+			if( this == All_Tasks ) {
+				val = PARAM_VALUE_COMPLETED_AND_UNCOMPLETED_TASKS;
+			} else {
+				val = ordinal();
 			}
 			return val;
 		}
