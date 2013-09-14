@@ -80,7 +80,7 @@ public final class JTableUtil {
 			colWidths[colIdx] = colWidth;
 		}
 
-		return( colWidths );
+		return colWidths;
 	}
 
 	public static void resizeTableColumnsToFit( JTable table ) {
