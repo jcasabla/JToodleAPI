@@ -12,6 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public abstract class DeletionResultMixIn extends CoreBeanMixIn {
 
+	protected DeletionResultMixIn() {
+		super();
+	}
+
 	@JsonProperty( "deleted" )
 	private Integer deleted = null;
 

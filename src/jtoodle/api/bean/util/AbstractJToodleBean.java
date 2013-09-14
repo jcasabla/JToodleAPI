@@ -9,4 +9,8 @@ package jtoodle.api.bean.util;
  * @author justo
  */
 public abstract class AbstractJToodleBean {
+
+	protected AbstractJToodleBean() {
+	}
+
 }
