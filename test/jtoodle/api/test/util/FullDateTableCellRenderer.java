@@ -7,6 +7,7 @@ package jtoodle.api.test.util;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -38,10 +39,11 @@ public class FullDateTableCellRenderer extends DefaultTableCellRenderer {
 			}
 		}
 
-		return( super.getTableCellRendererComponent(table, value2, isSelected, hasFocus, row, column));
+		return super.getTableCellRendererComponent(table, value2, isSelected, hasFocus, row, column);
 	}
 
-	private static final SimpleDateFormat sdf = new SimpleDateFormat( "EEE, MM/dd/yyyy 'at' HH:mm:ss:SSS zzz" );
+	private static final SimpleDateFormat sdf = new SimpleDateFormat(
+			"EEE, MM/dd/yyyy 'at' HH:mm:ss:SSS zzz", Locale.getDefault() );
 
 	static {
 		sdf.setTimeZone( TimeZone.getTimeZone( "GMT" ) );
