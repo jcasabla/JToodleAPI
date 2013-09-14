@@ -113,18 +113,18 @@ public class AuthenticationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        userIdLabel = new javax.swing.JLabel();
+        javax.swing.JLabel userIdLabel = new javax.swing.JLabel();
         userIdTextField = new javax.swing.JTextField();
-        tokenLabel = new javax.swing.JLabel();
+        javax.swing.JLabel tokenLabel = new javax.swing.JLabel();
         tokenTextField = new javax.swing.JTextField();
-        apiKeyLabel = new javax.swing.JLabel();
+        javax.swing.JLabel apiKeyLabel = new javax.swing.JLabel();
         apiKeyTextField = new javax.swing.JTextField();
-        errorTypeLabel = new javax.swing.JLabel();
+        javax.swing.JLabel errorTypeLabel = new javax.swing.JLabel();
         errorTypeTextField = new javax.swing.JTextField();
-        errorCodeLabel = new javax.swing.JLabel();
+        javax.swing.JLabel errorCodeLabel = new javax.swing.JLabel();
         errorCodeTextField = new javax.swing.JTextField();
-        errorDescLabel = new javax.swing.JLabel();
-        errorDescPane = new javax.swing.JScrollPane();
+        javax.swing.JLabel errorDescLabel = new javax.swing.JLabel();
+        javax.swing.JScrollPane errorDescPane = new javax.swing.JScrollPane();
         errorDescTextArea = new javax.swing.JTextArea();
 
         org.openide.awt.Mnemonics.setLocalizedText(userIdLabel, org.openide.util.NbBundle.getMessage(AuthenticationPanel.class, "AuthenticationPanel.userIdLabel.text")); // NOI18N
@@ -173,7 +173,7 @@ public class AuthenticationPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(errorTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(errorCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                            .addComponent(errorCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(errorDescLabel))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,18 +217,11 @@ public class AuthenticationPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel apiKeyLabel;
     private javax.swing.JTextField apiKeyTextField;
-    private javax.swing.JLabel errorCodeLabel;
     private javax.swing.JTextField errorCodeTextField;
-    private javax.swing.JLabel errorDescLabel;
-    private javax.swing.JScrollPane errorDescPane;
     private javax.swing.JTextArea errorDescTextArea;
-    private javax.swing.JLabel errorTypeLabel;
     private javax.swing.JTextField errorTypeTextField;
-    private javax.swing.JLabel tokenLabel;
     private javax.swing.JTextField tokenTextField;
-    private javax.swing.JLabel userIdLabel;
     private javax.swing.JTextField userIdTextField;
     // End of variables declaration//GEN-END:variables
 }
