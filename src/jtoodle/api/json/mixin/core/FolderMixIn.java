@@ -4,6 +4,7 @@
  */
 package jtoodle.api.json.mixin.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -13,8 +14,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public abstract class FolderMixIn extends CoreBeanMixIn {
 
 	@JsonProperty( "ord" )
-	public abstract Integer getOrder();
+	private Integer order = null;
 
-	public abstract void setOrder( Integer order );
+	@JsonIgnore
+	public abstract Integer getOrder();
 
 }
