@@ -47,78 +47,63 @@ public class NullSafeTest {
 		logger.log( Level.INFO, "" );
 		logger.log( Level.INFO, "equals(Object,Object)" );
 
-		testEquals( null, null, true );
+		assertTrue( "failure: null == null", NullSafe.equals( null, null ) );
+		assertFalse( "failure: 1 != null", NullSafe.equals( 1, null ) );
+		assertFalse( "failure: null != 1", NullSafe.equals( null, 1 ) );
+		assertFalse( "failure: \"\" != null", NullSafe.equals( "", null ) );
+		assertFalse( "failure: null != \"\"", NullSafe.equals( null, "" ) );
 
-		testEquals( 1, null, false );
-		testEquals( null, 1, false );
-		testEquals( 1, 1, true );
-		testEquals( 1, 2, false );
+		assertTrue( "failure: 1 == 1", NullSafe.equals( 1, 1 ) );
+		assertFalse( "failure: 1 != 2", NullSafe.equals( 1, 2 ) );
 
-		testEquals( "", null, false );
-		testEquals( null, "", false );
-		testEquals( "xyz", "xyz", true );
-		testEquals( "abc", "xyz", false );
-	}
-
-	private void testEquals( Object o1, Object o2, boolean expResult ) {
-		logger.log( Level.INFO,
-					"equals - o1=[{0}], o2=[{1}], expResult=[{2}]",
-					new Object[] { o1, o2, expResult } );
-							
-		boolean result = NullSafe.equals( o1, o2 );
-		assertEquals( expResult, result );
+		assertTrue( "failure: \"xyz\" == \"xyz\"",
+					NullSafe.equals( "xyz", "xyz" ) );
+		assertFalse( "failure: \"abc\" != \"xyz\"",
+					 NullSafe.equals( "abc", "xyz" ) );
 	}
 
 	/**
 	 * Test of isNullOrEmpty method, of class NullSafe.
 	 */
 	@Test
-	public void testIsNullOrEmpty_String() {
+	public void testIsNullOrEmptyString() {
 		logger.log( Level.INFO, "" );
 		logger.log( Level.INFO, "isNullOrEmpty(String)" );
 
-		testIsNullOrEmpty_String( null, true );
-		testIsNullOrEmpty_String( "", true );
-		testIsNullOrEmpty_String( " ", true );
-		testIsNullOrEmpty_String( "-!@#$", false );
-		testIsNullOrEmpty_String( " ab cd ", false );
+		assertTrue( "failure - null should be considered empty",
+					NullSafe.isNullOrEmpty( (String) null ) );
+		assertTrue( "failure - 0-length string should be considered empty",
+					NullSafe.isNullOrEmpty( "" ) );
+		assertTrue( "failure - all-spaces string should be considered empty",
+					NullSafe.isNullOrEmpty( " " ) );
+		assertFalse( "failure - \"-!@#$\" should not be considered empty",
+					 NullSafe.isNullOrEmpty( "-!@#$" ) );
+		assertFalse( "failure - \" ab cd \" should not be considered empty",
+					 NullSafe.isNullOrEmpty( " ab cd " ) );
 	}
 	
-	private void testIsNullOrEmpty_String( String s, boolean expResult ) {
-		logger.log( Level.INFO,
-					"isNullOrEmpty - s=[{0}], expResult=[{1}]",
-					new Object[] { s, expResult } );
-
-		boolean result = NullSafe.isNullOrEmpty( s );
-		assertEquals( expResult, result );
-	}
-
 	/**
 	 * Test of isNullOrEmpty method, of class NullSafe.
 	 */
 	@Test
-	public void testIsNullOrEmpty_Collection() {
+	public void testIsNullOrEmptyCollection() {
 		logger.log( Level.INFO, "" );
 		logger.log( Level.INFO, "isNullOrEmpty(Collection)" );
 
-		testIsNullOrEmpty_Collection( null, true );
-		testIsNullOrEmpty_Collection( Collections.emptyList(), true );
+		assertTrue( "failure: null collection is empty",
+					NullSafe.isNullOrEmpty( (Collection) null ) );
+		assertTrue( "failure: Collections.emptyList() is empty",
+					NullSafe.isNullOrEmpty( Collections.emptyList() ) );
 
 		List l = new ArrayList();
 
 		l.add( Boolean.FALSE );
-		testIsNullOrEmpty_Collection( l, false );		
+		assertFalse( "failure: Collection not empty after call to .add( Boolean.FALSE )",
+					 NullSafe.isNullOrEmpty( l ) );
 
 		l.clear();
-		testIsNullOrEmpty_Collection( l, true );		
+		assertTrue( "failure: Collection is empty after call to .clear()",
+					NullSafe.isNullOrEmpty( l ) );
 	}
 	
-	private void testIsNullOrEmpty_Collection( Collection c, boolean expResult ) {
-		logger.log( Level.INFO,
-					"isNullOrEmpty - c=[{0}], expResult=[{1}]",
-					new Object[] { c, expResult } );
-
-		boolean result = NullSafe.isNullOrEmpty( c );
-		assertEquals( expResult, result );
-	}
 }
