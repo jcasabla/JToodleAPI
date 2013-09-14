@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Iterator;
 import jtoodle.api.bean.core.Folder;
 import jtoodle.api.json.bean.ObjectMapperFactory;
+import jtoodle.api.util.NullSafe;
 
 /**
  *
@@ -28,9 +29,7 @@ public class FolderUpdateCriteria extends FolderOperations.OperationCriteria<Fol
 		while( fieldNames.hasNext() ) {
 			String fName = fieldNames.next();
 
-			if( "ord".equals( fName ) ) {
-				break;
-			} else {
+			if( ! NullSafe.equals( fName, "ord" ) ) {
 				JsonNode fValue = rootNode.findValue( fName );
 
 				if( !fValue.isNull() ) {
