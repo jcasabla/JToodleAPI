@@ -4,6 +4,9 @@
  */
 package jtoodle.api.json.enums;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author justo
@@ -80,6 +83,13 @@ public enum ReminderTime {
 				case "Week":
 				case "Weeks": {
 					mins *= MINS_PER_WEEK;
+					break;
+				}
+				default: {
+					Logger.getLogger( getClass().getName() )
+							.log( Level.WARNING,
+								"Unexpected time unit [{0}]",
+								new Object[] { timeUnit } );
 					break;
 				}
 			}
