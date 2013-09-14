@@ -1,7 +1,12 @@
 JUnit4TestShouldUseTestAnnotation
-LongVariable
 MethodArgumentCouldBeFinal
+LongVariable
+TooManyFields
+ShortVariable
+ExcessivePublicCount
+ExcessiveMethodLength
 UncommentedEmptyConstructor
-BeanMembersShouldSerialize
 LocalVariableCouldBeFinal
+BeanMembersShouldSerialize
+UseAssertEqualsInsteadOfAssertTrue
 ImmutableField
