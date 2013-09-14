@@ -37,7 +37,7 @@ public class Folder extends AbstractCoreBean {
 
 	private String name = null;
 
-	private Boolean _private = null;
+	private Boolean isPrivate = null;
 
 	private Boolean archived = null;
 
@@ -52,11 +52,11 @@ public class Folder extends AbstractCoreBean {
 	}
 
 	public Boolean getPrivate() {
-		return _private;
+		return isPrivate;
 	}
 
 	public void setPrivate( Boolean _private ) {
-		this._private = _private;
+		this.isPrivate = _private;
 	}
 
 	public Boolean getArchived() {
